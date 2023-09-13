@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :messages
+  has_many :splits
+  
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
   end
