@@ -1,0 +1,30 @@
+.page-padding {
+  height: calc(100vh - 80px);
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  min-width: 250px;
+  max-width: 400px;
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  .form-actions.btn {
+    background-color: $ff-red;
+    // background-color: $ff-green;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  input.btn {
+    color: white;
+  }
+
+  a {
+    text-decoration: none;
+    color: $ff-purple;
+  }
+}
