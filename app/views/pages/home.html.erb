@@ -23,7 +23,11 @@
           </div>
 
           <div class="d-grid gap-2">
-            <button class="btn login-btn" type="button">Log in</button>
+            <%= link_to new_user_session_path do %>
+              <button class="btn login-btn" type="button">
+                Log In
+              </button>
+            <% end %>
           </div>
 
         </form>

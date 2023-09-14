@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
   has_many :messages
   has_many :splits
-  
+  belongs_to :member
+
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
   end
