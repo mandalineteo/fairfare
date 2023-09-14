@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root to: "splits#index"
+  root to: "pages#home"
+  # root to: "splits#index"
 end
