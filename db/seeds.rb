@@ -146,15 +146,17 @@ if seed_bills_and_items
     end
   end
 
-  # def create_payers(bill)
-  #   puts "    adding payers"
-  #   rand (1..2).times do
-  #     payer = Payer.create!(
-  #       bill:,
-  #       member: split.member[(rand(0..1))]
-  #     )
-  #   end
-  # end
+  def create_payers(bill)
+    puts "    adding payers"
+    bill_members = bill.split.members
+    rand (1..3).times do
+      payer = Payer.create!(
+        bill:,
+        member: bill_members[(rand(bill_members.count))]
+      )
+      puts "    -created #{payer.member.first_name} as a payer"
+    end
+  end
 
   def create_bills(split)
     puts "\nCreating bills for split: #{split.name}..."
