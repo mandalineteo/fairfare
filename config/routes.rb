@@ -11,3 +11,9 @@ Rails.application.routes.draw do
     end
   end
 end
+
+# def tabulate
+#   @split = Split.find_by(invite_code: params[:id])
+# end
+
+# splits/9382d98d392j3d/tabulate
