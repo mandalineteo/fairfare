@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :messages
+
   has_many :splits, dependent: :destroy
   has_many :contacts, ->(user) { where.not(id: user.member_id).distinct }, through: :splits, source: :members
 

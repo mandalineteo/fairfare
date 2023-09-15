@@ -1,0 +1,30 @@
+<div class="card pt-5">
+  <h1><%= @split.name %></h1>
+</div>
+
+<h3>Name of establishment: </h3>
+<%= simple_form_for [@split, @bill] do |f| %>
+  <%= f.input :merchant %>
+
+
+  <h3>Enter item: </h3>
+
+  <div class="container text-center">
+    <div class="row align-items-center">
+      <div class="col">
+        Item:
+      </div>
+      <div class="col">
+        Quantity:
+      </div>
+      <div class="col">
+        Amount:
+      </div>
+    </div>
+  </div>
+
+  <%= render 'item_form_input', f: f %>
+
+  <%= f.submit %>
+
+<% end %>

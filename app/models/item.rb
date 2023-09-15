@@ -7,4 +7,6 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :quantity, presence: true
   validates :price, presence: true
+  has_many :members, through: :item_members
+
 end

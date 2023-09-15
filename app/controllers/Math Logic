@@ -1,0 +1,44 @@
+Disclaimer:
+- Data structures here may not correspond to our existing schema exactly
+
+Members = [M1, M2, M3, ...]
+Bills = [B1, B2, B3, ...]
+Items = [I1, I2, I3, I4, ...]
+Tax = T%
+Discount = D%
+
+Split has many Bills
+Bills have many Items
+Items have one or many Members
+
+For each bill:
+  item = {
+    item_price: $,
+    sharers: [M1, M2 ...]
+    portion_price: item_price/(sharers.length)
+  }
+  member = [item1.portion_price, item2.portion_price ...]
+    Member_owes = member.sum
+  OR member = {
+      owes: item1.portion_price + item2.portion_price ...
+    }
+
+For each split:
+  member_owes_total = [bill1.member_owes + bill2.member_owes ]
+
+
+Steps:
+1 Assign items to Members
+  - I << M
+2 Calculate how much each person pays (based on consumption) for one bill
+  - For each Bill, do:
+    - For each Item do:
+      - Iterate through members array and check if |member| is present in item.sharers array
+        - If member is present, add item.portion_price to member array / member.owes value
+3 Add taxes/discounts if applicable
+  - if Tax or Discount:
+    - member_owes = member_owes * (1 + tax%/100 - discount%/100)
+4 Sum up how much each person pays (based on consumption) across bills
+    - member_owes_total
+3 Calculate how much each member should pay or receive back
+  - (factor payers in)

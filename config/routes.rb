@@ -7,13 +7,15 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :splits, only: %i[index show new create destroy] do
     resources :split_members, only: %i[create]
+    resources :members, only: %i[create index]
+
     get :add_members
-    resources :members, only: %i[create]
     get "add_existing_contact/:member_id", to: "splits#add_existing_contact", as: :add_existing_contact
+
+    resources :bills, only: %i[index show new create destroy] do
+      resources :items, only: %i[index new create edit update destroy]
+    end
   end
-
-  resources :members, only: %i[index]
-
 end
 
 # def tabulate

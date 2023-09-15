@@ -1,0 +1,52 @@
+<div class="container-fluid bill-index">
+  <div class="bill-description">
+    <%# <%= link_to collaborate_path %>
+    <%# <%= link_to edit_bill_path %>
+
+    <h1><%= "#{@split.name}" %></h1>
+    <div class="dropdown d-flex">
+      <h2>Payer: </h2>
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Select Person(s)
+      </button>
+      <ul class="dropdown-menu">
+        <% @split_members.each do |member| %>
+          <li><a class="dropdown-item" href="#"><%= member.first_name %></a></li>
+        <% end %>
+      </ul>
+    </div>
+    <h2>Merchant: <%= "#{@bill.merchant}" %></h2>
+    <h2>Date: </h2>
+    <hr>
+  </div>
+<%# ------------------------------------------------------------- %>
+  <div class="bill-items">
+    <div class="bill-headers row">
+      <h3 class="col-7">Item</h3>
+      <h3 class="col-1">Qty</h3>
+      <h3 class="col-2">Unit price</h3>
+      <h3 class="col-2">People</h3>
+    </div>
+    <% @items.each do |item| %>
+      <div class="bill-summary-item-card d-flex">
+        <p class="col-7"><%= "#{item.name}" %></p>
+        <p class="col-1"><%= "#{item.quantity}" %></p>
+        <p class="col-2"><%= "#{item.price}" %></p>
+        <p class="col-2">Add people</p>
+      </div>
+    <% end %>
+    <hr>
+  </div>
+<%# ------------------------------------------------------------- %>
+  <div class="bill-footer row">
+    <div class="tax-discounts col-6">
+      <p>Tax (<%= "%tax" %>%):<%= "TAX AMT HERE" %></p>
+      <p>Discount (<%= "%discount" %>%):<%= "-DISCOUNTED AMT HERE" %></p>
+    </div>
+    <div class="add-receipt col-6 justify-content-center">
+      <p>Add another receipt?</p>
+      <button>Yes</button>
+      <button>No</button>
+    </div>
+  </div>
+</div>
