@@ -14,6 +14,7 @@ class BillsController < ApplicationController
   #   puts items
 
   #   render json: { data: } # this is to show the json code on the webpage in local
+  # remember that price will need to be converted to cents
   # transfer this to the items controller #index method instead and list out the items on the html.erb file
   # end
 
@@ -30,6 +31,7 @@ class BillsController < ApplicationController
       ParseReceiptJob.perform_later(@bill)
 
       redirect_to root_path # change to loading page
+      # check sidekiq background jobs on what to do when the json is obtained from ocr
     else
       raise
     end
