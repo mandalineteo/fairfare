@@ -7,8 +7,14 @@ class User < ApplicationRecord
   has_many :messages
 
   has_many :splits, dependent: :destroy
-  
+
   belongs_to :member
+
+  before_save :make_admin
+
+  def make_admin
+    self.admin = true
+  end
 
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
