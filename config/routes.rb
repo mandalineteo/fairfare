@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :items, only: %i[index new create edit update destroy]
     end
   end
+  resources :bills, only: [:show]
 end
 
 # def tabulate
