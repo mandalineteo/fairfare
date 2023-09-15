@@ -10,12 +10,13 @@ require 'faker'
 require 'open-uri'
 require 'date'
 require 'securerandom'
+require 'pry-byebug'
 
 seed_members = true
 seed_users = true
 seed_splits = true
 seed_bills_and_items = true
-seed_payers = true
+# seed_payers = true
 # seed_items = true
 
 if seed_members
@@ -128,6 +129,16 @@ if seed_splits
     invite_code: six_digit_code
   )
   puts "created #{split3.name}."
+
+
+
+  Split.all.each do |split|
+    split.members << split.user.member
+    members = Member.where.not(user:split.user).sample(2)
+    members.each do |member|
+      split.members << member
+    end
+  end
 end
 
 # ----------------------------------------------------
@@ -149,12 +160,28 @@ if seed_bills_and_items
   def create_payers(bill)
     puts "    adding payers"
     bill_members = bill.split.members
-    rand (1..3).times do
+
+    rand(1..3).times do
       payer = Payer.create!(
         bill:,
         member: bill_members[(rand(bill_members.count))]
       )
       puts "    -created #{payer.member.first_name} as a payer"
+    end
+  end
+
+  def assign_members_to_items(bill)
+    puts "    adding members (consumers) to items"
+    bill_members = bill.split.members
+    items = bill.items
+    items.each do |item|
+      rand(1..3).times do
+        item_member = ItemMember.create!(
+          item:,
+          member: bill_members[rand(bill_members.count)]
+        )
+        puts "    -created #{item_member.member.first_name} as a member to item #{item.name}"
+      end
     end
   end
 
@@ -165,6 +192,8 @@ if seed_bills_and_items
       puts "Creating Bill for #{merchant}"
       bill = Bill.create!(merchant:, split:)
       create_items(bill)
+      create_payers(bill)
+      assign_members_to_items(bill)
       puts "created Bill for #{merchant}\n\n"
     end
   end
