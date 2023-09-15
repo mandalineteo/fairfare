@@ -11,4 +11,8 @@ class Member < ApplicationRecord
   def registered?
     !user.nil?
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
