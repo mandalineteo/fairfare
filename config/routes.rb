@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :splits, only: %i[index show new create destroy] do
     resources :bills, only: %i[index show new create destroy]
   end
+  resources :bills, only: [:show]
 end
 
 # def tabulate

@@ -8,6 +8,9 @@ class SplitsController < ApplicationController
   end
 
   def new
+    @split = Split.new
+
+
   end
 
   def create
