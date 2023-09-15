@@ -1,13 +1,19 @@
 <div class="m-5">
-  <h1>
-    Upload Receipt
-  </h1>
+    <%= link_to "Back", root_path, class:"btn btn-primary" %>
+    <h1 class="mt-4">
+      Upload Receipt
+    </h1>
+
   <div class="row justify-content-center">
     <div class="col-sm-8 my-3">
-      <%= form_with url: upload_split_bills_path(@split), method: :post, class: "d-flex" do  |form| %>
-        <%= form.label :image, 'Upload Photo' %>
-        <%= form.file_field :image %>
-        <%= submit_tag "Submit", class:"btn btn-primary" %>
+    <div>
+        <%= form_with url: upload_split_bills_path(@split), method: :post, class: "d-flex" do  |form| %>
+          <%= form.label :image, 'Upload Photo' %>
+          <%= form.file_field :image %>
+        </div>
+        <div class="my-5">
+          <%= submit_tag "Submit", class:"btn btn-primary" %>
+        </div>
       <% end %>
     </div>
   </div>
