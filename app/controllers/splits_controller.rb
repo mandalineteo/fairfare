@@ -16,13 +16,18 @@ class SplitsController < ApplicationController
     @split.invite_code = SecureRandom.hex(13)
     @split.user = current_user
     if @split.save
-      redirect_to split_members_new_path(split_id: @split.id)
+      redirect_to new_split_split_member_path(@split)
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def destroy
+  end
+
+  def add_members
+    @split = Split.find(params[:split_id])
+    @member = Member.new
   end
 
   private

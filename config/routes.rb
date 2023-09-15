@@ -5,9 +5,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :splits, only: %i[index show new create destroy]
+  resources :splits, only: %i[index show new create destroy] do
+    resources :split_members, only: %i[create]
+    get :add_members
+    resources :members, only: %i[create]
+  end
 
-  get 'split_members/new'
 
 end
 

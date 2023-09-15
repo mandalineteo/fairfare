@@ -1,0 +1,12 @@
+<h1>add members</h1>
+
+<% @split.members.each do |member| %>
+  <p><%= member.first_name %></p>
+<% end %>
+
+<%= simple_form_for([@split, @member]) do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :phone_number %>
+  <%= f.submit %>
+<% end %>
