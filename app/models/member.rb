@@ -1,4 +1,5 @@
 class Member < ApplicationRecord
+  
   has_one :user, dependent: :destroy
   has_many :split_members
   has_many :splits, through: :split_members
