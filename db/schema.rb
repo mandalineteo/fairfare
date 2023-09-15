@@ -105,7 +105,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_085240) do
   end
 
   create_table "splits", force: :cascade do |t|
-    t.string "status"
+    t.string "status", default: "draft"
     t.string "name"
     t.date "date"
     t.string "invite_code"
