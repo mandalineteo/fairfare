@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get "add_existing_contact/:member_id", to: "splits#add_existing_contact", as: :add_existing_contact
   end
 
+  resources :members, only: %i[index]
 
 end
 
