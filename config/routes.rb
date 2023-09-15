@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :splits, only: %i[index show new create destroy]
+  resources :splits, only: %i[index show new create destroy] do
+    resources :bills, only: %i[index show new create destroy]
+  end
 end
 
 # def tabulate
