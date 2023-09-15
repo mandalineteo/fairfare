@@ -5,11 +5,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :splits, only: %i[index show new create destroy] do
-    member do
-      get 'split_members/new', as: :new_member
-    end
-  end
+  resources :splits, only: %i[index show new create destroy]
+
+  get 'split_members/new'
+
 end
 
 # def tabulate

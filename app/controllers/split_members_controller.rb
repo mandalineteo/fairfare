@@ -1,10 +1,17 @@
 class SplitMembersController < ApplicationController
-  skip_before_action :authenticate_user!
-
   def new
-    @split_member = Split_member.new
+    split_id = params[:split_id]
+    @split = Split.find(split_id)
+    @split_member = SplitMember.new
   end
 
   def create
+    split_id = params[:split_id]
+    @split = Split.find(split_id)
+    @split_member = SplitMember.new
+
+    # if @split_member.save
+    # else
+    # end
   end
 end

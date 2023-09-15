@@ -1,7 +1,8 @@
-<h1>To be replaced with @split.name</h1>
+<h1><%= @split.name %></h1>
 
-<%= simple_form_for([@split, @split_member]) do |f| %>
-  <%= f.input :name %>
+<%= simple_form_for(@split, @split_member) do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
   <%= f.input :phone_number %>
   <%= f.submit "Add members" %>
 <% end %>

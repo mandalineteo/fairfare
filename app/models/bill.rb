@@ -7,6 +7,8 @@ class Bill < ApplicationRecord
   has_many :payers, dependent: :destroy
   has_many :members, through: :payers
   has_many :items, dependent: :destroy
+
+  validates :merchant, presence: true
 end
 
 # @bill.paid_by => [<member>,<member>]

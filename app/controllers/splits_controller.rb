@@ -1,6 +1,6 @@
-class SplitsController < ApplicationController
-  skip_before_action :authenticate_user!
+require 'securerandom'
 
+class SplitsController < ApplicationController
   def index
   end
 
@@ -13,9 +13,10 @@ class SplitsController < ApplicationController
 
   def create
     @split = Split.new(split_params)
+    @split.invite_code = SecureRandom.hex(13)
     @split.user = current_user
     if @split.save
-      redirect_to new_member_split_path
+      redirect_to split_members_new_path(split_id: @split.id)
     else
       render :new, status: :unprocessable_entity
     end
