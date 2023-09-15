@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_13_094806) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_14_143124) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_094806) do
   end
 
   create_table "splits", force: :cascade do |t|
-    t.string "status"
+    t.string "status", default: "draft"
     t.string "name"
     t.date "date"
     t.string "invite_code"

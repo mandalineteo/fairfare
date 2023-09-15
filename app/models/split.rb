@@ -5,5 +5,7 @@ class Split < ApplicationRecord
   has_many :members, through: :split_members
   has_many :bills, dependent: :destroy
 
-
+  validates :name, presence: true
+  validates :date, presence: true
+  validates :status, presence: true
 end

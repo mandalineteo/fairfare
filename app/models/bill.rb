@@ -8,6 +8,7 @@ class Bill < ApplicationRecord
   has_many :members, through: :payers
   has_many :items, dependent: :destroy
 
+  validates :merchant, presence: true
   # added by cl (15-09)
   accepts_nested_attributes_for :items
 end
