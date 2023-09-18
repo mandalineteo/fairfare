@@ -1,4 +1,7 @@
 class MembersController < ApplicationController
+  def index
+  end
+
   def create
     @member = Member.new(member_params)
     @split = Split.find(params[:split_id])

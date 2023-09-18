@@ -7,20 +7,21 @@
     <p><%= member.first_name %></p>
   <% end %>
 
-  <%= simple_form_for([@split, @member]) do |f| %>
+  <%= simple_form_for([@split, @member], html: { data: { "filter-contacts-target" => "form" } }) do |f| %>
     <%= f.input :first_name, input_html: {
         placeholder: 'Start typing to search for contact',
-        data: { action: "keyup->filter-contacts#filterByFirstName" }
+        data: { action: "keyup->filter-contacts#filterByFirstName" },
+        "data-filter-contacts-target" => "input"
       } %>
     <%= f.input :last_name %>
     <%= f.input :phone_number %>
     <%= f.submit %>
   <% end %>
 
-  <h2 class="mt-4" data-filter-contacts-target="list">Select existing contacts</h2>
+  <h2 class="mt-4">Select existing contacts</h2>
   <ul class="list-group">
     <% @available_contacts.each do |contact| %>
-      <li class="list-group-item">
+      <li class="list-group-item" data-filter-contacts-target="list">
         <%= link_to "#{contact.full_name} (#{contact.phone_number})", split_add_existing_contact_path(@split, contact) %>
       </li>
     <% end %>
