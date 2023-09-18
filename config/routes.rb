@@ -16,6 +16,12 @@ Rails.application.routes.draw do
       resources :items, only: %i[index new create edit update destroy]
     end
   end
+
+  resources :members, only: %i[create index] do
+    collection do
+      get :filter
+    end
+  end
 end
 
 # def tabulate

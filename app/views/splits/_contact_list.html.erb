@@ -1,0 +1,5 @@
+  <% contacts.each do |contact| %>
+      <li class="list-group-item" data-filter-contacts-target="list">
+        <%= contact.full_name %> <%= contact.phone_number %> <br>
+      </li>
+    <% end %>
