@@ -7,6 +7,7 @@ class Bill < ApplicationRecord
   has_many :payers, dependent: :destroy
   has_many :members, through: :payers
   has_many :items, dependent: :destroy
+  has_one_attached :photo
 
   validates :merchant, presence: true
   # added by cl (15-09)

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
+  require "sidekiq/web"
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -13,6 +17,11 @@ Rails.application.routes.draw do
     get "add_existing_contact/:member_id", to: "splits#add_existing_contact", as: :add_existing_contact
 
     resources :bills, only: %i[index show new create destroy] do
+      collection do
+        get :receipt
+        post :upload
+      end
+
       resources :items, only: %i[index new create edit update destroy]
     end
   end

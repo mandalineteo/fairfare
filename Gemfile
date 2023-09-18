@@ -80,3 +80,6 @@ group :test do
 end
 
 gem 'faker'
+gem "cloudinary"
+gem "sidekiq"
+gem "sidekiq-failures", "~> 1.0"
