@@ -4,7 +4,7 @@
 
 
   <% @split.members.each do |member| %>
-    <p><%= member.first_name %></p>
+    <p><%= member.id %></p>
   <% end %>
 
   <%= simple_form_for([@split, @member]) do |f| %>
