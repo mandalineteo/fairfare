@@ -4,6 +4,12 @@ class ItemsController < ApplicationController
     @bill = Bill.find(params[:bill_id])
     @items = Item.all.where(bill_id: @bill.id)
     @split_members = @split.members
+
+    if scraping_data
+      render :scraping
+    else
+      render :index
+    end
   end
 
   def new
