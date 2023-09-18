@@ -5,6 +5,7 @@ class ParseReceiptJob < ApplicationJob
     # require 'open-uri'
     url = Cloudinary::Utils.cloudinary_url("#{ENV["RAILS_ENV"]}/#{bill.photo.key}", quality: "auto:low")
     result = ExtractTextFromReceipt.(url:) # this is the json
+    items = RetrieveItemsFromReceipt.(json_data: result, bill:)
 
     bill.update(receipt_data: result)
   end
