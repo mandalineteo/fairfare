@@ -11,6 +11,12 @@ class User < ApplicationRecord
 
   belongs_to :member
 
+  before_save :make_admin
+
+  def make_admin
+    self.admin = true
+  end
+
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
   end
