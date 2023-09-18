@@ -14,7 +14,6 @@ export default class extends Controller {
 
   check(event) {
     event.preventDefault()
-    this.checkboxTarget.classList.toggle("green");
-
+    console.log("AJAX")
   }
 }
