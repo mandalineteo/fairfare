@@ -13,8 +13,8 @@ export default class extends Controller {
 
           const img = new Image();
           img.src = e.target.result;
-          img.style.height = "500px";
-          preview.style.height = "500px";
+          img.style.height = "700px";
+          preview.style.height = "700px";
 
           preview.src = img.src;
         }
