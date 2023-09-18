@@ -1,12 +1,59 @@
-<div class="card pt-5">
-  <h1><%= @split.name %></h1>
+<%# header - split name %>
+<div class="container text-center pt-5 m-5">
+  <div class="row">
+    <div class="col text-center">
+      <h1><%= @split.name.upcase %></h1>
+    </div>
+  </div>
 </div>
 
-<h3>Name of establishment: </h3>
-<%= simple_form_for [@split, @bill] do |f| %>
-  <%= f.input :merchant %>
+<div class="container text-left">
+  <%= simple_form_for [@split, @bill] do |f| %>
+    <%= f.input :merchant %>
+
+    <div class="row align-items-center">
+      <div class="col">
+        <%= render 'item_form_input', f: f %>
+        <%= f.submit value="Add More"%>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row mt-5">
+    <div class="col">
+      <div class="input-group  mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">GST</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing">
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="input-group  mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Service Tax</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing">
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="input-group  mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Discount</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing">
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-lg">Continue</button>
+</div>
 
 
+
+
+
+
+
+<%# <%= simple_form_for [@split, @bill] do |f| %>
+  <%# <%= f.input :merchant %>
+<%#
   <h3>Enter item: </h3>
 
   <div class="container text-center">
@@ -21,10 +68,10 @@
         Amount:
       </div>
     </div>
-  </div>
+  </div> %>
 
-  <%= render 'item_form_input', f: f %>
+  <%# <%= render 'item_form_input', f: f %>
 
-  <%= f.submit %>
+  <%# <%= f.submit %>
 
-<% end %>
+<%# <% end %>
