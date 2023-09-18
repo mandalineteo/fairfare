@@ -7,9 +7,16 @@ class User < ApplicationRecord
   has_many :messages
 
   has_many :splits, dependent: :destroy
-  has_many :contacts, ->(user) { where.not(id: user.member_id).distinct }, through: :splits, source: :members
+  # has_many :contacts, ->(user) { where.not(id: user.member_id).distinct }, through: :splits, source: :members
+  has_many :contacts, dependent: :destroy
 
   belongs_to :member
+
+  before_save :make_admin
+
+  def make_admin
+    self.admin = true
+  end
 
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
