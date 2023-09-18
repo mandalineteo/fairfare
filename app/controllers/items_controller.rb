@@ -4,8 +4,9 @@ class ItemsController < ApplicationController
     @bill = Bill.find(params[:bill_id])
     @items = Item.all.where(bill_id: @bill.id)
     @split_members = @split.members
+    @contacts = Contact.all.where(member_id: @)
 
-    if scraping_data
+    if @bill.scraping_data
       render :scraping
     else
       render :index

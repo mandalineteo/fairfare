@@ -34,7 +34,7 @@ Steps:
   - For each Bill, do:
     - For each Item do:
       - Iterate through members array and check if |member| is present in item.sharers array
-        - If member is present, add item.portion_price to member array / member.owes value
+        - If member is present, add item.portion_price to member array OR member.owes value
 3 Add taxes/discounts if applicable
   - if Tax or Discount:
     - member_owes = member_owes * (1 + tax%/100 - discount%/100)
