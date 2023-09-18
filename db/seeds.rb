@@ -22,7 +22,7 @@ seed_bills_and_items = true
 if seed_members
   puts "\n\n===== Creating members =====\n"
 
-  puts 'clearing old data...'
+  puts 'Clearing old data...'
   Member.destroy_all
   # phone_no = "#{["8","9"].sample}#{7.times { rand(9).to_s }}"
   # phone_no = (8..9).to_a.sample.to_s + rand((10**6)..((10**7) - 1)).to_s
@@ -30,31 +30,25 @@ if seed_members
   members = []
   puts "Creating John Doe..."
   member1 = Member.create!(
-    first_name: "John",
-    last_name: "Doe",
     phone_number: "91231239"
   )
-  puts "created John Doe.\n\n"
+  puts "Created John Doe.\n\n"
 
   puts "Creating 10 Members with accounts"
   10.times do
     member = Member.create!(
-      first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name,
-      phone_number: "91239123"
+      phone_number: rand(90_000_000..99_999_999).to_s
     )
     members << member
-    puts "created #{member.first_name}."
+    puts "Created member."
   end
 
   puts "Creating 10 Members without accounts"
   10.times do
     member = Member.create!(
-      first_name: Faker::Name.first_name,
-      last_name: Faker::Name.last_name,
-      phone_number: "91239123"
+      phone_number: rand(90_000_000..99_999_999).to_s
     )
-    puts "created #{member.first_name}."
+    puts "Created member."
   end
 end
 
@@ -63,7 +57,7 @@ end
 if seed_users
   puts "===== Creating Users =====\n\n"
 
-  puts 'clearing old data'
+  puts 'Clearing old data'
   User.destroy_all
   users = []
 
@@ -71,19 +65,43 @@ if seed_users
     member: member1,
     username: "Test1",
     email: "test123@gmail.com",
+    first_name: "Zohan",
+    last_name: "Goh",
     password: "password"
   )
-  puts "created #{user1.username}."
+  puts "Created #{user1.username}."
   10.times do |index|
     user = User.create!(
       member: members.shift,
       username: "User#{index}",
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
       email: Faker::Internet.email,
       password: "password"
     )
     users << user
-    puts "created #{user.username}."
+    puts "Created #{user.username}."
   end
+end
+# # ----------------------------------------------------
+
+puts "\n\n===== Creating Contacts =====\n"
+puts 'Clearing old data...'
+Contact.destroy_all
+
+puts 'Adding Zohan into contacts...'
+Contact.create!(
+  user: user1,
+  member: member1,
+  nickname: 'The Zohan'
+)
+Member.first(5).each_with_index do |member, index|
+puts 'Adding another contact...'
+  Contact.create!(
+    user: user1,
+    member:,
+    nickname: "friend #{index + 1}"
+  )
 end
 
 # # ----------------------------------------------------
@@ -91,7 +109,7 @@ end
 if seed_splits
   puts "\n\n===== Creating splits =====\n"
 
-  puts 'clearing old data...'
+  puts 'Clearing old data...'
   Split.destroy_all
 
   def split_date
@@ -110,7 +128,7 @@ if seed_splits
     date: split_date,
     invite_code: six_digit_code
   )
-  puts "created #{split1.name}."
+  puts "Created #{split1.name}."
 
   split2 = Split.create!(
     user: user1,
@@ -166,7 +184,7 @@ if seed_bills_and_items
         bill:,
         member: bill_members[(rand(bill_members.count))]
       )
-      puts "    -created #{payer.member.first_name} as a payer"
+      puts "    -created payers"
     end
   end
 
@@ -180,7 +198,7 @@ if seed_bills_and_items
           item:,
           member: bill_members[rand(bill_members.count)]
         )
-        puts "    -created #{item_member.member.first_name} as a member to item #{item.name}"
+        puts "    -created member for item #{item.name}"
       end
     end
   end
