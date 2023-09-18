@@ -1,6 +1,7 @@
 class BillsController < ApplicationController
   def index
     @bills = Bill.all
+
   end
 
   def show
@@ -18,11 +19,10 @@ class BillsController < ApplicationController
     @bill = Bill.new(bill_params)
     @bill.split = @split
 
-
     if @bill.save
       redirect_to :show
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -31,5 +31,4 @@ class BillsController < ApplicationController
   def bill_params
     params.require(:bill).permit(:merchant, items_attributes: [:name, :price, :quantity])
   end
-
 end
