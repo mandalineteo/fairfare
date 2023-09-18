@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
     @items = Item.all.where(bill_id: @bill.id)
     @split_members = @split.members
 
-    if scraping_data
+    if @bill.scraping_data
       render :scraping
     else
       render :index
