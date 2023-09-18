@@ -4,29 +4,47 @@
 
 
   <% @split.members.each do |member| %>
-    <p><%= member.first_name %></p>
+    <p><%= member.given_nickname(current_user) %></p>
   <% end %>
 
-  <%= simple_form_for([@split, @member], html: { data: { "filter-contacts-target" => "form" } }) do |f| %>
-    <%= f.input :first_name, input_html: {
+  <%= simple_form_for([@split, @split_member], html: { data: { "filter-contacts-target" => "form" } }) do |f| %>
+    <%#= f.text_field :first_name, input_html: {
         placeholder: 'Start typing to filter your contacts',
         data: { action: "keyup->filter-contacts#filterByFirstName" }
     } %>
 
-    <%= f.input :last_name, input_html: {
+    <%#= f.input :last_name, input_html: {
       placeholder: 'Start typing to filter contacts',
       data: { action: "keyup->filter-contacts#filterByLastName"}
     } %>
 
-    <%= f.input :phone_number, input_html: {
+    <div class="mb-3 tel required member_phone_number">
+      <label class="form-label tel required" for="member_phone_number">Nickname <abbr title="required">*</abbr></label>
+      <input class="form-control string tel required" placeholder="Start typing to filter your contacts" data-action="keyup->filter-contacts#filterByNickname" type="text" name="nickname" id="member_nickname">
+    </div>
+
+
+    <div class="mb-3 tel required member_phone_number">
+      <label class="form-label tel required" for="member_phone_number">Phone Number <abbr title="required">*</abbr></label>
+      <input class="form-control string tel required" placeholder="Start typing to filter your contacts" data-action="keyup->filter-contacts#filterByNickname" type="text" name="phone_number" id="member_phone_number">
+    </div>
+
+    <%= f.association :member, as: :hidden %>
+
+    <%= f.association :split, as: :hidden %>
+    <%#= f.input :phone_number, input_html: {
       placeholder: 'Start typing to filter your contacts',
       data: { action: "keyup->filter-contacts#filterByPhoneNumber" }
     } %>
-    <%= f.submit %>
+    <%= f.submit 'Add to split' %>
   <% end %>
 
+<% if @available_contacts.empty? %>
+  something
+<% else %>
   <h2 class="mt-4">Select existing contacts</h2>
   <ul class="list-group" data-filter-contacts-target="contacts">
     <%= render "contact_list", contacts: @available_contacts %>
   </ul>
+<% end %>
 </div>

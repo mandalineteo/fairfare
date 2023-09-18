@@ -25,6 +25,15 @@ class MembersController < ApplicationController
   end
 
   def create
+    raise
+    # find if there is a member with this number
+      # if not, create the member
+
+    # check if member is a contact
+      # if not, add as contact
+
+    # add to split
+
     @member = Member.new(member_params)
     @split = Split.find(params[:split_id])
 

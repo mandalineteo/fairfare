@@ -35,8 +35,9 @@ class SplitsController < ApplicationController
 
   def add_members
     @split = Split.find(params[:split_id])
-    @member = Member.new
+    # @member = Member.new
     @available_contacts = current_user.contacts - @split.members
+    @split_member = SplitMember.new(split: @split)
   end
 
   private
