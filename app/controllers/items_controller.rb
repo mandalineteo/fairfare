@@ -4,7 +4,11 @@ class ItemsController < ApplicationController
     @bill = Bill.find(params[:bill_id])
     @items = Item.all.where(bill_id: @bill.id)
     @split_members = @split.members
+<<<<<<< HEAD
     @payer = Payer.new
+=======
+    # @contacts = Contact.all.where(member_id: )
+>>>>>>> master
 
     if @bill.scraping_data
       render :scraping
@@ -30,5 +34,9 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    @item = Item.find(params[:id])
+    @bill = @item.bill
+    @item.destroy
+    # redirect_to edit_bill_path(@bill)
   end
 end

@@ -19,17 +19,27 @@ seed_bills_and_items = true
 # seed_payers = true
 # seed_items = true
 
+ItemMember.destroy_all
+Payer.destroy_all
+Contact.destroy_all
+Item.destroy_all
+Bill.destroy_all
+SplitMember.destroy_all
+Split.destroy_all
+Member.destroy_all
+User.destroy_all
+
+
 if seed_members
   puts "\n\n===== Creating members =====\n"
 
   puts 'Clearing old data...'
-  Member.destroy_all
   # phone_no = "#{["8","9"].sample}#{7.times { rand(9).to_s }}"
   # phone_no = (8..9).to_a.sample.to_s + rand((10**6)..((10**7) - 1)).to_s
 
-  members = []
-  puts "Creating John Doe..."
-  member1 = Member.create!(
+  members_with_accounts = []
+  puts "Creating Zohan member..."
+  zohan_member = Member.create!(
     phone_number: "91231239"
   )
   puts "Created John Doe.\n\n"
@@ -39,15 +49,17 @@ if seed_members
     member = Member.create!(
       phone_number: rand(90_000_000..99_999_999).to_s
     )
-    members << member
+    members_with_accounts << member
     puts "Created member."
   end
 
+  members_without_accounts = []
   puts "Creating 10 Members without accounts"
   10.times do
     member = Member.create!(
       phone_number: rand(90_000_000..99_999_999).to_s
     )
+    members_without_accounts << member
     puts "Created member."
   end
 end
@@ -58,21 +70,22 @@ if seed_users
   puts "===== Creating Users =====\n\n"
 
   puts 'Clearing old data'
-  User.destroy_all
+
   users = []
 
-  user1 = User.create!(
-    member: member1,
+  zohan_user = User.create!(
+    member: zohan_member,
     username: "Test1",
     email: "test123@gmail.com",
     first_name: "Zohan",
     last_name: "Goh",
     password: "password"
   )
-  puts "Created #{user1.username}."
+  puts "Created #{zohan_user.username}."
+
   10.times do |index|
     user = User.create!(
-      member: members.shift,
+      member: members_with_accounts[index],
       username: "User#{index}",
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
@@ -87,30 +100,37 @@ end
 
 puts "\n\n===== Creating Contacts =====\n"
 puts 'Clearing old data...'
-Contact.destroy_all
 
-puts 'Adding Zohan into contacts...'
-Contact.create!(
-  user: user1,
-  member: member1,
-  nickname: 'The Zohan'
-)
-Member.first(5).each_with_index do |member, index|
-puts 'Adding another contact...'
+# puts 'Adding Zohan into contacts...'
+# Contact.create!(
+#   user: zohan_user,
+#   member: zohan_member,
+#   nickname: 'The Zohan'
+# )
+
+members_with_accounts.first(3).each_with_index do |member, index|
+  puts 'Adding contacts with accounts...'
   Contact.create!(
-    user: user1,
+    user: zohan_user,
     member:,
-    nickname: "friend #{index + 1}"
+    nickname: "friend with account #{index + 1}"
   )
 end
 
+members_without_accounts.first(3).each_with_index do |member, index|
+  puts 'Adding contacts without accounts...'
+  Contact.create!(
+    user: zohan_user,
+    member:,
+    nickname: "friend with no account #{index + 1}"
+  )
+end
 # # ----------------------------------------------------
 
 if seed_splits
   puts "\n\n===== Creating splits =====\n"
 
   puts 'Clearing old data...'
-  Split.destroy_all
 
   def split_date
     Date.today + rand(10).days
@@ -122,7 +142,7 @@ if seed_splits
   # statuses = ["draft", "pending", "complete"]
 
   split1 = Split.create!(
-    user: user1,
+    user: zohan_user,
     status: "draft",
     name: "my first split",
     date: split_date,
@@ -131,7 +151,7 @@ if seed_splits
   puts "Created #{split1.name}."
 
   split2 = Split.create!(
-    user: user1,
+    user: zohan_user,
     status: "pending",
     name: "lunch meal",
     date: split_date,
@@ -140,7 +160,7 @@ if seed_splits
   puts "created #{split2.name}."
 
   split3 = Split.create!(
-    user: user1,
+    user: zohan_user,
     status: "complete",
     name: "dinner meal",
     date: split_date,
@@ -219,11 +239,76 @@ if seed_bills_and_items
   puts "\n\n===== Creating bills & items =====\n"
 
   puts 'clearing old data...'
-  Bill.destroy_all
-  Item.destroy_all
+
 
   Split.all.each { |split| create_bills(split) }
 
 end
 
 # ----------------------------------------------------
+
+# THIS IS JUST FOR TESTING THE O$P$ CALCULATON LOGIC (in splits#show) - CAN BE REMOVED IF NOT NEEDED
+
+# Create users for members
+users = []
+4.times do
+  users << User.create(email: Faker::Internet.email,
+                      password: 'password',
+                      password_confirmation: 'password')
+end
+
+# Create members
+members = []
+users.each do |user|
+  members << Member.create(user: user, phone_number: Faker::PhoneNumber.cell_phone)
+end
+
+# Create contacts for members
+members.each do |member|
+  other_members = members.reject { |m| m.id == member.id }
+  other_members.each do |contact_member|
+    Contact.create(nickname: Faker::Name.first_name, user: member.user, member: contact_member)
+  end
+end
+
+# Create split with one of the members
+split = Split.create(name: Faker::Lorem.word, date: Date.today, user: users.first)
+
+# Connect split with members
+members.each do |member|
+  SplitMember.create(split: split, member: member)
+end
+
+# Create 5 bills
+bills = []
+5.times do
+  bill = Bill.create(merchant: Faker::Company.name,
+                    split: split,
+                    date: Date.today,
+                    total_amount: 0)
+
+  # Create 3 items for each bill
+  3.times do
+    item = Item.create(name: Faker::Commerce.product_name,
+                      quantity: rand(1..5),
+                      price: rand(10..100),
+                      bill: bill)
+
+    #Updating total_amount in bill after adding each item
+    bill.total_amount += item.price * item.quantity
+    bill.save
+
+    # Connect item with random member
+    ItemMember.create(item: item, member: members.sample)
+  end
+
+  # Assign bill payers randomly
+  payers = members.sample(rand(1..4))
+  payers.each do |payer|
+    Payer.create(bill: bill, member: payer)
+  end
+
+  bills << bill
+end
+
+puts "Seeding is complete. Created #{Split.count} split with #{Bill.count} bills and #{Item.count} items. Created #{Member.count} members with #{Contact.count} contacts."

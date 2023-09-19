@@ -25,12 +25,23 @@ Rails.application.routes.draw do
       collection do
         get :receipt
         post :upload
+        get :select
       end
 
+<<<<<<< HEAD
       resources :items, only: %i[index new create edit update destroy]
       resources :payers, only: %i[new create destroy]
     end
   end
+=======
+      resources :items, only: %i[index new create edit update]
+    end
+  end
+
+
+  resources :items, only: %i[destroy]
+
+>>>>>>> master
 end
 
 # def tabulate
