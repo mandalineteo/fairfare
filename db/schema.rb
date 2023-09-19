@@ -51,6 +51,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_18_065015) do
     t.date "date"
     t.integer "taxes"
     t.integer "total_amount"
+    t.integer "discount"
+    t.integer "service_charge"
     t.index ["split_id"], name: "index_bills_on_split_id"
   end
 

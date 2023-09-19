@@ -10,10 +10,7 @@ class ContactsController < ApplicationController
         render json: {
           contacts: render_to_string(
             partial: "splits/contact_list",
-            locals: {
-              contacts: @contacts,
-              split: @split
-            },
+            locals: { available_contacts: @contacts, split: @split },
             formats: [:html]
           )
         }

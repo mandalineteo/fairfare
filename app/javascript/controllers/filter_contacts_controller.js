@@ -8,8 +8,7 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log(this.splitIdValue);
-
+    // console.log(this.splitIdValue);
     this.url = `/splits/${this.splitIdValue}/contacts/filter`
     this.nickname = '';
   }

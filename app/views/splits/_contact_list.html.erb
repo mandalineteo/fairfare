@@ -1,10 +1,19 @@
 <div data-filter-contacts-target="contacts">
-  <h2 class="mt-4">Click to add existing contacts to split</h2>
-  <ul class="list-group" >
-    <% contacts.each do |contact| %>
-      <li class="list-group-item">
-        <%= link_to "#{contact.nickname} #{contact.member.phone_number}", split_add_existing_contact_path(split, contact) %> <br>
-      </li>
-    <% end %>
-  </ul>
+  <% if available_contacts.empty? %>
+
+    <h2 class="mt-4">No Contacts to show</h2>
+    <p>Enter a new nickname and phone number to add member to split.</p>
+
+  <% else %>
+
+    <h2 class="mt-4">Click to add existing contacts to split</h2>
+    <ul class="list-group" >
+      <% available_contacts.each do |contact| %>
+        <li class="list-group-item">
+          <%= link_to "#{contact.nickname} #{contact.member.phone_number}", split_add_existing_contact_path(split, contact.member.id) %> <br>
+        </li>
+      <% end %>
+    </ul>
+
+  <% end %>
 </div>
