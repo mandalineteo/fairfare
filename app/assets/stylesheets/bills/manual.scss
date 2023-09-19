@@ -1,0 +1,49 @@
+$button-shadow-color: #e8e8ba;
+
+.manual-input-header {
+  margin: 0 auto;
+
+  h1 {
+    color: $gray;
+    font-family: $headers-font;
+    font-size: 50px;
+    font-weight: bolder;
+    margin: 0 auto;
+    padding-top: 30px;
+    text-align: center;
+    text-shadow: 1px 1px 2px $yellow;
+  }
+}
+
+.add-button, .remove-button {
+  background-color: $ff-purple;
+  border: none;
+  border-radius: 8px;
+  color: $light-gray;
+  font-family: $body-font;
+  padding: 10px;
+  box-shadow: 3px 3px 10px $button-shadow-color;
+  transition: 300ms all ease-in-out;
+
+  &:hover {
+    color: $ff-purple;
+    background-color: $light-gray;
+    border: 1px solid $ff-purple;
+  }
+}
+
+.remove-button {
+  display: flex;
+  position:relative;
+  bottom: 43px;
+  left: 120px;
+}
+
+
+.cont-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: $ff-purple;
+  box-shadow: 3px 3px 10px $light-gray;
+}

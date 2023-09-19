@@ -22,9 +22,11 @@ Rails.application.routes.draw do
         post :upload
       end
 
-      resources :items, only: %i[index new create edit update destroy]
+      resources :items, only: %i[index new create edit update]
     end
   end
+
+  resources :items, only: %i[destroy]
 end
 
 # def tabulate

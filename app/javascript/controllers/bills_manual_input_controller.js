@@ -2,27 +2,37 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="bills-manual-input"
 export default class extends Controller {
-  static targets = ["addInputElement", "taxInput"]
+  static targets = ["addInputElement", "removeInputElement"]
+  // static values = {
+  //   input: String
+  // }
 
   connect() {
-    // console.log("test");
+    this.inputField = this.addInputElementTarget.children[0].outerHTML
+    this.nextId = document.querySelectorAll(".item").length
   }
 
-  addForm(event) {
+  addItemInput(event) {
+    // console.log("triggered")
     event.preventDefault()
 
-    const existingItemFieldsCount = document.querySelectorAll(".item").length
-    const insertForm = `<div class="item" speechify-initial-font-family="&quot;Work Sans&quot;, Helvetica, &quot;sans-serif&quot;" speechify-initial-font-size="16px">
-    <div class="mb-3 string required bill_items_name" speechify-initial-font-family="&quot;Work Sans&quot;, Helvetica, &quot;sans-serif&quot;" speechify-initial-font-size="16px"><label class="form-label string required" for="bill_items_attributes_${existingItemFieldsCount}_name" speechify-initial-font-family="&quot;Work Sans&quot;, Helvetica, &quot;sans-serif&quot;" speechify-initial-font-size="16px">Name <abbr title="required" speechify-initial-font-family="&quot;Work Sans&quot;, Helvetica, &quot;sans-serif&quot;" speechify-initial-font-size="16px">*</abbr></label><input class="form-control string required" type="text" name="bill[items_attributes][${existingItemFieldsCount}][name]" id="bill_items_attributes_${existingItemFieldsCount}_name" speechify-initial-font-family="&quot;Work Sans&quot;, Helvetica, &quot;sans-serif&quot;" speechify-initial-font-size="16px"></div>
-    <div class="mb-3 integer required bill_items_price" speechify-initial-font-family="&quot;Work Sans&quot;, Helvetica, &quot;sans-serif&quot;" speechify-initial-font-size="16px"><label class="form-label integer required" for="bill_items_attributes_${existingItemFieldsCount}_price" speechify-initial-font-family="&quot;Work Sans&quot;, Helvetica, &quot;sans-serif&quot;" speechify-initial-font-size="16px">Price <abbr title="required" speechify-initial-font-family="&quot;Work Sans&quot;, Helvetica, &quot;sans-serif&quot;" speechify-initial-font-size="16px">*</abbr></label><input class="form-control numeric integer required" type="number" step="1" name="bill[items_attributes][${existingItemFieldsCount}][price]" id="bill_items_attributes_${existingItemFieldsCount}_price" speechify-initial-font-family="&quot;Work Sans&quot;, Helvetica, &quot;sans-serif&quot;" speechify-initial-font-size="16px"></div>
-    <div class="mb-3 integer required bill_items_quantity" speechify-initial-font-family="&quot;Work Sans&quot;, Helvetica, &quot;sans-serif&quot;" speechify-initial-font-size="16px"><label class="form-label integer required" for="bill_items_attributes_${existingItemFieldsCount}_quantity" speechify-initial-font-family="&quot;Work Sans&quot;, Helvetica, &quot;sans-serif&quot;" speechify-initial-font-size="16px">Quantity <abbr title="required" speechify-initial-font-family="&quot;Work Sans&quot;, Helvetica, &quot;sans-serif&quot;" speechify-initial-font-size="16px">*</abbr></label><input class="form-control numeric integer required" type="number" step="1" name="bill[items_attributes][${existingItemFieldsCount}][quantity]" id="bill_items_attributes_${existingItemFieldsCount}_quantity" speechify-initial-font-family="&quot;Work Sans&quot;, Helvetica, &quot;sans-serif&quot;" speechify-initial-font-size="16px"></div>
-    </div>`
+    const newInput = this.buildItemInput()
 
-    this.addInputElementTarget.insertAdjacentHTML("beforeend", insertForm)
+    this.addInputElementTarget.insertAdjacentHTML("beforeend", newInput)
   }
 
-  addTax(event) {
-    event.preventDefault()
+  buildItemInput() {
+    let newInput = this.inputField.replaceAll('_0_', `_${this.nextId}_`)
+    newInput = newInput.replaceAll('[0]', `[${this.nextId}]`)
+
+    this.nextId++;
+
+    return newInput;
   }
 
+
+  removeInput(event) {
+    const input = event.target.parentElement;
+    input.parentElement.removeChild(input)
+  }
 }

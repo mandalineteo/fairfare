@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
     @items = Item.all.where(bill_id: @bill.id)
     @split_members = @split.members
 
-    if scraping_data
+    if @bill.scraping_data
       render :scraping
     else
       render :index
@@ -29,5 +29,9 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    @item = Item.find(params[:id])
+    @bill = @item.bill
+    @item.destroy
+    # redirect_to edit_bill_path(@bill)
   end
 end
