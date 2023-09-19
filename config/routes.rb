@@ -32,11 +32,8 @@ Rails.application.routes.draw do
       resources :payers, only: %i[new create destroy]
     end
 
+    resources :items, only: %i[destroy]
   end
-
-
-  resources :items, only: %i[destroy]
-
 end
 
 # def tabulate
