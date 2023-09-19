@@ -7,7 +7,7 @@
     <div class="payer dropdown d-flex fw-bold" data-controller="payer-dropdown">
       <form>
         <div class="mb-3">
-          <input type="string" class="form-control" id="payer" data-payer-dropdown-target="input" value="<%= current_user %>">
+          <%# <input type="string" class="form-control" id="payer" data-payer-dropdown-target="input" value="<%= current_user %>
         </div>
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           Select Person(s)
@@ -16,7 +16,7 @@
           <%# <% @split_members.each do |member| %>
             <%# <li><a class="dropdown-item" href="#"><%= member.first_name </a></li>
           <%# <% end %>
-          <li><a class="dropdown-item" data-action="click->payer-dropdown#select" data-payer-dropdown-target="name"><%= current_user.Contact.find %></a></li>
+          <li><a class="dropdown-item" data-action="click->payer-dropdown#select" data-payer-dropdown-target="name"><%= current_user %></a></li>
         </ul>
         <h2>paid this bill</h2>
       </form>
@@ -56,13 +56,13 @@
             <% @split_members.each do |member| %>
                 <%# <a class="nickname" href="#"><%= member.first_name</a> %>
                 <%= form_with url: root_path, data: {action: "submit->add-people#check"} do |f|  %>
-                  <%= hidden_field_tag "member_id", Contact.find %>
+                  <%= hidden_field_tag "member_id", member.id %>
                   <%= hidden_field_tag "remove", false %>
 
                   <div class="d-flex person">
                     <div class="d-flex">
                       <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-                      <p><%= Contact.find %></p>
+                      <p><%= nickname(member.id) %></p>
                     </div>
                     <%= button_tag "", type:  "submit", class:"add green", style:"background:none; padding:0px; border:none;", data: { add_people_target:"checkbox" } do %>
                     <i class="fa-solid fa-square-check" ></i>
