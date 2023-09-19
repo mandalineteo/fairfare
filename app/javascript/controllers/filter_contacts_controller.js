@@ -8,29 +8,23 @@ export default class extends Controller {
     console.log("I am connected");
     console.log(this.listTarget);
     console.log(this.formTarget);
+    console.log(this.contactsTarget);
 
-    this.url = '/members/filter'
-    this.firstName = '';
-    this.lastName = '';
-    this.phoneNumber = '';
+    this.url = '/contacts/filter'
+    this.nickname = '';
   }
 
-  filterByFirstName(event) {
-    this.firstName = event.target.value
-    this.filterMembers()
-  }
-
-  filterByLastName(event) {
-    this.lastName = event.target.value
-    this.filterMembers()
-  }
-
-  filterByPhoneNumber(event) {
-    this.phoneNumber = event.target.value
+  filterByNickname(event) {
+    this.nickname = event.target.value
     this.filterMembers()
   }
 
   filterMembers() {
-    fetch(`${this.url}?first_name=${this.firstName}&last_name=${this.lastName}&phone_number=${this.phoneNumber}`)
+    fetch(`${this.url}?nickname=${this.nickname}`, { headers: { "Accept": "application/json" } })
+      .then(response => response.text())
+      .then((data) => {
+        console.log(data)
+        this.contactsTarget.innerHTML = data
+      })
   }
 }

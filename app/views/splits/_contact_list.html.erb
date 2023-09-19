@@ -1,5 +1,5 @@
   <% contacts.each do |contact| %>
       <li class="list-group-item" data-filter-contacts-target="list">
-        <%= contact.nickname %> <%= contact.phone_number %> <br>
+        <%= link_to "#{contact.nickname} #{contact.member.phone_number}", split_add_existing_contact_path(@split, contact) %> <br>
       </li>
     <% end %>

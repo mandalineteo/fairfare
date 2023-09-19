@@ -30,14 +30,13 @@ class SplitsController < ApplicationController
     redirect_to split_add_members_path(@split)
   end
 
-  def destroy
-  end
-
   def add_members
     @split = Split.find(params[:split_id])
-    # @member = Member.new
     @available_contacts = current_user.contacts - @split.members
     @split_member = SplitMember.new(split: @split)
+  end
+
+  def destroy
   end
 
   private

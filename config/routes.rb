@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :members, only: %i[create index] do
+  resources :contacts, only: %i[create index] do
     collection do
       get :filter
     end
