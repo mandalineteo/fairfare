@@ -2,12 +2,6 @@
 
   <h1>Add members</h1>
 
-
-  <% @split.members.each do |member| %>
-    <p>Members to be added to split:</p>
-    <p><%= member.given_nickname(current_user) %></p>
-  <% end %>
-
   <%= simple_form_for([@split, @split_member], html: { data: { "filter-contacts-target" => "form" } }) do |f| %>
     <div class="mb-3 tel required member_nickname">
       <label class="form-label tel required" for="member_nickname">Nickname <abbr title="required">*</abbr></label>
@@ -25,6 +19,11 @@
 
     <%= f.submit 'Add to split' %>
   <% end %>
+  <br>
+  <h2>Included in split:</h2>
+    <% @split.members.each do |member| %>
+      <p><%= member.given_nickname(current_user) %> <%= member.phone_number %></p>
+    <% end %>
 
 <% if @available_contacts.empty? %>
   <p>Contact does not exist. Enter a new nickname and phone number to add member to split.</P>
@@ -32,3 +31,5 @@
     <%= render "contact_list", contacts: @available_contacts, split: @split %>
 <% end %>
 </div>
+
+<%= link_to "Add a bill", receipt_split_bills_path  %>

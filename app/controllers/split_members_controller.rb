@@ -18,5 +18,6 @@ class SplitMembersController < ApplicationController
         #Create new contact using current_user's ID, @member's ID and the params[:nickname]
         @split.member << @member
       end
+    end
   end
 end
