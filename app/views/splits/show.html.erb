@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="my-5">
+    <h1>Split Name: <%= @split.name %></h1>
+  </div>
+  <% if !@split.bills.empty? %>
+    <%= render partial: 'nothing_new' %>
+    <% else %>
+    <%= render partial: 'bill_info' %>
+  <% end %>
+  </div>
+</div>
