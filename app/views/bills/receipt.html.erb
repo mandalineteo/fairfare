@@ -1,20 +1,23 @@
 <div class="m-5">
-    <%= link_to "Back", root_path, class:"btn btn-primary" %>
-    <h1 class="mt-4">
-      Upload Receipt
-    </h1>
+    <%= link_to "Back", split_add_members_path(@split), class:"btn btn-primary" %>
 
   <div class="row justify-content-center">
     <div class="col-sm-8 my-3">
-    <div>
-        <%= form_with url: upload_split_bills_path(@split), method: :post, class: "d-flex" do  |form| %>
-          <%= form.label :image, 'Upload Photo' %>
-          <%= form.file_field :image %>
-        </div>
+    <h1 class="mt-3 mb-4">
+      Upload Receipt
+    </h1>
+    <div data-controller="preview-image-uploaded">
+        <%= image_tag "upload-image-preview.jpeg", class:"img-fluid", style: "height: 300px;", data: { preview_image_uploaded_target: "previewImage" }%>
         <div class="my-5">
-          <%= submit_tag "Submit", class:"btn btn-primary" %>
-        </div>
-      <% end %>
+          <%= form_with url: upload_split_bills_path(@split), method: :post, class: "d-flex" do  |form| %>
+            <%= form.label :image, 'Upload Photo', class:"pe-3" %>
+            <%= form.file_field :image, data: { action: "change->preview-image-uploaded#change" } %>
+          </div>
+          <div class="my-5">
+            <%= submit_tag "Submit", class:"btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

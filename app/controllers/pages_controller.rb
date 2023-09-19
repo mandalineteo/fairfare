@@ -12,4 +12,8 @@ class PagesController < ApplicationController
       render 'pages/home'
     end
   end
+
+  def owed_money_amount
+    @split = Split.find(params[:split_id])
+  end
 end
