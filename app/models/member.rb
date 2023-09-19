@@ -43,4 +43,18 @@ class Member < ApplicationRecord
     end
     owe/100.00
   end
+
+  def amount_to_pay(current_user)
+    owe = 0
+    splits = current_user.member.splits
+    splits.each do |split|
+      stats = split.get_split_stats
+      stats.each do |stat|
+        if stat[:payee_member].id == current_user.member.id
+          owe += stat[:amount]
+        end
+      end
+    end
+    owe/100.00
+  end
 end
