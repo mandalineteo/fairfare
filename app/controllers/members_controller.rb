@@ -1,5 +1,14 @@
 class MembersController < ApplicationController
   def create
+    raise
+    # find if there is a member with this number
+      # if not, create the member
+
+    # check if member is a contact
+      # if not, add as contact
+
+    # add to split
+
     @member = Member.new(member_params)
     @split = Split.find(params[:split_id])
 
@@ -13,6 +22,6 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:first_name, :last_name, :phone_number)
+    params.require(:member).permit(:phone_number)
   end
 end

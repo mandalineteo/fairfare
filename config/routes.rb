@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   resources :splits, only: %i[index show new create destroy] do
     resources :split_members, only: %i[create]
     resources :members, only: %i[create index]
+    resources :contacts, only: %i[create index] do
+      collection do
+        get :filter
+      end
+    end
 
     get :add_members
     get "add_existing_contact/:member_id", to: "splits#add_existing_contact", as: :add_existing_contact
@@ -25,6 +30,7 @@ Rails.application.routes.draw do
       resources :items, only: %i[index new create edit update destroy]
     end
   end
+
 end
 
 # def tabulate
