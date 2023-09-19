@@ -9,10 +9,14 @@ class SplitMembersController < ApplicationController
       # if no, means contact not selected.
       @member = Member.find_by(phone_number: params[:phone_number])
       # check if phone_number belongs to existing member
-      if @member.nil?
-        redirect_to
-        # if yes, find that member
+      # if yes, find that member
       # else
-        # create new member
+      # create new member
+      if @member.nil?
+        redirect_to #create member page
+      else
+        #Create new contact using current_user's ID, @member's ID and the params[:nickname]
+        @split.member << @member
+      end
   end
 end

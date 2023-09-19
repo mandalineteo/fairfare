@@ -1,4 +1,4 @@
-<div class="container" data-controller="filter-contacts">
+<div class="container" data-controller="filter-contacts" data-filter-contacts-split-id-value="<%= @split.id %>">
 
   <h1>Add members</h1>
 
@@ -29,9 +29,6 @@
 <% if @available_contacts.empty? %>
   <p>Contact does not exist. Enter a new nickname and phone number to add member to split.</P>
 <% else %>
-  <h2 class="mt-4">Select existing contacts</h2>
-  <ul class="list-group" data-filter-contacts-target="contacts">
-    <%= render "contact_list", contacts: @available_contacts %>
-  </ul>
+    <%= render "contact_list", contacts: @available_contacts, split: @split %>
 <% end %>
 </div>
