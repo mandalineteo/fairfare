@@ -34,12 +34,11 @@ class SplitsController < ApplicationController
 
   def add_members
     @split = Split.find(params[:split_id])
-    member_ids = @split.members.map do |member|
-      member.id
+
+    @available_contacts = current_user.contacts.reject do |contact|
+      @split.members.include?(contact.member)
     end
-    @available_contacts = current_user.contacts.filter do |contact|
-      !member_ids.include?(contact.member.id)
-    end
+
     @split_member = SplitMember.new(split: @split)
   end
 

@@ -13,8 +13,6 @@
       <input class="form-control string tel required" placeholder="Enter phone number" type="text" name="phone_number" id="member_phone_number">
     </div>
 
-    <%= f.association :member, as: :hidden %>
-
     <%= f.association :split, as: :hidden %>
 
     <%= f.submit 'Add to split' %>
@@ -25,11 +23,7 @@
       <p><%= member.given_nickname(current_user) %> <%= member.phone_number %></p>
     <% end %>
 
-<% if @available_contacts.empty? %>
-  <p>Contact does not exist. Enter a new nickname and phone number to add member to split.</P>
-<% else %>
-    <%= render "contact_list", contacts: @available_contacts, split: @split %>
-<% end %>
-</div>
+    <%= render "contact_list", available_contacts: @available_contacts, split: @split %>
+  </div>
 
-<%= link_to "Add a bill", receipt_split_bills_path  %>
+<%= link_to "Add a bill", select_split_bills_path  %>
