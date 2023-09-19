@@ -21,7 +21,7 @@
       <div class="card-body">
         <h5 class="card-title">Owed: </h5>
 
-        <p class="card-text">$</p>
+        <p class="card-text">$ <%= current_user.member.amount_owed(current_user) %></p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
@@ -30,7 +30,7 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Owe: </h5>
-        <p class="card-text">$</p>
+        <p class="card-text">$<%= current_user.member.amount_to_pay(current_user) %></p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
