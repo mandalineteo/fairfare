@@ -1,22 +1,34 @@
 class SplitMembersController < ApplicationController
   def create
-    # check if member_id is present in params
-    if params[:member_id].present?
-      @split = Split.find(params[:split_id])
-      @member = Member.find(params[:member_id])
-      @split.member << @member
+    nickname = params[:nickname]
+    # Check if member exist (with phone_number)
+    @member = Member.find_by(phone_number: params[:phone_number])
+    # If member doesn't exist, create member
+    if @member.nil?
+      @member = Member.create(phone_number: params[:phone_number])
+    end
+
+    # Make member a contact
+    @contact = Contact.create(
+      user: current_user,
+      member: @member,
+      nickname: nickname
+    )
+
+    # Add contact as a split member
+    @split_member = SplitMember.new(split_member_params)
+    @split_member.member = @member
+
+    if @split_member.save
+      redirect_to split_add_members_path(@split_member.split), notice: "#{nickname} added as contact!"
     else
-      # if no, means contact not selected.
-      @member = Member.find_by(phone_number: params[:phone_number])
-      # check if phone_number belongs to existing member
-      # if yes, find that member
-      # else
-      # create new member
-      if @member.nil?
-        redirect_to #create member page
-      else
-        #Create new contact using current_user's ID, @member's ID and the params[:nickname]
-        @split.member << @member
-      end
+
+    end
+  end
+
+  private
+
+  def split_member_params
+    params.require(:split_member).permit(:split_id)
   end
 end
