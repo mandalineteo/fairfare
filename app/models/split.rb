@@ -72,7 +72,7 @@ class Split < ApplicationRecord
     end
 
     filled_data.each do |data|
-      puts "#{data[:payee_member].id} owes #{data[:payer_member].id} SGD #{data[:amount]}"
+      puts "#{data[:payee_member].id} owes #{data[:payer_member].id} SGD #{data[:amount] / 100.00}"
     end
 
     return filled_data

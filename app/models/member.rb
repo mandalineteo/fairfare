@@ -30,12 +30,17 @@ class Member < ApplicationRecord
     end
   end
 
-  def amount_owed
-    if payer.member == current_user
-      bill.items.map do |item|
-        @member = item.member
-        @total_amount = member.consumed_items_amount * (taxes / total_amount)
+  def amount_owed(current_user)
+    owe = 0
+    splits = current_user.member.splits
+    splits.each do |split|
+      stats = split.get_split_stats
+      stats.each do |stat|
+        if stat[:payer_member].id == current_user.member.id
+          owe += stat[:amount]
+        end
       end
     end
+    owe/100.00
   end
 end
