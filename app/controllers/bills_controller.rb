@@ -32,6 +32,10 @@ class BillsController < ApplicationController
     end
   end
 
+  def select
+    @split = Split.find(params[:split_id])
+  end
+
   def index
     @bills = Bill.all
   end

@@ -1,10 +1,12 @@
 require 'securerandom'
 
 class SplitsController < ApplicationController
+
   def index
   end
 
   def show
+    @split = Split.find(params[:id])
   end
 
   def new

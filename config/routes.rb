@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       collection do
         get :receipt
         post :upload
+        get :select
       end
 
       resources :items, only: %i[index new create edit update destroy]
