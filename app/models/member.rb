@@ -13,9 +13,10 @@ class Member < ApplicationRecord
   end
 
   def given_nickname(current_user)
-    Contact.find_by(
-      user: current_user,
-      member: self
-    )&.nickname || "Sad Member #{id}"
+    contact = Contact.find_by(
+      member: self,
+      user: current_user
+    )
+    contact.nickname
   end
 end
