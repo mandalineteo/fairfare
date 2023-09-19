@@ -17,6 +17,17 @@ class Member < ApplicationRecord
       member: self,
       user: current_user
     )
-    contact.nickname
+    contact ? contact.nickname : 'No nickname???'
+  end
+
+  def payer?(bill)
+    payer = Payer.find_by(
+      member: self,
+      bill:
+    )
+    puts '-------------------'
+    puts payer ? true : false
+    return payer ? true : false
+    # code method to find out if member has payer for bill
   end
 end

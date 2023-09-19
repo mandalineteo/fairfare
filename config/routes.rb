@@ -28,9 +28,9 @@ Rails.application.routes.draw do
       end
 
       resources :items, only: %i[index new create edit update destroy]
+      resources :payers, only: %i[new create destroy]
     end
   end
-
 end
 
 # def tabulate
