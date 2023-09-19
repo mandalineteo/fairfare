@@ -19,11 +19,21 @@ seed_bills_and_items = true
 # seed_payers = true
 # seed_items = true
 
+ItemMember.destroy_all
+Payer.destroy_all
+Contact.destroy_all
+Item.destroy_all
+Bill.destroy_all
+SplitMember.destroy_all
+Split.destroy_all
+Member.destroy_all
+User.destroy_all
+
+
 if seed_members
   puts "\n\n===== Creating members =====\n"
 
   puts 'Clearing old data...'
-  Member.destroy_all
   # phone_no = "#{["8","9"].sample}#{7.times { rand(9).to_s }}"
   # phone_no = (8..9).to_a.sample.to_s + rand((10**6)..((10**7) - 1)).to_s
 
@@ -58,7 +68,7 @@ if seed_users
   puts "===== Creating Users =====\n\n"
 
   puts 'Clearing old data'
-  User.destroy_all
+
   users = []
 
   user1 = User.create!(
@@ -87,7 +97,6 @@ end
 
 puts "\n\n===== Creating Contacts =====\n"
 puts 'Clearing old data...'
-Contact.destroy_all
 
 puts 'Adding Zohan into contacts...'
 Contact.create!(
@@ -110,7 +119,6 @@ if seed_splits
   puts "\n\n===== Creating splits =====\n"
 
   puts 'Clearing old data...'
-  Split.destroy_all
 
   def split_date
     Date.today + rand(10).days
@@ -219,11 +227,76 @@ if seed_bills_and_items
   puts "\n\n===== Creating bills & items =====\n"
 
   puts 'clearing old data...'
-  Bill.destroy_all
-  Item.destroy_all
+
 
   Split.all.each { |split| create_bills(split) }
 
 end
 
 # ----------------------------------------------------
+
+# THIS IS JUST FOR TESTING THE O$P$ CALCULATON LOGIC (in splits#show) - CAN BE REMOVED IF NOT NEEDED
+
+# Create users for members
+users = []
+4.times do
+  users << User.create(email: Faker::Internet.email,
+                      password: 'password',
+                      password_confirmation: 'password')
+end
+
+# Create members
+members = []
+users.each do |user|
+  members << Member.create(user: user, phone_number: Faker::PhoneNumber.cell_phone)
+end
+
+# Create contacts for members
+members.each do |member|
+  other_members = members.reject { |m| m.id == member.id }
+  other_members.each do |contact_member|
+    Contact.create(nickname: Faker::Name.first_name, user: member.user, member: contact_member)
+  end
+end
+
+# Create split with one of the members
+split = Split.create(name: Faker::Lorem.word, date: Date.today, user: users.first)
+
+# Connect split with members
+members.each do |member|
+  SplitMember.create(split: split, member: member)
+end
+
+# Create 5 bills
+bills = []
+5.times do
+  bill = Bill.create(merchant: Faker::Company.name,
+                    split: split,
+                    date: Date.today,
+                    total_amount: 0)
+
+  # Create 3 items for each bill
+  3.times do
+    item = Item.create(name: Faker::Commerce.product_name,
+                      quantity: rand(1..5),
+                      price: rand(10..100),
+                      bill: bill)
+
+    #Updating total_amount in bill after adding each item
+    bill.total_amount += item.price * item.quantity
+    bill.save
+
+    # Connect item with random member
+    ItemMember.create(item: item, member: members.sample)
+  end
+
+  # Assign bill payers randomly
+  payers = members.sample(rand(1..4))
+  payers.each do |payer|
+    Payer.create(bill: bill, member: payer)
+  end
+
+  bills << bill
+end
+
+puts "Seeding is complete. Created #{Split.count} split with #{Bill.count} bills and #{Item.count} items. Created #{Member.count} members with #{Contact.count} contacts."
