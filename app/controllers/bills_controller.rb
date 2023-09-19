@@ -55,13 +55,29 @@ class BillsController < ApplicationController
     @bill = Bill.new(bill_params)
     @bill.split = @split
 
-
     if @bill.save
-      redirect_to :show
+      redirect_to split_bill_items_path(@split, @bill)
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
+
+  def edit
+    @split = Split.find(params[:split_id])
+    @bill = Bill.find(params[:bill_id])
+  end
+
+  def update
+    @split = Split.find(params[:split_id])
+    @bill = Bill.find(params[:bill_id])
+  end
+
+  # def destroy
+  #   @item = Item.find(params[:id])
+  #   @bill = @item.bill
+  #   @item.destroy
+  #   # redirect_to edit_bill_path(@bill)
+  # end
 
   private
 

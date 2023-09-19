@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema[7.0].define(version: 2023_09_18_065015) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +53,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_18_065015) do
     t.date "date"
     t.integer "taxes"
     t.integer "total_amount"
+    t.integer "discount"
+    t.integer "service_charge"
     t.index ["split_id"], name: "index_bills_on_split_id"
   end
 

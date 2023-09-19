@@ -30,5 +30,9 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    @item = Item.find(params[:id])
+    @bill = @item.bill
+    @item.destroy
+    # redirect_to edit_bill_path(@bill)
   end
 end
