@@ -11,4 +11,12 @@ class Member < ApplicationRecord
   def registered?
     !user.nil?
   end
+
+  def given_nickname(current_user)
+    contact = Contact.find_by(
+      member: self,
+      user: current_user
+    )
+    contact.nickname
+  end
 end

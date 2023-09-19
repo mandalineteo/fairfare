@@ -2,17 +2,29 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="filter-contacts"
 export default class extends Controller {
-  static targets = ["list"]
-
-  connect() {
-    console.log("I am connected");
+  static targets = ["form", "contacts"]
+  static values = {
+    splitId: String
   }
 
-  filterByFirstName(event) {
-    console.log(event.target.value);
-    // 1. create a route to search by this
-    //      - members/filter?first_name=zohan
-    const url = `members/filter?first_name=${event.target.value}`
-    // 2. fetch ->
+  connect() {
+    console.log(this.splitIdValue);
+
+    this.url = `/splits/${this.splitIdValue}/contacts/filter`
+    this.nickname = '';
+  }
+
+  filterByNickname(event) {
+    this.nickname = event.target.value
+    this.filterContacts()
+  }
+
+  filterContacts() {
+    fetch(`${this.url}?nickname=${this.nickname}`, { headers: { "Accept": "application/json" } })
+      .then(response => response.json())
+      .then((data) => {
+        // console.log(data.contacts)
+        this.contactsTarget.innerHTML = data.contacts
+      })
   }
 }
