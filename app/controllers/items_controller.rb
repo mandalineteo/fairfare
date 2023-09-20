@@ -4,11 +4,9 @@ class ItemsController < ApplicationController
     @bill = Bill.find(params[:bill_id])
     @items = Item.all.where(bill_id: @bill.id)
     @split_members = @split.members
-<<<<<<< HEAD
     @payer = Payer.new
-=======
+    @item_member = ItemMember.new
     # @contacts = Contact.all.where(member_id: )
->>>>>>> master
 
     if @bill.scraping_data
       render :scraping
