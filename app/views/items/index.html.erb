@@ -1,4 +1,4 @@
-<div class="container-fluid bill-index">
+<div class="container-fluid bill-index" data-controller="edit-bill" data-action="click->edit-bill#closeForm">
   <div class="bill-description">
     <%# <%= link_to collaborate_path %>
     <%# <%= link_to edit_bill_path %>
@@ -11,7 +11,6 @@
       </button>
       <ul class="dropdown-menu">
         <% @split_members.each do |member| %>
-
           <div data-controller="payer-dropdown" data-payer-dropdown-has-payer-value="<%= member.payer?(@bill) %>" data-payer-dropdown-split-id-value="<%= @split.id %>" data-payer-dropdown-bill-id-value="<%= @bill.id %>">
 
             <%# <%= render "form", payer: @payer %>
@@ -58,16 +57,41 @@
       <div class="item-row">
         <% @items.each do |item| %>
           <div class="bill-summary-item-card row">
-            <div class="col-7">
-              <p class="item"><%= "#{item.name}" %></p>
-              <ul>
-              </ul>
+            <div class="col-10">
+
+              <%= simple_form_for :item,  data: { edit_bill_target: "itemDescriptions", action: "focusout->edit-bill#updateItem" } do |f| %>
+
+                <div class="row form-toggler" data-action="click->edit-bill#toggleForm">
+                  <div class="col-8 form-toggler">
+                    <p class="item-value"><%= "#{item.name}" %></p>
+                  </div>
+                  <div class="col-2 form-toggler">
+                    <p class="item-value"><%= "#{item.quantity}" %></p>
+                  </div>
+                  <div class="col-2 form-toggler">
+                    <p class="item-value"><%= "#{item.price}" %></p>
+                  </div>
+
+                  <div class="col-7" >
+                    <%= f.input :name, input_html: { class: "item-input",  value: item.name }, label_html: { class: "item-input"}  %>
+                  </div>
+
+                  <div class="col-3">
+                    <%= f.input :quantity, input_html: { class: "item-input",  value: item.quantity},  label_html: { class: "item-input"}  %>
+                  </div>
+
+                  <div class="col-2" >
+                    <%= f.input :price, input_html: { class: "item-input",  value: item.price},  label_html: { class: "item-input"}%>
+                  </div>
+
+
+                </div>
+              <% end %>
             </div>
 
-            <p class="col-1"><%= "#{item.quantity}" %></p>
-            <p class="col-2"><%= "#{item.price}" %></p>
             <p class="col-2 people" data-action="click->add-people#appear">Add people</p>
           </div>
+          <%# </form> %>
 
           <div class="pop-up d-none" data-add-people-target="popup">
             <% @split_members.each do |member| %>
@@ -111,3 +135,18 @@
     </div>
   </div>
 </div>
+
+
+<style>
+  .show-form .item-input{
+    display: inline !important;
+  }
+
+  .item-input {
+    display: none;
+  }
+
+  .show-form .item-value {
+    display: none;
+  }
+</style>
