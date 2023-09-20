@@ -71,13 +71,14 @@
 
   <div class="bill-footer row">
     <div class="tax-discounts col-6">
-      <p>Tax (<%=  %>%):<%= "TAX AMT HERE" %></p>
-      <p>Discount (<%= "%discount" %>%):<%= "-DISCOUNTED AMT HERE" %></p>
+      <p>Discount: $<%= @bill.discount %></p>
+      <p>Tax: $<%= @bill.taxes %></p>
+      <p>Service Charge: $<%= @bill.service_charge %></p>
     </div>
     <div class="add-receipt col-6 justify-content-center">
       <p>Add another receipt?</p>
-      <button>Yes</button>
-      <button>No</button>
+      <%= link_to "<button>Yes</button>".html_safe, select_split_bills_path %>
+      <%= link_to "<button>No</button>".html_safe, split_path(@split) %>
     </div>
   </div>
 </div>
