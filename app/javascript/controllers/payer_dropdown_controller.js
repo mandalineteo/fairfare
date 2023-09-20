@@ -48,21 +48,21 @@ export default class extends Controller {
       this.checkboxTarget.classList.remove("green")
       this.checkboxTarget.classList.add("grey")
 
-  //     // THIS GREEN->GREY TOGGLE IS NOT WORKING BUT THE DELETE IS WORKING ????????
+      //     // THIS GREEN->GREY TOGGLE IS NOT WORKING BUT THE DELETE IS WORKING ????????
 
 
-  //     fetch(this.destroy_url, {
-  //       method: "DELETE",
-  //       headers: { "Accept": "application/json" },
-  //       // body: new FormData(this.formTarget)
-  //     })
-  //     console.log(response)
-  //       .then(response => {
-  //         return response.json()
-  //       })
-  //       .then((data) => {
-  //         console.log("data", data)
-  //       })
-  //   }
+      //     fetch(this.destroy_url, {
+      //       method: "DELETE",
+      //       headers: { "Accept": "application/json" },
+      //       // body: new FormData(this.formTarget)
+      //     })
+      //     console.log(response)
+      //       .then(response => {
+      //         return response.json()
+      //       })
+      //       .then((data) => {
+      //         console.log("data", data)
+      //       })
+    }
   }
 }
