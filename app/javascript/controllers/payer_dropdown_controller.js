@@ -11,11 +11,8 @@ export default class extends Controller {
   }
 
   connect() {
-    this.create_url = `/splits/${this.splitIdValue}/bills/${this.billIdValue}/payers`
-    // this.destroy_url = `/splits/${this.splitIdValue}/bills/${this.billIdValue}/payers/${this.payerIdValue}`
-    // console.log(this.create_url)
-
-    // if has payer is true, add green
+    // this.create_url = `/splits/${this.splitIdValue}/bills/${this.billIdValue}/payers`
+    this.destroy_url = `/splits/${this.splitIdValue}/bills/${this.billIdValue}/payers/${this.payerIdValue}`
 
     if (this.hasPayerValue === 'true') {
       console.log('hasPayer', this.hasPayerValue)
@@ -23,27 +20,49 @@ export default class extends Controller {
     }
   }
 
-
-  check(event) {
+  toggle(event) {
     event.preventDefault()
 
-    this.checkboxTarget.classList.remove("add")
-    this.checkboxTarget.classList.add("green")
+    console.log(event.target.action);
 
-    fetch(this.create_url, {
-      method: "POST", // Could be dynamic with Stimulus values
-      headers: { "Accept": "application/json" },
-      body: new FormData(this.formTarget)
-    })
-      .then(response => {
-        return response.json()
+    if (this.hasPayerValue === 'false') {
+
+      this.checkboxTarget.classList.remove("grey")
+      this.checkboxTarget.classList.add("green")
+
+      fetch(this.formTarget.action, {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: new FormData(this.formTarget)
       })
-      .then((data) => {
-        console.log("data", data)
-        // if (data.inserted_item) {
-        //   this.checkboxTarget.insertAdjacentHTML("beforeend", data.inserted_item)
-        // }
-        // this.formTarget.outerHTML = data.form
-      })
+        .then(response => {
+          return response.json()
+        })
+        .then((data) => {
+          console.log("data", data)
+        })
+    }
+
+    if (this.hasPayerValue === 'true') {
+
+      this.checkboxTarget.classList.remove("green")
+      this.checkboxTarget.classList.add("grey")
+
+  //     // THIS GREEN->GREY TOGGLE IS NOT WORKING BUT THE DELETE IS WORKING ????????
+
+
+  //     fetch(this.destroy_url, {
+  //       method: "DELETE",
+  //       headers: { "Accept": "application/json" },
+  //       // body: new FormData(this.formTarget)
+  //     })
+  //     console.log(response)
+  //       .then(response => {
+  //         return response.json()
+  //       })
+  //       .then((data) => {
+  //         console.log("data", data)
+  //       })
+  //   }
   }
 }
