@@ -39,7 +39,7 @@
   margin-bottom: 0;
 }
 
-.add-people {
+.add-people-button {
 
   .pop-up {
     padding: 12px;
@@ -60,10 +60,10 @@
   }
 }
 
-button.add {
+button.grey {
   color: rgb(199, 196, 196);
 }
 
-.green {
-  color: $ff-green !important;
+button.green {
+  color: $ff-green;
 }
