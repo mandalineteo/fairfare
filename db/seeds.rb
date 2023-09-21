@@ -143,11 +143,11 @@ split = Split.create!(
 
 puts "\n[3 / 11] Creating split members"
 # split members
-[members_with_accounts.sample(2), members_without_accounts.sample(2)].flatten.each do |member|
-  split.members << member
+split.members << zohan_user.member
+zohan_user.contacts.first(4).each do |contact|
+  split.members << contact.member
   puts "        - added user"
 end
-
 
 # 2 bill
 puts "\n[5 / 11] Creating first bill"

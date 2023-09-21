@@ -13,11 +13,13 @@ class Member < ApplicationRecord
   end
 
   def given_nickname(current_user)
+    return current_user.username if current_user.member == self
+
     contact = Contact.find_by(
       member: self,
       user: current_user
     )
-    contact ? contact.nickname : 'No nickname???'
+    contact&.nickname
   end
 
   def payer?(bill)

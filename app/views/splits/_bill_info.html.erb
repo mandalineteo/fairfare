@@ -16,7 +16,8 @@
   <h3>Settlements:</h3>
   <% @split.settlements.each do |settlement| %>
     <div class="my-4">
-      <%= "#{settlement[:payee].phone_number} owes #{settlement[:payer].phone_number} SGD#{settlement[:amount]/100.00}" %>
+      <%= "#{settlement[:payee].given_nickname(@split.user)} (#{settlement[:payee].phone_number}) owes #{settlement[:payer].given_nickname(@split.user)} (#{settlement[:payer].phone_number}) SGD#{format('%.2f', settlement[:amount]/100.00)}" %>
+
     </div>
   <% end %>
   <%# @split.get_split_stats.each do |stat| %>
