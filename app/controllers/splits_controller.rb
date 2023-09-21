@@ -1,7 +1,6 @@
 require 'securerandom'
 
 class SplitsController < ApplicationController
-
   def index
     @splits = Split.all
   end
