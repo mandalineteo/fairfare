@@ -117,7 +117,7 @@ class Member < ApplicationRecord
     items = Item.where(bill: bill).joins(:item_members).where(item_members: { member: self })
 
     items.each do |item|
-      price = item.price
+      price = item.price.to_f
       quantity = item.quantity
       share = (price * quantity) / item.members.count
       total += share

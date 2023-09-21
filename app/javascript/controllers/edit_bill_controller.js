@@ -9,22 +9,21 @@ export default class extends Controller {
     console.log("test from bill input")
   }
 
-  // item & qty & unit price
+
   toggleForm(e) {
     this.itemDescriptionsTargets.forEach((target)=>{
       target.classList.remove("show-form");
     })
-    // console.log('show form')
+    console.log('show form')
     const form = e.currentTarget.parentElement;
     form.classList.add("show-form");
   }
 
   closeForm(e){
-    // console.log('close form')
+    console.log('close form')
     if (e.target.classList.contains("item-value") || e.target.classList.contains("form-toggler") || e.target.tagName.toLowerCase() === "input") {
       return;
     }
-
     this.itemDescriptionsTargets.forEach((target)=>{
       target.classList.remove("show-form");
     })
