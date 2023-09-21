@@ -1,0 +1,25 @@
+.standard-button {
+  opacity: 0.8;
+  padding: 8px;
+  border-radius: 15px;
+  border: none;
+  font-weight: 600!important;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem!important;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.yellow-pink-button {
+  background-color: $ff-yellow;
+  color: $ff-red;
+}
+
+.red-button {
+  color:white;
+  background-color: $ff-red;
+}
+
+.green-button {
+  color:white;
+  background-color: $ff-green;
+}

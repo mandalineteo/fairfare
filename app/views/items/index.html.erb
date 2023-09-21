@@ -17,20 +17,22 @@
       <h2>paid this bill</h2>
     </div>
 
-    <h2>Merchant: <%= "#{@bill.merchant}" %></h2>
-    <h2>Date: <%= @bill.date %></h2>
-    <hr>
+    <p>Merchant: <%= "#{@bill.merchant}" %></p>
+    <p>Date: <%= @bill.date %></p>
+    <%# <hr> %>
   </div>
 
 <%# ------------------------------------------------------------- %>
 
   <div class="bill-items">
-    <div class="bill-headers row fw-bold">
+    <div class="bill-headers row" style="margin-bottom: 0.8rem">
       <h3 class="col-7 item">Item</h3>
       <h3 class="col-1">Qty</h3>
       <h3 class="col-2">Unit price</h3>
       <h3 class="col-2">People</h3>
     </div>
+
+  <%# <hr style="margin-top: 0.5rem"> %>
 
     <div class="add-people-button">
       <div class="item-row">
@@ -71,7 +73,7 @@
                 <% end %>
               </div>
 
-              <p class="col-2 people" data-action="click->add-people-button#appear">Add people</p>
+              <p class="col-2 people" data-action="click->add-people-button#appear">add people</p>
             </div>
 
             <div class="pop-up d-none" data-add-people-button-target="popup">
@@ -87,7 +89,7 @@
       </div>
     </div>
 
-    <hr>
+    <%# <hr> %>
   </div>
 
 
@@ -100,9 +102,11 @@
       <p>Service Charge: $<%= @bill.service_charge %></p>
     </div>
     <div class="add-receipt col-6 justify-content-center">
-      <p>Add another receipt?</p>
-      <%= link_to "<button>Yes</button>".html_safe, select_split_bills_path %>
-      <%= link_to "<button>No</button>".html_safe, split_path(@split) %>
+      <p style="margin-bottom: 20px">Add another receipt?</p>
+      <div class="d-flex">
+        <%= link_to "<button>Yes</button>".html_safe, select_split_bills_path, class:"add-another-receipt" %>
+        <%= link_to "<button>No</button>".html_safe, split_path(@split), class:"continue-to-bill-summary" %>
+      </div>
     </div>
   </div>
 </div>

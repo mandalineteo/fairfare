@@ -1,9 +1,23 @@
 .container-fluid.bill-index {
-  padding: 1.5rem;
+  padding: 2.5rem;
+  font-weight: 300;
+  overflow-x: hidden;
+  position: relative;
 
-  h1, h2, h3, p {
-    font-size: 1rem;
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;;
   }
+
+  h2, h3, p {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+.bill-description p, .tax-discounts p {
+  font-weight: 300!important;
 }
 
 .dropdown-toggle {
@@ -19,6 +33,10 @@
 
   p {
     margin-top: 0;
+  }
+
+  h2 {
+    margin-bottom: 0;
   }
 }
 
@@ -65,11 +83,32 @@ ul.dropdown-menu {
 
 // <%# ------------------------------------------------------------- %>
 
+.bill-items {
+  background-color: white;
+  border-radius: 20px;
+  padding: 1rem 2rem 0.1rem 2rem;
+  margin: 1rem auto 1.5rem;
+  width: calc(vw);
+  width: 95vw;
+  position: relative;
+  left: -6vw;
+  font-weight: 500;
+}
 
 .bill-items, .bill-headers {
   p, h3 {
     text-align: center;
   }
+
+  h3{
+    font-weight: 500!important;
+  }
+
+  .form-toggler p {
+    color: $ff-red;
+    font-weight: 300!important;
+  }
+
   .item {
     text-align: start;
   }
@@ -81,11 +120,15 @@ ul.dropdown-menu {
 
 .people {
   background-color: $ff-yellow;
-  padding: 6px;
+  opacity: 0.8;
+  padding: 8px;
   border-radius: 15px;
   border: none;
-  color: $ff-purple;
-  margin-bottom: 0;
+  color: $ff-red;
+  font-weight: 600!important;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem!important;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .add-people-button {
@@ -138,7 +181,6 @@ ul.dropdown-menu {
   text-align: left;
 }
 
-
 // <%# ------------------------------------------------------------- %>
 
 .removed-white {
@@ -149,4 +191,46 @@ ul.dropdown-menu {
   background-color: $ff-green!important;
   color: white!important;
   font-weight: bold;
+}
+
+// <%# ------------------------FOOTER---------------------------- %>
+
+.add-receipt {
+  text-align: center;
+
+  .d-flex {
+    justify-content: space-evenly;
+  }
+
+  a button {
+    opacity: 0.8;
+    padding: 8px;
+    border-radius: 15px;
+    border: none;
+    font-weight: 600!important;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem!important;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+    .add-another-receipt {
+      color:white;
+      background-color: $ff-green;
+    }
+    .continue-to-bill-summary {
+      color:white;
+      background-color: $ff-red;
+    }
+  }
+
+  a.add-another-receipt button {
+    color:$ff-yellow;
+    background-color: $ff-purple;
+    width: 60px;
+  }
+
+  a.continue-to-bill-summary button {
+    color:$ff-purple;
+    background-color: $ff-yellow;
+    width: 60px;
+    }
 }
