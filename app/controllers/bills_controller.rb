@@ -82,6 +82,6 @@ class BillsController < ApplicationController
   private
 
   def bill_params
-    params.require(:bill).permit(:merchant, items_attributes: [:name, :price, :quantity])
+    params.require(:bill).permit(:merchant, :discount, :service_charge, :taxes, items_attributes: %i[name price quantity])
   end
 end
