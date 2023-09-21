@@ -30,4 +30,11 @@ class User < ApplicationRecord
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
   end
+
+  def owed_summary
+    splits.each do |split|
+      split.settlements
+      raise
+    end
+  end
 end
