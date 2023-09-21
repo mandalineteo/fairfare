@@ -102,4 +102,33 @@ class Member < ApplicationRecord
     end
     owe/100.00
   end
+
+  # ---------------------
+
+  def amount_paid(bill)
+    return 0 unless bill.payers.map(&:member).include? self
+
+    bill.total_amount / bill.payers.count
+  end
+
+  def total_consumed(bill)
+    total = 0
+    # get all the items i am a part of
+    items = Item.where(bill: bill).joins(:item_members).where(item_members: { member: self })
+
+    items.each do |item|
+      price = item.price.to_f
+      quantity = item.quantity
+      share = (price * quantity) / item.members.count
+      total += share
+    end
+    # for each item
+    # get the total item price
+    # get the total item members
+    # get my own share
+
+    # return sum of all my shares
+    total = (total - amount_paid(bill)) + bill.even_split_tax
+    return { total:, member: self }
+  end
 end

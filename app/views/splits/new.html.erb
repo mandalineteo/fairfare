@@ -1,6 +1,10 @@
-<h1>Create a new Split!</h1>
-<%= simple_form_for(@split) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :date %>
-  <%= f.submit "Add members" %>
-<% end %>
+<div class="container">
+  <h1>Create a new Split!</h1>
+  <%= simple_form_for(@split) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :date %>
+    <%= f.submit "Add members" %>
+  <% end %>
+  <br>
+  <%= link_to "Back", root_path, class: "split-button" %>
+</div>
