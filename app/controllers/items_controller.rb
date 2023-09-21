@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
     @items = Item.all.where(bill_id: @bill.id)
     @split_members = @split.members
     @payer = Payer.new
+    @item_member = ItemMember.new
     # @contacts = Contact.all.where(member_id: )
 
     if @bill.scraping_data

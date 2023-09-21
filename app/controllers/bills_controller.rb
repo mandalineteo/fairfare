@@ -23,7 +23,7 @@ class BillsController < ApplicationController
 
     if @bill.save
       # schedule a background job
-      ParseReceiptJob.perform_later(@bill)
+      ParseReceiptJob.perform_now(@bill)
 
       redirect_to split_bill_items_path(@bill.split, @bill)
       # check sidekiq background jobs on what to do when the json is obtained from ocr
@@ -92,6 +92,7 @@ class BillsController < ApplicationController
   private
 
   def bill_params
-    params.require(:bill).permit(:merchant, items_attributes: %i[name price quantity])
+    # params.require(:bill).permit(:merchant, items_attributes: %i[name price quantity])
+    params.require(:bill).permit(:merchant, :discount, :service_charge, :taxes, items_attributes: %i[name price quantity])
   end
 end

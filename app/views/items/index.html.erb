@@ -1,47 +1,62 @@
 <div class="container-fluid bill-index" data-controller="edit-bill" data-action="click->edit-bill#closeForm">
-  <div class="bill-description">
+  <div class="bill-description" >
     <%# <%= link_to collaborate_path %>
     <%# <%= link_to edit_bill_path %>
-
-    <h1 class="fw-bold"><%= "#{@split.name}" %></h1>
-
-    <div class="payer dropdown d-flex fw-bold">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Select Person(s)
-      </button>
-      <ul class="dropdown-menu">
-        <% @split_members.each do |member| %>
-          <div data-controller="payer-dropdown" data-payer-dropdown-has-payer-value="<%= member.payer?(@bill) %>" data-payer-dropdown-split-id-value="<%= @split.id %>" data-payer-dropdown-bill-id-value="<%= @bill.id %>">
-
-            <%# <%= render "form", payer: @payer %>
-
-            <%= simple_form_for([@split, @bill, @payer], html: { data: {
-              payer_dropdown_target: "form",
-              action: "submit->payer-dropdown#check"} }) do |f|  %>
-              <%= hidden_field_tag "member_id", member.id %>
-              <%= hidden_field_tag "remove", false %>
-              <div class="d-flex person">
-                <div class="d-flex">
-                  <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-                  <p><%= member.given_nickname(current_user) %></p>
-                </div>
-                <%= button_tag "", type:  "submit", class:"add", style:"background:none; padding:0px; border:none;", data: { payer_dropdown_target:"checkbox" } do %>
-                  <i class="fa-solid fa-square-check" ></i>
-                <% end %>
-              </div>
-            <% end %>
-
+    <div data-action="click->edit-bill#splitInfo">
+      <%= simple_form_for :split,  html: { data: { edit_bill_target: "billHeaderText" }  , action: "focusout->edit-bill#updateSplitValue" } do |f| %>
+        <h1 class="fw-bold"><%= "#{@split.name}" %></h1>
+        <div data-action="click->edit-bill#displaySplitForm">
+          <div class="col-2 " data-action="click->edit-bill#toggleSplitForm" >
+            <%= f.input :name, input_html: { class: "split-input", value: @split.name } %>
           </div>
-
-        <% end %>
-      </ul>
-      <h2>paid this bill</h2>
+        </div>
+      <% end %>
     </div>
+
+
+
+        <div class="payer dropdown d-flex">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            Select Person(s)
+          </button>
+          <ul class="dropdown-menu">
+            <% @split_members.each do |member| %>
+              <div data-controller="payer-dropdown" data-payer-dropdown-has-payer-value="<%= member.payer?(@bill) %>" data-payer-dropdown-split-id-value="<%= @split.id %>" data-payer-dropdown-bill-id-value="<%= @bill.id %>">
+
+                <%# <%= render "form", payer: @payer %>
+
+                <%= simple_form_for([@split, @bill, @payer], html: { data: {
+                  payer_dropdown_target: "form",
+                  action: "submit->payer-dropdown#check"} }) do |f|  %>
+                  <%= hidden_field_tag "member_id", member.id %>
+                  <%= hidden_field_tag "remove", false %>
+                  <div class="d-flex person">
+                    <div class="d-flex">
+                      <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+                      <p><%= member.given_nickname(current_user) %></p>
+                    </div>
+                    <%= button_tag "", type:  "submit", class:"add", style:"background:none; padding:0px; border:none;", data: { payer_dropdown_target:"checkbox" } do %>
+                      <i class="fa-solid fa-square-check" ></i>
+                    <% end %>
+                  </div>
+                <% end %>
+
+              </div>
+
+              <%= render 'bills/payer', member: member, bill: @bill, split: @split, payer: @payer %>
+            <% end %>
+          </ul>
+          <h2>paid this bill</h2>
+        </div>
+
+
 
     <h2>Merchant: <%= "#{@bill.merchant}" %></h2>
     <h2>Date: <%= @bill.date %></h2>
     <hr>
   </div>
+
+  <%# <% raise %>
 
 <%# ------------------------------------------------------------- %>
 
@@ -53,7 +68,7 @@
       <h3 class="col-2">People</h3>
     </div>
 
-    <div class="add-people" data-controller="add-people">
+    <div class="add-people-button">
       <div class="item-row">
         <% @items.each do |item| %>
           <div class="bill-summary-item-card row">
@@ -92,26 +107,27 @@
             <p class="col-2 people" data-action="click->add-people#appear">Add people</p>
           </div>
           <%# </form> %>
+          <div data-controller="add-people-button">
+            <div class="bill-summary-item-card row">
+              <div class="col-7">
+                <p class="item"><%= "#{item.name}" %></p>
+                <ul>
+                </ul>
+              </div>
 
-          <div class="pop-up d-none" data-add-people-target="popup">
-            <% @split_members.each do |member| %>
-                <%# <a class="nickname" href="#"><%= member.first_name</a> %>
-                <%= form_with url: split_bill_payers_path, data: {action: "submit->add-people#check"} do |f|  %>
-                  <%= hidden_field_tag "member_id", member.id %>
-                  <%= hidden_field_tag "remove", false %>
+              <p class="col-1"><%= "#{item.quantity}" %></p>
+              <p class="col-2"><%= "#{item.price}" %></p>
+              <p class="col-2 people" data-action="click->add-people-button#appear">Add people</p>
+            </div>
 
-                  <div class="d-flex person">
-                    <div class="d-flex">
-                      <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-                      <p><%= member.given_nickname(current_user) %></p>
-                    </div>
-                    <%= button_tag "", type:  "submit", class:"add green", style:"background:none; padding:0px; border:none;", data: { add_people_target:"checkbox" } do %>
-                      <i class="fa-solid fa-square-check" ></i>
-                    <% end %>
-                  </div>
+            <div class="pop-up d-none" data-add-people-button-target="popup">
+              <% @split_members.each do |member| %>
 
-                <% end%>
-            <% end %>
+                <%= render 'items/item_member', member: member, bill: @bill, split: @split, item: item, item_member: @item_member %>
+
+              <% end %>
+            </div>
+
           </div>
         <% end %>
       </div>
@@ -125,13 +141,14 @@
 
   <div class="bill-footer row">
     <div class="tax-discounts col-6">
-      <p>Tax (<%=  %>%):<%= "TAX AMT HERE" %></p>
-      <p>Discount (<%= "%discount" %>%):<%= "-DISCOUNTED AMT HERE" %></p>
+      <p>Discount: $<%= @bill.discount %></p>
+      <p>Tax: $<%= @bill.taxes %></p>
+      <p>Service Charge: $<%= @bill.service_charge %></p>
     </div>
     <div class="add-receipt col-6 justify-content-center">
       <p>Add another receipt?</p>
-      <button>Yes</button>
-      <button>No</button>
+      <%= link_to "<button>Yes</button>".html_safe, select_split_bills_path %>
+      <%= link_to "<button>No</button>".html_safe, split_path(@split) %>
     </div>
   </div>
 </div>
@@ -149,4 +166,15 @@
   .show-form .item-value {
     display: none;
   }
+
+
+
+  /* split-input-header .split-input {
+    display: inline;
+  }
+
+  .split-input {
+    display: none;
+  } */
+
 </style>

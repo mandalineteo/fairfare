@@ -28,7 +28,9 @@ Rails.application.routes.draw do
         get :select
       end
 
-      resources :items, only: %i[index new create edit update destroy]
+      resources :items, only: %i[index new create edit update destroy] do
+        resources :item_members, only: %i[new create destroy]
+      end
       resources :payers, only: %i[new create destroy]
     end
 
@@ -36,6 +38,8 @@ Rails.application.routes.draw do
     resources :items, only: %i[destroy]
 
   end
+
+  # resources :payers, only: %i[destroy]
 end
 
 # def tabulate
