@@ -7,8 +7,17 @@
     <%= link_to destroy_user_session_path, data: {turbo_method: :delete} do %>
       <i class="fa-solid fa-power-off"></i>
     <% end %>
+
+    <%= link_to new_split_path do %>
+      <i class="fa-solid fa-rotate-right"></i>
+    <% end %>
   </div>
 </nav>
+
+
+
+
+
 
 <div class="welcome-message" style="text-align: center";>
   <h1>Hello <%= current_user.username %></h1>
@@ -21,7 +30,7 @@
       <div class="card-body">
         <h5 class="card-title">Owed: </h5>
 
-        <p class="card-text">$ <%= current_user.member.amount_owed(current_user) %></p>
+        <p class="card-text">$</p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
@@ -30,7 +39,7 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Owe: </h5>
-        <p class="card-text">$<%= current_user.member.amount_to_pay(current_user) %></p>
+        <p class="card-text">$</p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>

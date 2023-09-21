@@ -1,3 +1,5 @@
+
+
 <div class="manual-input">
   <div class="text-center manual-input-header">
     <h1 ><%= @split.name.upcase %></h1>
@@ -6,6 +8,7 @@
   <div class="container text-left manual-inputs-header" >
     <%= simple_form_for [@split, @bill] do |f| %>
       <%= f.input :merchant %>
+      <%= f.input :date %>
 
       <div class="items" data-controller="bills-manual-input">
         <%= f.simple_fields_for(:items) do |ff| %>
@@ -27,6 +30,7 @@
           <%= f.input :taxes, input_html: { min: '0' } %>
           <%= f.input :service_charge, input_html: { min: '0' } %>
           <%= f.input :discount, input_html: { min: '0' } %>
+          <%= f.input :total_amount, input_html: { min: '0' } %>
 
           <%= f.submit  %>
 
@@ -38,7 +42,3 @@
     <% end %>
   </div>
 </div>
-
-
-<%#
-<%= link_to "Continue", split_bill_items_path(split: @split_id, bill: @bill.id) %>
