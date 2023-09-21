@@ -32,9 +32,6 @@ class Split < ApplicationRecord
     return split_settlements
   end
 
-<<<<<<< HEAD
-
-=======
   def sort_split_stats
     # bills.map(&:settlement)
     payer_negative = []
@@ -99,5 +96,4 @@ class Split < ApplicationRecord
     end
     settlements
   end
->>>>>>> master
 end
