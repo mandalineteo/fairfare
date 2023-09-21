@@ -1,4 +1,5 @@
-<div data-controller="add-people"
+<div class="item-member-partial"
+  data-controller="add-people"
   data-add-people-has-item-member-value="<%= member.item_member?(item) %>"
   data-add-people-split-id-value="<%= @split.id %>"
   data-add-people-bill-id-value="<%= @bill.id %>"
@@ -8,11 +9,20 @@
 
   <% if member.item_member?(item) %>
 
-    <%= link_to "Delete",
-        split_bill_item_item_member_path(split.id, bill.id, item.id, member.item_member_id(item)),
-        # split_bill_payer_path(split.id, bill.id, member.payer_id(bill)),
-        data: {turbo_method: :delete}
-      %>
+    <%= link_to split_bill_item_item_member_path(split.id, bill.id, item.id, member.item_member_id(item)),
+        data: {
+          action: 'click->add_people#delete',
+          turbo_method: :delete,
+          add_people_target:"checkbox"
+          },
+          class: "person d-flex delete" do %>
+
+          <div class="d-flex person-details">
+            <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+            <p><%= member.given_nickname(current_user) %></p>
+          </div>
+
+          <% end %>
 
   <% else %>
 
@@ -20,21 +30,14 @@
       add_people_target: "form",
       action: "submit->add-people#toggle"} }) do |f| %>
 
-    <%# <%= form_with url: split_bill_payers_path, data: {
-      add_people_target: "form",
-      action: "submit->add-people#toggle"} do |f|  %>
-
       <%= hidden_field_tag "member_id", member.id %>
 
-      <div class="d-flex person">
-        <div class="d-flex">
-          <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-          <p><%= member.given_nickname(current_user) %></p>
-        </div>
-        <%= button_tag "", type:  "submit", class:"grey", style:"background:none; padding:0px; border:none;", data: { add_people_target:"checkbox" } do %>
-          <i class="fa-solid fa-square-check" ></i>
+        <%= button_tag "", type:  "submit", class:"d-flex person", style:"padding:14px; border:none;", data: { add_people_target:"checkbox" } do %>
+          <div class="d-flex person-details">
+            <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+            <p><%= member.given_nickname(current_user) %></p>
+          </div>
         <% end %>
-      </div>
 
     <% end %>
   <% end%>

@@ -1,4 +1,5 @@
- <div data-controller="payers"
+ <div class="payer-partial"
+  data-controller="payers"
   data-payers-has-payer-value="<%= member.payer?(bill) %>"
   data-payers-split-id-value="<%= split.id %>"
   data-payers-bill-id-value="<%= bill.id %>"
@@ -15,6 +16,7 @@
           payers_target:"checkbox"
         },
         class: "person d-flex delete" do %>
+
         <div class="d-flex person-details">
           <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
           <p><%= member.given_nickname(current_user) %></p>
@@ -28,18 +30,14 @@
       action: "submit->payers#toggle"} }) do |f|  %>
       <%= hidden_field_tag "member_id", member.id %>
 
-      <%# <%= hidden_field_tag "remove", false %>
       <%= button_tag "", type:  "submit", class:"d-flex person", style:"padding:14px; border:none;", data: { payers_target:"checkbox" } do %>
         <div class="d-flex person-details">
           <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
           <p><%= member.given_nickname(current_user) %></p>
         </div>
-          <%# <i class="fa-solid fa-square-check" ></i> %>
       <% end %>
 
     <% end %>
 
   <% end %>
-
-
 </div>
