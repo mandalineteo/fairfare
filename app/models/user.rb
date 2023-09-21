@@ -4,9 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # to allow new registration form to render phone_number field
-  attr_accessor :phone_number
-
   has_many :messages
 
   has_many :splits, dependent: :destroy
@@ -16,12 +13,6 @@ class User < ApplicationRecord
   belongs_to :member
 
   before_save :make_admin
-  before_validation :assign_or_create_member
-
-  def assign_or_create_member
-    member = Member.find_or_create_by(phone_number:)
-    self.member_id = member.id
-  end
 
   def make_admin
     self.admin = true
