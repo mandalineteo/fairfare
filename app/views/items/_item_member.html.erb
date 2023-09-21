@@ -26,15 +26,14 @@
 
       <%= hidden_field_tag "member_id", member.id %>
 
-      <div class="d-flex person">
-        <div class="d-flex">
-          <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-          <p><%= member.given_nickname(current_user) %></p>
-        </div>
-        <%= button_tag "", type:  "submit", class:"grey", style:"background:none; padding:0px; border:none;", data: { add_people_target:"checkbox" } do %>
-          <i class="fa-solid fa-square-check" ></i>
+      <%# <div class="d-flex person"> %>
+        <%= button_tag "", type:  "submit", class:"d-flex person", style:"padding:14px; border:none;", data: { add_people_target:"checkbox" } do %>
+          <div class="d-flex person-details">
+            <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+            <p><%= member.given_nickname(current_user) %></p>
+          </div>
         <% end %>
-      </div>
+      <%# </div> %>
 
     <% end %>
   <% end%>
