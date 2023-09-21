@@ -130,7 +130,7 @@ class Member < ApplicationRecord
     # get my own share
 
     # return sum of all my shares
-    total = (total - amount_paid(bill)) + bill.even_split_tax
-    return { total:, member: self }
+    amount = (total - amount_paid(bill)) + bill.even_split_tax
+    return { amount:, member: self }
   end
 end
