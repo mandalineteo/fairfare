@@ -48,12 +48,12 @@ export default class extends Controller {
     splitForm.classList.add("split-input-header")
   }
 
-  // displayHeaderForm() {
-  //   console.log("test to display bill header")
+  splitInfo() {
+    console.log("test to display bill header")
 
-  //   this.billHeaderTextTarget.classList.remove("splitInput")
-  //   // console.log("class removed")
-  // }
+    // this.billHeaderTextTarget.classList.remove("splitInput")
+    // console.log("class removed")
+  }
 
   updateSplitValue(e) {
     // console.log("fire ajax for split name ")

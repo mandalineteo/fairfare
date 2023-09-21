@@ -5,7 +5,7 @@
     <div data-action="click->edit-bill#splitInfo">
       <%= simple_form_for :split,  html: { data: { edit_bill_target: "billHeaderText" }  , action: "focusout->edit-bill#updateSplitValue" } do |f| %>
         <h1 class="fw-bold"><%= "#{@split.name}" %></h1>
-        <div data-action="click->edit-bill#displaySplitForm">
+        <div >
           <div class="col-2 " data-action="click->edit-bill#toggleSplitForm" >
             <%= f.input :name, input_html: { class: "split-input", value: @split.name } %>
           </div>
