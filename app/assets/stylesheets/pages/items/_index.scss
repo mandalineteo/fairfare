@@ -141,14 +141,16 @@ ul.dropdown-menu {
   }
 }
 
-.item-member-partial a {
+.item-member-partial {
+  a {
   text-decoration: none;
   color: black;
-}
+  }
 
-.item-member-partial button.person {
-  width: calc(100% - 8px);
+  button.person {
+    width: calc(100% - 8px);
 
+  }
 }
 
 .item-member-partial .person {
@@ -170,6 +172,7 @@ ul.dropdown-menu {
   p {
     margin-bottom: 0;
     margin-right: 10px;
+    font-weight:300!important;
   }
 }
 
@@ -190,7 +193,8 @@ ul.dropdown-menu {
 .added-green {
   background-color: $ff-green!important;
   color: white!important;
-  font-weight: bold;
+  // font-weight :500!important;
+  opacity: 0.8;
 }
 
 // <%# ------------------------FOOTER---------------------------- %>
