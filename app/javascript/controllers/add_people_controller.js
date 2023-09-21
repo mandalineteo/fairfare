@@ -17,7 +17,7 @@ export default class extends Controller {
 
     if (this.hasItemMemberValue) {
       console.log('hasItemMember', this.hasItemMemberValue)
-      this.checkboxTarget.classList.add("green")
+      this.checkboxTarget.classList.add("added-green")
     }
   }
 
@@ -26,9 +26,6 @@ export default class extends Controller {
     // console.log("AJAX")
 
     if (!this.hasItemMemberValue) {
-
-      this.checkboxTarget.classList.remove("grey")
-      this.checkboxTarget.classList.add("green")
 
       fetch(this.formTarget.action, {
         method: "POST",
@@ -42,26 +39,21 @@ export default class extends Controller {
           console.log("data", data)
         })
     }
+  }
 
-    if (this.hasPayerValue === 'true') {
+  delete(event) {
+    event.preventDefault()
 
-      this.checkboxTarget.classList.remove("green")
-      this.checkboxTarget.classList.add("grey")
-
-      // THIS GREEN->GREY TOGGLE IS NOT WORKING BUT THE DELETE IS WORKING ????????
-
-
-      // fetch(this.destroy_url, {
-      //   method: "DELETE",
-      //   headers: { "Accept": "application/json" },
-      //   // body: new FormData(this.formTarget)
-      // })
-      //   .then(response => {
-      //     return response.json()
-      //   })
-      //   .then((data) => {
-      //     console.log("data", data)
-      //   })
-    }
+    fetch(event.currentTarget.href, {
+      method: 'DELETE',
+      headers: {
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+        Accept: 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.element.outerHTML = data.item_member_html
+      })
   }
 }

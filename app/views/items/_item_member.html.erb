@@ -9,21 +9,26 @@
 
   <% if member.item_member?(item) %>
 
-    <%= link_to "Delete",
-        split_bill_item_item_member_path(split.id, bill.id, item.id, member.item_member_id(item)),
-        # split_bill_payer_path(split.id, bill.id, member.payer_id(bill)),
-        data: {turbo_method: :delete}
-      %>
+    <%= link_to split_bill_item_item_member_path(split.id, bill.id, item.id, member.item_member_id(item)),
+        data: {
+          action: 'click->add_people#delete',
+          turbo_method: :delete,
+          add_people_target:"checkbox"
+          },
+          class: "person d-flex delete" do %>
+
+          <div class="d-flex person-details">
+            <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+            <p><%= member.given_nickname(current_user) %></p>
+          </div>
+
+          <% end %>
 
   <% else %>
 
     <%= simple_form_for([@split, @bill, item, @item_member], html: { data: {
       add_people_target: "form",
       action: "submit->add-people#toggle"} }) do |f| %>
-
-    <%# <%= form_with url: split_bill_payers_path, data: {
-      add_people_target: "form",
-      action: "submit->add-people#toggle"} do |f|  %>
 
       <%= hidden_field_tag "member_id", member.id %>
 
