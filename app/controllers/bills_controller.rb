@@ -23,7 +23,7 @@ class BillsController < ApplicationController
 
     if @bill.save
       # schedule a background job
-      ParseReceiptJob.perform_later(@bill)
+      ParseReceiptJob.perform_now(@bill)
 
       redirect_to split_bill_items_path(@bill.split, @bill)
       # check sidekiq background jobs on what to do when the json is obtained from ocr
