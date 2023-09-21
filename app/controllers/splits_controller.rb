@@ -2,7 +2,7 @@ require 'securerandom'
 
 class SplitsController < ApplicationController
   def index
-    @splits = Split.all
+    @splits = current_user.member.splits
   end
 
   def show

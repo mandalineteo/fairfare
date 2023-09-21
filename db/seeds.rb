@@ -73,25 +73,30 @@ if seed_users
 
   users = []
 
-  zohan_user = User.create!(
-    member: zohan_member,
+  zohan_user = User.new(
+    # member: zohan_member,
     username: "Test1",
     email: "test123@gmail.com",
     first_name: "Zohan",
     last_name: "Goh",
     password: "password"
   )
+  zohan_user.phone_number = zohan_member.phone_number
+  zohan_user.save!
+
   puts "Created #{zohan_user.username}."
 
   10.times do |index|
-    user = User.create!(
-      member: members_with_accounts[index],
+    user = User.new(
       username: "User#{index}",
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       email: Faker::Internet.email,
       password: "password"
     )
+    user.phone_number = members_with_accounts[index].phone_number
+    user.save!
+
     users << user
     puts "Created #{user.username}."
   end
@@ -143,11 +148,11 @@ split = Split.create!(
 
 puts "\n[3 / 11] Creating split members"
 # split members
-[members_with_accounts.sample(2), members_without_accounts.sample(2)].flatten.each do |member|
-  split.members << member
+split.members << zohan_user.member
+zohan_user.contacts.first(4).each do |contact|
+  split.members << contact.member
   puts "        - added user"
 end
-
 
 # 2 bill
 puts "\n[5 / 11] Creating first bill"
