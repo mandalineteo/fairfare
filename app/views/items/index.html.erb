@@ -52,7 +52,7 @@
                       <p class="item-value"><%= "#{item.quantity}" %></p>
                     </div>
                     <div class="col-2 form-toggler">
-                      <p class="item-value"><%= "#{item.price}" %></p>
+                      <p class="item-value"><%= sprintf("%.2f", item.price / 100.00) %></p>
                     </div>
 
                     <div class="col-7" >
@@ -71,6 +71,8 @@
                 <% end %>
               </div>
 
+              <p class="col-1"><%= "#{item.quantity}" %></p>
+              <p class="col-2"><%= sprintf("%.2f", item.price / 100.00) %></p>
               <p class="col-2 people" data-action="click->add-people-button#appear">Add people</p>
             </div>
 
@@ -95,9 +97,10 @@
 
   <div class="bill-footer row">
     <div class="tax-discounts col-6">
-      <p>Discount: $<%= @bill.discount %></p>
-      <p>Tax: $<%= @bill.taxes %></p>
-      <p>Service Charge: $<%= @bill.service_charge %></p>
+      <p>Discount: SGD $<%= sprintf("%.2f", @bill.discount / 100.00) %></p>
+      <p>Tax: SGD $<%= sprintf("%.2f", @bill.taxes / 100.00) %></p>
+      <p>Service Charge: SGD $<%= sprintf("%.2f", @bill.service_charge / 100.00) %></p>
+      <p>Total Amount: SGD $<%= sprintf("%.2f", @bill.total_amount / 100.00) %></p>
     </div>
     <div class="add-receipt col-6 justify-content-center">
       <p>Add another receipt?</p>
