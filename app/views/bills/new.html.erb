@@ -1,44 +1,45 @@
+<div class="page-setup">
+
+  <div class="manual-input">
+    <div class="text-center manual-input-header">
+      <h1 ><%= @split.name.upcase %></h1>
+    </div>
+
+    <div class="container text-left manual-inputs-header" >
+      <%= simple_form_for [@split, @bill] do |f| %>
+        <%= f.input :merchant %>
+        <%= f.input :date %>
+
+        <div class="items" data-controller="bills-manual-input">
+          <%= f.simple_fields_for(:items) do |ff| %>
+
+            <div class="align-items-center" data-bills-manual-input-target="addInputElement">
+              <%= render 'item_form_input', ff: ff %>
+            </div>
+
+          <% end %>
+          <button type="button" class="btn-lg add-button" data-action="click->bills-manual-input#addItemInput" >
+            Add Item
+          </button>
+
+        </div>
 
 
-<div class="manual-input">
-  <div class="text-center manual-input-header">
-    <h1 ><%= @split.name.upcase %></h1>
-  </div>
+        <div class="all-taxes" data-bills-manual-input-target="taxInputElement">
 
-  <div class="container text-left manual-inputs-header" >
-    <%= simple_form_for [@split, @bill] do |f| %>
-      <%= f.input :merchant %>
-      <%= f.input :date %>
+            <%= f.input :taxes, as: :float, input_html: { min: '0.00' } %>
+            <%= f.input :service_charge, as: :float, input_html: { min: '0.00' } %>
+            <%= f.input :discount, as: :float, input_html: { min: '0.00' } %>
+            <%= f.input :total_amount, as: :float, input_html: { min: '0.00' } %>
 
-      <div class="items" data-controller="bills-manual-input">
-        <%= f.simple_fields_for(:items) do |ff| %>
-
-          <div class="align-items-center" data-bills-manual-input-target="addInputElement">
-            <%= render 'item_form_input', ff: ff %>
-          </div>
-
-        <% end %>
-        <button type="button" class="btn-lg add-button" data-action="click->bills-manual-input#addItemInput" >
-          Add Item
-        </button>
-
-      </div>
+            <%= f.submit  %>
 
 
-      <div class="all-taxes" data-bills-manual-input-target="taxInputElement">
-
-          <%= f.input :taxes, as: :float, input_html: { min: '0.00' } %>
-          <%= f.input :service_charge, as: :float, input_html: { min: '0.00' } %>
-          <%= f.input :discount, as: :float, input_html: { min: '0.00' } %>
-          <%= f.input :total_amount, as: :float, input_html: { min: '0.00' } %>
-
-          <%= f.submit  %>
-
-
+            </div>
           </div>
         </div>
-      </div>
 
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
