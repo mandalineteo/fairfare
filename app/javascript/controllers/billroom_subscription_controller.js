@@ -9,6 +9,7 @@ export default class extends Controller {
 
   connect() {
     console.log(`Subscribe to the bill with the id ${this.billIdValue}.`)
+    console.log(this.itemMemberTargets)
     this.channel = createConsumer().subscriptions.create(
       { channel: "BillRoomChannel", id: this.billIdValue },
       {
