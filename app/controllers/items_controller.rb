@@ -52,6 +52,12 @@ class ItemsController < ApplicationController
     # redirect_to split_bill_items_path(@split)
   end
 
+  def items
+    @split = Split.find(params[:split_id])
+    @bill = Bill.find(params[:bill_id])
+
+  end
+
   def destroy
     @item = Item.find(params[:id])
     @bill = @item.bill

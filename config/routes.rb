@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :splits, only: %i[index show new create destroy] do
+  resources :splits, except: %i[edit] do
     resources :split_members, only: %i[create]
     resources :members, only: %i[create index]
     resources :contacts, only: %i[create index] do
@@ -21,12 +21,21 @@ Rails.application.routes.draw do
     get :add_members
     get "add_existing_contact/:member_id", to: "splits#add_existing_contact", as: :add_existing_contact
 
-    resources :bills, only: %i[index show new create edit update destroy] do
+    # added on 21-09 @ 9.17pm
+    resources :bills do
+      resources :items, only: %i[update index]
+    end
+
+    resources :bills do
       collection do
         get :receipt
         post :upload
         get :select
       end
+
+      # member do
+      #   patch :items, only: %i[items]
+      # end
 
       resources :items, only: %i[index new create edit update destroy] do
         resources :item_members, only: %i[new create destroy]
@@ -40,7 +49,10 @@ Rails.application.routes.draw do
   end
 
   # resources :payers, only: %i[destroy]
+  resources :bills, only: :update
+  resources :items, only: :update
 end
+
 
 # def tabulate
 #   @split = Split.find_by(invite_code: params[:id])
