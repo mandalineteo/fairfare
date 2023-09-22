@@ -15,7 +15,21 @@ class ItemMembersController < ApplicationController
     if @item_member.save
       BillRoomChannel.broadcast_to(
         @item_member.item.bill,
-        "HELLO"
+        {
+          member_id: @item_member.member.id,
+          item_id: @item_member.item.id,
+          item_member_form_html: render_to_string(
+            partial: "items/item_member",
+            locals: {
+              member: @item_member.member,
+              bill: @item_member.item.bill,
+              split: @item_member.item.bill.split,
+              item: @item_member.item,
+              item_member: @item_member
+            },
+            formats: [:html]
+          )
+        }
       )
     end
 
