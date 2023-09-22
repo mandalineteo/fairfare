@@ -23,6 +23,8 @@ class Bill < ApplicationRecord
   end
 
   def even_split_tax
-    taxes / members.uniq.count
+    return 0 if taxes.nil?
+
+    taxes / (members.uniq.count.positive? ? members.uniq.count : 1)
   end
 end

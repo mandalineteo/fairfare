@@ -73,5 +73,6 @@ class Split < ApplicationRecord
       end
     end
     settlements
+
   end
 end
