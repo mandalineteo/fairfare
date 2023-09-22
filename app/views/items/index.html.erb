@@ -89,6 +89,7 @@
                   </button>
                   <div class="payer dropdown d-flex">
                     <ul class="dropdown-menu dropdown-menu-end">
+
                       <% @split_members.each do |member| %>
                         <%= render 'items/item_member', member: member, bill: @bill, split: @split, item: item, item_member: @item_member %>
                       <% end %>
@@ -103,6 +104,8 @@
             </div>
 
           </div>
+
+          <%= render "added_item_members", item: %>
         <% end %>
       </div>
     </div>

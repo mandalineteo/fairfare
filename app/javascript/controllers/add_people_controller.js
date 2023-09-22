@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="add-people"
 export default class extends Controller {
-  static targets = ["checkbox", "form"]
+  static targets = ["checkbox", "form", "everyone"]
   static values = {
     splitId: String,
     billId: String,
@@ -23,7 +23,7 @@ export default class extends Controller {
 
   toggle(event) {
     event.preventDefault()
-    // console.log("AJAX")
+    console.log("AJAX")
 
     if (!this.hasItemMemberValue) {
 
@@ -32,12 +32,6 @@ export default class extends Controller {
         headers: { "Accept": "application/json" },
         body: new FormData(this.formTarget)
       })
-        .then(response => {
-          return response.json()
-        })
-        .then((data) => {
-          console.log("data", data)
-        })
     }
   }
 
@@ -51,9 +45,11 @@ export default class extends Controller {
         Accept: 'application/json'
       }
     })
-      .then(response => response.json())
-      .then(data => {
-        this.element.outerHTML = data.item_member_html
-      })
+  }
+
+  everyone(event) {
+    event.preventDefault()
+
+    this.everyoneTarget
   }
 }

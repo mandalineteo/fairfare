@@ -9,7 +9,9 @@ class Split < ApplicationRecord
   validates :date, presence: true
   validates :status, presence: true
 
-
+  # def got_bill
+  #   bills.count.positive?
+  # end
 
   def split_stats
     split_settlements = []

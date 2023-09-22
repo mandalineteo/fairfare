@@ -1,6 +1,55 @@
 // Specific CSS for your home-page
 $signincolor: #DBDBDB;
 
+.homepage {
+  background-color: $ff-yellow;
+  height: calc(100vh - 80px);
+  width: 100vw;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  .d-flex {
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  h1 {
+    font-size: 58px;
+    color: $ff-purple;
+    font-weight: 800;
+    margin: auto;
+    text-align: center;
+  }
+
+  p {
+    color: $ff-purple;
+    text-align: center;
+    margin-bottom: 85px;
+  }
+
+  .login-btn {
+    // background-color: #FF9B50;
+    border-radius: 5px;
+    color: white;
+    margin: 16px auto;
+    padding: 8px 16px;
+    font-size: 1rem!important;
+  }
+
+  a {
+    text-decoration: none;
+    color: $ff-purple;
+    font-size: 0.8rem!important;
+  }
+}
+
+
+
+// ---------------------------------------
+
+
 .home-img {
   border: 1px solid red;
 }
@@ -23,11 +72,6 @@ $signincolor: #DBDBDB;
     border-radius: 5px;
   }
   // log in button
-  .login-btn {
-    background-color: #FF9B50;
-    border-radius: 5px;
-    color: white;
-  }
 }
 
 // sign up column

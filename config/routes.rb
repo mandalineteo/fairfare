@@ -21,12 +21,8 @@ Rails.application.routes.draw do
     get :add_members
     get "add_existing_contact/:member_id", to: "splits#add_existing_contact", as: :add_existing_contact
 
-    # added on 21-09 @ 9.17pm
     resources :bills do
       resources :items, only: %i[update index]
-    end
-
-    resources :bills do
       collection do
         get :receipt
         post :upload
@@ -43,9 +39,7 @@ Rails.application.routes.draw do
       resources :payers, only: %i[new create destroy]
     end
 
-
     resources :items, only: %i[destroy]
-
   end
 
   # resources :payers, only: %i[destroy]

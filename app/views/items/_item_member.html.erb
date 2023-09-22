@@ -1,8 +1,11 @@
-<div class="item-member-partial"
+<div
+  data-billroom-subscription-target="itemMember"
+  data-id="item-<%=item.id%>-member-<%= member.id %>"
+  class="item-member-partial"
   data-controller="add-people"
   data-add-people-has-item-member-value="<%= member.item_member?(item) %>"
-  data-add-people-split-id-value="<%= @split.id %>"
-  data-add-people-bill-id-value="<%= @bill.id %>"
+  data-add-people-split-id-value="<%= split.id %>"
+  data-add-people-bill-id-value="<%= bill.id %>"
   data-add-people-item-id-value="<%= item.id %>"
   data-add-people-item-member-id-value="<%= member.item_member?(item) ? member.item_member_id(item) : nil %>">
     <%# <a class="nickname" href="#"><%= member.first_name</a> %>
@@ -26,7 +29,7 @@
 
   <% else %>
 
-    <%= simple_form_for([@split, @bill, item, @item_member], html: { data: {
+    <%= simple_form_for([split, bill, item, item_member], html: { data: {
       add_people_target: "form",
       action: "submit->add-people#toggle"} }) do |f| %>
 
