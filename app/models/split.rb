@@ -40,7 +40,7 @@ class Split < ApplicationRecord
   end
 
   def settlements
-    sort_split_hash = sort_split_stats
+  sort_split_hash = sort_split_stats
     # raise
     # outstanding_payer = sort_split_stats[:payers][0][:member][:phone_number]
     # outstanding_payer_amount = sort_split_stats[:payers][0][:amount]
@@ -51,7 +51,7 @@ class Split < ApplicationRecord
     settlements = []
 
     sort_split_hash[:payers].each do |payer|
-      sort_split_hash[:payees].each do |payee|
+    sort_split_hash[:payees].each do |payee|
         diff = payer[:amount] + payee[:amount]
 
         amount = 0
