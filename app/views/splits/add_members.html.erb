@@ -1,7 +1,7 @@
 <div class="container" data-controller="filter-contacts" data-filter-contacts-split-id-value="<%= @split.id %>">
 
-  <div class="form">
-    <h1>Add members</h1>
+  <div class="form form-summary-card-less-padding">
+    <h1 class="mt-3">Add members</h1>
     <%= simple_form_for([@split, @split_member], html: { data: { "filter-contacts-target" => "form" } }) do |f| %>
       <div class="mb-3 tel required contact_nickname">
         <label class="form-label tel required" for="contact_nickname">Nickname <abbr title="required">*</abbr></label>
@@ -19,12 +19,12 @@
         <%= f.submit 'Create', disabled: 'disabled', data: { filter_contacts_target: 'submit' } %>
         <p class="split-button" data-action="click->filter-contacts#back">Back</p>
       </div>
-      <p class="split-button" data-filter-contacts-target="toggle" data-action="click->filter-contacts#toggle">Create a new contact</p>
+      <p class="split-button" data-filter-contacts-target="toggle" data-action="click->filter-contacts#toggle">Create</p>
     <% end %>
   </div>
   <br>
-  <div class="split-members">
-    <h2>Contacts included in split</h2>
+  <div class="split-members form-summary-card-less-padding">
+    <h2 class="pt-3">Contacts included in split</h2>
       <% @split.members.each do |member| %>
         <p><%= member.given_nickname(current_user) %> <%= member.phone_number %></p>
       <% end %>
@@ -34,6 +34,8 @@
     <%= render "splits/contact_list", available_contacts: @available_contacts, split: @split %>
   </div>
 
-  <%= link_to "Add a bill", select_split_bills_path, class: "split-button" %>
+  <%= link_to "Add a bill", select_split_bills_path, class: "split-button my-5" %>
   <%= link_to "Back", new_split_path, class: "split-button" %>
+  <div class="mb-5">
+  </div>
 </div>
