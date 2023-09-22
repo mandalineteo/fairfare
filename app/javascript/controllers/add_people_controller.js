@@ -23,7 +23,7 @@ export default class extends Controller {
 
   toggle(event) {
     event.preventDefault()
-    // console.log("AJAX")
+    console.log("AJAX")
 
     if (!this.hasItemMemberValue) {
 
@@ -32,12 +32,6 @@ export default class extends Controller {
         headers: { "Accept": "application/json" },
         body: new FormData(this.formTarget)
       })
-        .then(response => {
-          return response.json()
-        })
-        .then((data) => {
-          console.log("data", data)
-        })
     }
   }
 
