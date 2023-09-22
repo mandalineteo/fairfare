@@ -44,21 +44,21 @@
         html: { data: { edit_bill_target: "merchantAndDate" } } do |f| %>
 
 
-            <%= f.input :merchant,
-                  label: false,
-                  input_html: {
-                    placeholder: 'Merchant Name',
-                    data: { action: 'blur->edit-bill#updateMerchantValue' }
-                  }
-                  %>
+        <%= f.input :merchant,
+              label: false,
+              input_html: {
+                placeholder: 'Merchant Name',
+                data: { action: 'blur->edit-bill#updateMerchantValue' }
+              }
+              %>
 
-            <%= f.input :date,
-                label: false,
-                input_html: {
-                  data: {
-                    action: 'blur->edit-bill#updateMerchantValue'
-                  }
-                } %>
+        <%= f.input :date,
+            label: false,
+            input_html: {
+              data: {
+                action: 'blur->edit-bill#updateMerchantValue'
+              }
+            } %>
 
 
       <% end %>
@@ -88,61 +88,29 @@
               <%= render 'item_form', item: item %>
             </div>
 
-            <p class="col-2 people" data-action="click->add-people#appear">Add people</p>
-          </div>
-          <%# </form> %>
-          <div data-controller="add-people-button">
-            <div class="bill-summary-item-card row d-flex">
-
-              <div class="col-10">
-                <%= simple_form_for :item,  data: { edit_bill_target: "itemDescriptions", action: "focusout->edit-bill#updateItem" } do |f| %>
-
-                  <div class="row form-toggler" data-action="click->edit-bill#toggleForm">
-
-                    <div class="col-8 form-toggler item">
-                      <p class="item-value"><%= "#{item.name}" %></p>
-                    </div>
-                    <div class="col-2 form-toggler">
-                      <p class="item-value"><%= "#{item.quantity}" %></p>
-                    </div>
-                    <div class="col-2 form-toggler">
-                      <p class="item-value"><%= sprintf("%.2f", item.price / 100.00) %></p>
-                    </div>
-
-                    <div class="col-7" >
-                      <%= f.input :name, input_html: { class: "item-input",  value: item.name }, label_html: { class: "item-input"}  %>
-                    </div>
-
-                    <div class="col-3">
-                      <%= f.input :quantity, input_html: { class: "item-input",  value: item.quantity},  label_html: { class: "item-input"}  %>
-                    </div>
-
-                    <div class="col-2" >
-                      <%= f.input :price, input_html: { class: "item-input",  value: item.price},  label_html: { class: "item-input"}%>
-                    </div>
-
+            <div class="col-2">
+              <div data-controller="add-people-button" class="people">
+                <div class="bill-summary-item-card d-flex">
+                  <%# <p class="col-2 people" data-action="click->add-people-button#appear">add people</p> %>
+                  <button class="col-2 people btn btn-secondary " type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" style="margin-right:0">
+                    <i class="fa-solid fa-user-plus"></i>
+                  </button>
+                  <div class="payer dropdown d-flex">
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <% @split_members.each do |member| %>
+                        <%= render 'items/item_member', member: member, bill: @bill, split: @split, item: item, item_member: @item_member %>
+                      <% end %>
+                    </ul>
                   </div>
-                <% end %>
-              </div>
+                  <%# <p class="col-1"><%= "#{item.quantity}"</p> %>
+                  <%# <p class="col-2"><%= sprintf("%.2f", item.price / 100.00)</p> %>
+                </div>
 
-              <%# <p class="col-2 people" data-action="click->add-people-button#appear">add people</p> %>
-              <button class="col-2 people btn btn-secondary " type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" style="margin-right:0">
-                <i class="fa-solid fa-user-plus"></i>
-              </button>
-              <div class="payer dropdown d-flex">
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <% @split_members.each do |member| %>
-                    <%= render 'items/item_member', member: member, bill: @bill, split: @split, item: item, item_member: @item_member %>
-                  <% end %>
-                </ul>
+                <%# <div class="pop-up d-none" data-add-people-button-target="popup"> %>
+
+
               </div>
-              <%# <p class="col-1"><%= "#{item.quantity}"</p> %>
-              <%# <p class="col-2"><%= sprintf("%.2f", item.price / 100.00)</p> %>
             </div>
-
-            <%# <div class="pop-up d-none" data-add-people-button-target="popup"> %>
-
-
           </div>
         <% end %>
       </div>
