@@ -16,7 +16,7 @@ class User < ApplicationRecord
   belongs_to :member
 
   before_save :make_admin
-  # before_validation :assign_or_create_member
+  before_validation :assign_or_create_member
 
   def assign_or_create_member
     member = Member.find_or_create_by(phone_number:)
@@ -29,6 +29,20 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
+  end
+
+  def owe_summary(current_user)
+    amount = 0
+    current_user.member.splits.each do |split|
+      split.settlements.each do |settlement|
+        puts settlement[:payee].id
+        puts current_user.member.id
+        if settlement[:payee] == current_user.member
+          amount += settlement[:amount]
+        end
+      end
+    end
+    amount
   end
 
   def owed_summary(current_user)
