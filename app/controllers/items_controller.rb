@@ -42,14 +42,13 @@ class ItemsController < ApplicationController
   end
 
   def update
-    # @split = Split.find(params[:split_id])
-    # @bill = Bill.find(params[:bill_id])
-    # @items = Item.all.where(bill_id: @bill.id)
-    @item = Item.find(params[:item_id])
-    raise
-    # @item.update(item_params)
 
-    # redirect_to split_bill_items_path(@split)
+    @item = Item.find(params[:id])
+    @item.update(item_params)
+
+    respond_to do |format|
+      format.text { head :ok }
+    end
   end
 
   def items
