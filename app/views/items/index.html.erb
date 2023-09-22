@@ -26,9 +26,9 @@
 
   <div class="bill-items">
     <div class="bill-headers row" style="margin-bottom: 0.8rem">
-      <h3 class="col-7 item">Item</h3>
-      <h3 class="col-1">Qty</h3>
-      <h3 class="col-2">Unit price</h3>
+      <h3 class="col-6 item">Item</h3>
+      <h3 class="col-2 right-text">Qty</h3>
+      <h3 class="col-2 right-text">Unit price</h3>
       <h3 class="col-2">People</h3>
     </div>
 
@@ -82,6 +82,10 @@
                   <% @split_members.each do |member| %>
                     <%= render 'items/item_member', member: member, bill: @bill, split: @split, item: item, item_member: @item_member %>
                   <% end %>
+
+                  <p class="d-flex person" style="padding:14px; border:none;" data-action="click->add-people#everyone">everyone</p>
+
+
                 </ul>
               </div>
               <%# <p class="col-1"><%= "#{item.quantity}"</p> %>
