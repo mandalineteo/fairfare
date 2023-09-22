@@ -67,43 +67,43 @@ class Member < ApplicationRecord
     return item_member.id
   end
 
-  def consumed_items_amount
-    total_amount = 0
+  # def consumed_items_amount
+  #   total_amount = 0
 
-    bill.items.each do |item|
-      if item.member == current_user
-        total_amount += item.quantity
-      end
-    end
-  end
+  #   bill.items.each do |item|
+  #     if item.member == current_user
+  #       total_amount += (item.quantity * item.price)/item.members.count
+  #     end
+  #   end
+  # end
 
-  def amount_owed(current_user)
-    owe = 0
-    splits = current_user.member.splits
-    splits.each do |split|
-      stats = split.get_split_stats
-      stats.each do |stat|
-        if stat[:payer_member].id == current_user.member.id
-          owe += stat[:amount]
-        end
-      end
-    end
-    owe/100.00
-  end
+  # def amount_owed(current_user)
+  #   owe = 0
+  #   splits = current_user.member.splits
+  #   splits.each do |split|
+  #     stats = split.get_split_stats
+  #     stats.each do |stat|
+  #       if stat[:payer_member].id == current_user.member.id
+  #         owe += stat[:amount]
+  #       end
+  #     end
+  #   end
+  #   owe/100.00
+  # end
 
-  def amount_to_pay(current_user)
-    owe = 0
-    splits = current_user.member.splits
-    splits.each do |split|
-      stats = split.get_split_stats
-      stats.each do |stat|
-        if stat[:payee_member].id == current_user.member.id
-          owe += stat[:amount]
-        end
-      end
-    end
-    owe/100.00
-  end
+  # def amount_to_pay(current_user)
+  #   owe = 0
+  #   splits = current_user.member.splits
+  #   splits.each do |split|
+  #     stats = split.get_split_stats
+  #     stats.each do |stat|
+  #       if stat[:payee_member].id == current_user.member.id
+  #         owe += stat[:amount]
+  #       end
+  #     end
+  #   end
+  #   owe/100.00
+  # end
 
   # ---------------------
 
@@ -116,12 +116,15 @@ class Member < ApplicationRecord
   def total_consumed(bill)
     total = 0
     # get all the items i am a part of
+    # items = bill.items
     items = Item.where(bill: bill).joins(:item_members).where(item_members: { member: self })
 
     items.each do |item|
       price = item.price.to_f
       quantity = item.quantity
-      share = (price * quantity) / item.members.count
+      # total_price = price * quantity
+      share = (price * quantity) / (item.members.count.positive? ? item.members.count : item.bill.members.uniq.count)
+
       total += share
     end
     # for each item
