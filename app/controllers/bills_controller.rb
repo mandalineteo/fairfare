@@ -64,6 +64,8 @@ class BillsController < ApplicationController
     @bill.split = @split
 
     if @bill.save
+      @bill.update_total_bill if @bill.total_amount.nil?
+
       redirect_to split_bill_items_path(@split, @bill)
     else
       render :new, status: :unprocessable_entity
@@ -77,14 +79,42 @@ class BillsController < ApplicationController
   end
 
   def update
+    @bill = Bill.find(params[:id])
+
+    # @items = Item.where(bill: @bill)
+
+    # @items.each do |item|
+    #   item.attributes = bill_params
+    #   item.save
+    # end
+
+    @bill.update(bill_params)
+    # temp comment out line 79 on 21-09 @8.58pm
+    # redirect_to split_bill_items_path(@split)
+
+    respond_to do |format|
+      format.html { redirect_to split_bill_items_path(@split) }
+      format.text { render plain: 'testtt' }
+    end
+  end
+
+  # added on 21-09 @ 9.36pm
+  def items
     @split = Split.find(params[:split_id])
     @bill = Bill.find(params[:bill_id])
-    @items = Item.all.where(bill_id: @bill.id)
+    @items = Item.where(bill_id: @bill.id)
 
     @items.update(item_params)
+    @bill.update_total_bill
 
     redirect_to split_bill_items_path(@split)
   end
+
+  # def items
+  #   @split = Split.find(params[:split_id])
+  #   @bill = Bill.find(params[:bill_id])
+  #   item.bill = @bill
+  # end
 
 
   # def destroy
@@ -98,6 +128,6 @@ class BillsController < ApplicationController
 
   def bill_params
     # params.require(:bill).permit(:merchant, items_attributes: %i[name price quantity])
-    params.require(:bill).permit(:merchant, :discount, :service_charge, :taxes, :total_amount, :date, items_attributes: %i[name price quantity])
+    params.require(:bill).permit(:merchant, :date, :discount, :service_charge, :taxes, items_attributes: %i[name price quantity])
   end
 end
