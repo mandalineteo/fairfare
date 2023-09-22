@@ -1,58 +1,92 @@
-<div class="container-fluid bill-index" data-controller="edit-bill" data-action="click->edit-bill#closeForm">
+<div class="container-fluid bill-index" data-controller="edit-bill" data-action="click->edit-bill#closeForm"  >
   <div class="bill-description" >
     <%# <%= link_to collaborate_path %>
     <%# <%= link_to edit_bill_path %>
-    <div data-action="click->edit-bill#splitInfo">
-      <%= simple_form_for :split,  html: { data: { edit_bill_target: "billHeaderText" }  , action: "focusout->edit-bill#updateSplitValue" } do |f| %>
-        <h1 class="fw-bold"><%= "#{@split.name}" %></h1>
-        <div >
-          <div class="col-2 " data-action="click->edit-bill#toggleSplitForm" >
-            <%= f.input :name, input_html: { class: "split-input", value: @split.name } %>
+
+
+
+
+    <h1
+      data-action="click->edit-bill#toggleSplitForm"
+      data-edit-bill-target="splitHeader"
+      class="fw-bold split-name-value">
+      <%= "#{@split.name}" %>
+    </h1>
+
+    <%= simple_form_for @split,
+      html: {
+        data: {
+          edit_bill_target: "splitText",
+          action: "focusout->edit-bill#updateSplitValue"
+        },
+        class: 'd-none'
+      } do |f| %>
+        <%= f.input :name, label: false %>
+    <% end %>
+
+
+
+
+
+    <div class="payer dropdown d-flex">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+        Select Person(s)
+      </button>
+      <ul class="dropdown-menu">
+        <% @split_members.each do |member| %>
+          <div data-controller="payer-dropdown" data-payer-dropdown-has-payer-value="<%= member.payer?(@bill) %>" data-payer-dropdown-split-id-value="<%= @split.id %>" data-payer-dropdown-bill-id-value="<%= @bill.id %>">
+
+            <%# <%= render "form", payer: @payer %>
+
+            <%= simple_form_for([@split, @bill, @payer], html: { data: {
+              payer_dropdown_target: "form",
+              action: "submit->payer-dropdown#check"} }) do |f|  %>
+              <%= hidden_field_tag "member_id", member.id %>
+              <%= hidden_field_tag "remove", false %>
+              <div class="d-flex person">
+                <div class="d-flex">
+                  <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
+                  <p><%= member.given_nickname(current_user) %></p>
+                </div>
+                <%= button_tag "", type:  "submit", class:"add", style:"background:none; padding:0px; border:none;", data: { payer_dropdown_target:"checkbox" } do %>
+                  <i class="fa-solid fa-square-check" ></i>
+                <% end %>
+              </div>
+            <% end %>
+
           </div>
-        </div>
+
+          <%= render 'bills/payer', member: member, bill: @bill, split: @split, payer: @payer %>
+        <% end %>
+      </ul>
+      <h2>paid this bill</h2>
+    </div>
+
+      <%= simple_form_for @bill,
+        html: { data: { edit_bill_target: "merchantAndDate" } } do |f| %>
+
+
+            <%= f.input :merchant,
+                  label: false,
+                  input_html: {
+                    placeholder: 'Merchant Name',
+                    data: { action: 'blur->edit-bill#updateMerchantValue' }
+                  }
+                  %>
+
+            <%= f.input :date,
+                label: false,
+                input_html: {
+                  data: {
+                    action: 'blur->edit-bill#updateMerchantValue'
+                  }
+                } %>
+
+
       <% end %>
     </div>
 
 
-
-        <div class="payer dropdown d-flex">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-            Select Person(s)
-          </button>
-          <ul class="dropdown-menu">
-            <% @split_members.each do |member| %>
-              <div data-controller="payer-dropdown" data-payer-dropdown-has-payer-value="<%= member.payer?(@bill) %>" data-payer-dropdown-split-id-value="<%= @split.id %>" data-payer-dropdown-bill-id-value="<%= @bill.id %>">
-
-                <%# <%= render "form", payer: @payer %>
-
-                <%= simple_form_for([@split, @bill, @payer], html: { data: {
-                  payer_dropdown_target: "form",
-                  action: "submit->payer-dropdown#check"} }) do |f|  %>
-                  <%= hidden_field_tag "member_id", member.id %>
-                  <%= hidden_field_tag "remove", false %>
-                  <div class="d-flex person">
-                    <div class="d-flex">
-                      <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-                      <p><%= member.given_nickname(current_user) %></p>
-                    </div>
-                    <%= button_tag "", type:  "submit", class:"add", style:"background:none; padding:0px; border:none;", data: { payer_dropdown_target:"checkbox" } do %>
-                      <i class="fa-solid fa-square-check" ></i>
-                    <% end %>
-                  </div>
-                <% end %>
-
-              </div>
-
-              <%= render 'bills/payer', member: member, bill: @bill, split: @split, payer: @payer %>
-            <% end %>
-          </ul>
-          <h2>paid this bill</h2>
-        </div>
-
-
-
-    <h2>Merchant: <%= "#{@bill.merchant}" %></h2>
-    <h2>Date: <%= @bill.date %></h2>
     <hr>
   </div>
 
@@ -70,38 +104,10 @@
 
     <div class="add-people-button">
       <div class="item-row">
-        <% @items.each do |item| %>
+        <% @bill.items.each do |item| %>
           <div class="bill-summary-item-card row">
             <div class="col-10">
-
-              <%= simple_form_for :item,  data: { edit_bill_target: "itemDescriptions", action: "focusout->edit-bill#updateItem" } do |f| %>
-
-                <div class="row form-toggler" data-action="click->edit-bill#toggleForm">
-                  <div class="col-8 form-toggler">
-                    <p class="item-value"><%= "#{item.name}" %></p>
-                  </div>
-                  <div class="col-2 form-toggler">
-                    <p class="item-value"><%= "#{item.quantity}" %></p>
-                  </div>
-                  <div class="col-2 form-toggler">
-                    <p class="item-value"><%= "#{item.price}" %></p>
-                  </div>
-
-                  <div class="col-7" >
-                    <%= f.input :name, input_html: { class: "item-input",  value: item.name }, label_html: { class: "item-input"}  %>
-                  </div>
-
-                  <div class="col-3">
-                    <%= f.input :quantity, input_html: { class: "item-input",  value: item.quantity},  label_html: { class: "item-input"}  %>
-                  </div>
-
-                  <div class="col-2" >
-                    <%= f.input :price, input_html: { class: "item-input",  value: item.price},  label_html: { class: "item-input"}%>
-                  </div>
-
-
-                </div>
-              <% end %>
+              <%= render 'item_form', item: item %>
             </div>
 
             <p class="col-2 people" data-action="click->add-people#appear">Add people</p>
@@ -134,17 +140,56 @@
     </div>
 
     <hr>
+
   </div>
 
 
 <%# ------------------------------------------------------------- %>
 
-  <div class="bill-footer row">
-    <div class="tax-discounts col-6">
-      <p>Discount: $<%= @bill.discount %></p>
-      <p>Tax: $<%= @bill.taxes %></p>
-      <p>Service Charge: $<%= @bill.service_charge %></p>
+  <%# form for taxes & discount %>
+  <div class="bill-footer row" data-action="click->edit-bill#closeTaxForm">
+    <%= simple_form_for :bill,
+      html: {
+        data: {
+          edit_bill_target: "taxDescriptions",
+          action: "focusout->edit-bill#updateTaxAndDiscount"
+        }
+    }  do |f| %>
+
+    <div data-action="click->edit-bill#toggleTaxesForm" class="taxes-toggler">
+      <div class="tax-discounts col-6 taxes-toggler">
+        <div class="taxes-toggler">
+          <p class="tax-value">Discount: $<%= @bill.discount %></p>
+        </div>
+
+        <div class="taxes-toggler">
+          <p class="tax-value">Tax: $<%= @bill.taxes %></p>
+        </div>
+
+        <div class="taxes-toggler">
+          <p class="tax-value">Service Charge: $<%= @bill.service_charge %></p>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col">
+          <%= f.input :discount, :label => "Discount: ", input_html: { class: "tax-input discount-input-field", value: @bill.discount },  label_html: { class: "tax-input" }  %>
+        </div>
+        <div class="col">
+          <%= f.input :taxes, :label => "Taxes: ", input_html: { class: "tax-input taxes-input-field", value: @bill.taxes },  label_html: { class: "tax-input" }  %>
+        </div>
+        <div class="col">
+          <%= f.input :service_charge, :label => "Service Charge: ", input_html: { class: "tax-input service-charges-input-field", value: @bill.service_charge },  label_html: { class: "tax-input" }  %>
+        </div>
+        <div>
+          <%= f.hidden_field :authenticity_token, value: form_authenticity_token %>
+        </div>
+      </div>
     </div>
+
+    <% end %>
+
     <div class="add-receipt col-6 justify-content-center">
       <p>Add another receipt?</p>
       <%= link_to "<button>Yes</button>".html_safe, select_split_bills_path %>
@@ -155,6 +200,9 @@
 
 
 <style>
+/* edit item name, quantity & price */
+
+
   .show-form .item-input{
     display: inline !important;
   }
@@ -168,13 +216,42 @@
   }
 
 
+  /* edit split's name */
 
-  /* split-input-header .split-input {
-    display: inline;
+  .split-name-button {
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    right: 1rem;
   }
 
-  .split-input {
-    display: none;
-  } */
 
+  /* merchant's name & date */
+
+  .merchant-and-date .merchant-input {
+    display: inline !important;
+  }
+
+  .merchant-input {
+    display: none;
+  }
+
+  .merchant-and-date .merchant-date-value {
+    display: none;
+  }
+
+
+  /* taxes */
+
+ .tax-and-discount .tax-input {
+    display: inline !important;
+  }
+
+  .tax-input {
+    display: none;
+  }
+
+  .tax-and-discount .tax-value {
+    display: none;
+  }
 </style>

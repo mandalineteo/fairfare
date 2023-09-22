@@ -34,7 +34,7 @@ class User < ApplicationRecord
   def owed_summary
     splits.each do |split|
       split.settlements
-      raise
+
     end
   end
 end

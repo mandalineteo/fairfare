@@ -13,6 +13,15 @@ class SplitsController < ApplicationController
     @split = Split.new
   end
 
+  def update
+    @split = Split.find(params[:id])
+    @split.update(split_params)
+
+    respond_to do |format|
+      format.text { render plain: @split.name }
+    end
+  end
+
   def create
     @split = Split.new(split_params)
     @split.invite_code = SecureRandom.hex(13)
