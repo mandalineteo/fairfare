@@ -104,7 +104,7 @@
               </div>
 
               <p class="col-1"><%= "#{item.quantity}" %></p>
-              <p class="col-2"><%= "#{item.price}" %></p>
+              <p class="col-2"><%= "#{item.price / 100}" %></p>
               <p class="col-2 people" data-action="click->add-people-button#appear">Add people</p>
             </div>
 
@@ -129,10 +129,10 @@
 
   <div class="bill-footer row">
     <div class="tax-discounts col-6">
-      <p>Discount: $<%= @bill.discount %></p>
-      <p>Tax: $<%= @bill.taxes %></p>
-      <p>Service Charge: $<%= @bill.service_charge %></p>
-      <p>Total Amount: $<%= @bill.total_amount %></p>
+      <p>Discount: $<%= @bill.discount / 100 %></p>
+      <p>Tax: $<%= @bill.taxes / 100 %></p>
+      <p>Service Charge: $<%= @bill.service_charge / 100 %></p>
+      <p>Total Amount: $<%= "#{('%.2f', bill.total_amount/100.00)}" %></p>
     </div>
     <div class="add-receipt col-6 justify-content-center">
       <p>Add another receipt?</p>

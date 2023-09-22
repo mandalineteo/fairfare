@@ -16,7 +16,7 @@ class User < ApplicationRecord
   belongs_to :member
 
   before_save :make_admin
-  before_validation :assign_or_create_member
+  # before_validation :assign_or_create_member
 
   def assign_or_create_member
     member = Member.find_or_create_by(phone_number:)
@@ -34,7 +34,6 @@ class User < ApplicationRecord
   def owed_summary
     splits.each do |split|
       split.settlements
-      raise
     end
   end
 end

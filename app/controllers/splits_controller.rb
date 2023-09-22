@@ -2,7 +2,7 @@ require 'securerandom'
 
 class SplitsController < ApplicationController
   def index
-    @splits = Split.all
+    @splits = current_user.member.splits
   end
 
   def show
@@ -18,6 +18,9 @@ class SplitsController < ApplicationController
     @split.invite_code = SecureRandom.hex(13)
     @split.user = current_user
     if @split.save
+      # ask ashley later why need to save first
+      @split.members << current_user.member
+      @split.save
       redirect_to split_add_members_path(@split)
     else
       render :new, status: :unprocessable_entity
