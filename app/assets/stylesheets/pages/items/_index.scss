@@ -1,9 +1,24 @@
 .container-fluid.bill-index {
-  padding: 1.5rem;
+  padding: 2.5rem;
+  font-weight: 300;
+  overflow-x: hidden;
+  position: relative;
 
-  h1, h2, h3, p {
-    font-size: 1rem;
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: $ff-red;
   }
+
+  h2, h3, p {
+    font-size: 1rem;
+    // font-weight: 500;
+  }
+}
+
+.bill-description p, .tax-discounts p {
+  font-weight: 300!important;
 }
 
 .dropdown-toggle {
@@ -12,9 +27,6 @@
   margin: 4px 6px 4px 0;
   border: none;
 
-  // h2 {
-  //   align-items: center;
-  // }
 }
 
 .dropdown.payer {
@@ -22,6 +34,11 @@
 
   p {
     margin-top: 0;
+  }
+
+  h2 {
+    margin-bottom: 0;
+    color: $ff-purple;
   }
 }
 
@@ -36,7 +53,8 @@ ul.dropdown-menu {
 
 .dropdown-menu button.person {
   width: calc(100% - 8px);
-
+  background-color: white;
+  color: $ff-red;
 }
 
 .dropdown-menu .person {
@@ -68,10 +86,33 @@ ul.dropdown-menu {
 
 // <%# ------------------------------------------------------------- %>
 
+.bill-items {
+  background-color: white;
+  border-radius: 20px;
+  padding: 1rem 2rem 0.1rem 2rem;
+  margin: 1rem auto 1.5rem;
+  width: calc(vw);
+  width: 95vw;
+  position: relative;
+  left: -6vw;
+  font-weight: 500;
+}
+
 .bill-items, .bill-headers {
   p, h3 {
     text-align: center;
   }
+
+  h3{
+    font-weight: 500!important;
+    color: $ff-purple;
+  }
+
+  .form-toggler p {
+    // color: $ff-red;
+    font-weight: 300!important;
+  }
+
   .item {
     text-align: start;
   }
@@ -83,11 +124,19 @@ ul.dropdown-menu {
 
 .people {
   background-color: $ff-yellow;
-  padding: 6px;
-  border-radius: 15px;
+  opacity: 0.8;
+  padding: 0;
+  border-radius: 50%;
   border: none;
-  color: $ff-purple;
-  margin-bottom: 0;
+  color: $ff-red;
+  font-weight: 600!important;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem!important;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+  i {
+    color: $ff-red;
+  }
 }
 
 .add-people-button {
@@ -95,28 +144,115 @@ ul.dropdown-menu {
   .pop-up {
     padding: 12px;
     border-radius: 24px;
-    background-color: $ff-yellow;
+    // background-color: $ff-yellow;
     margin: 16px 0;
+  }
+
+  .dropdown-toggle {
+    // inline-size: 80px;
+    overflow-wrap: break-word;
   }
 }
 
-// .person {
-//   align-items: center;
-//   margin: 20px auto;
-//   justify-content: space-between;
-//   width: 80%;
+.item-member-partial {
+  a {
+  text-decoration: none;
+  color: black;
+  }
 
-//   p {
-//     margin: 4px 6px;
-//   }
+  button.person {
+    width: calc(100% - 8px);
+
+  }
+}
+
+.item-member-partial .person {
+  justify-content: space-evenly;
+  border-radius: 20px;
+  margin: 4px;
+
+  .person-details {
+    align-items: center;
+  }
+
+  img.avatar {
+    aspect-ratio: 1;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  p {
+    margin-bottom: 0;
+    margin-right: 10px;
+    font-weight:300!important;
+  }
+}
+
+// .person.delete {
+//   padding: 16px;
 // }
 
+.add-people-button .form-toggler.item p {
+  text-align: left;
+}
+
+// <%# ------------------------------------------------------------- %>
+
 .removed-white {
-  background-color: rgb(199, 196, 196)!important;
+  background-color: rgb(255, 255, 255)!important;
 }
 
 .added-green {
   background-color: $ff-green!important;
   color: white!important;
-  font-weight: bold;
+  // font-weight :500!important;
+  opacity: 0.8;
+}
+
+// <%# ------------------------FOOTER---------------------------- %>
+
+.add-receipt {
+  text-align: center;
+
+  .d-flex {
+    justify-content: space-evenly;
+  }
+
+  a button {
+    opacity: 0.8;
+    padding: 8px;
+    border-radius: 15px;
+    border: none;
+    font-weight: 600!important;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem!important;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+    .add-another-receipt {
+      color:white;
+      background-color: $ff-green;
+    }
+    .continue-to-bill-summary {
+      color:white;
+      background-color: $ff-red;
+    }
+  }
+
+  a.add-another-receipt button {
+    color:$ff-yellow;
+    background-color: $ff-purple;
+    width: 60px;
+  }
+
+  a.continue-to-bill-summary button {
+    color:$ff-purple;
+    background-color: $ff-yellow;
+    width: 60px;
+    }
+
+    p {
+      color: $ff-purple;
+      font-weight: 500;
+    }
 }

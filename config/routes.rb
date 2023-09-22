@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
     # added on 21-09 @ 9.17pm
     resources :bills do
-      resources :items, only: %i[update]
+      resources :items, only: %i[update index]
     end
 
     resources :bills do

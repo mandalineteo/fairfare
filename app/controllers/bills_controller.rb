@@ -52,10 +52,20 @@ class BillsController < ApplicationController
 
   def create
     @split = Split.find(params[:split_id])
-    @bill = Bill.new(bill_params)
+    converted_params = bill_params
+    converted_params[:items_attributes].each do |item|
+      item[1][:price] = item[1][:price].to_f * 100
+    end
+    converted_params[:taxes] = converted_params[:taxes].to_f * 100
+    converted_params[:discount] = converted_params[:discount].to_f * 100
+    converted_params[:service_charge] = converted_params[:service_charge].to_f * 100
+    converted_params[:total_amount] = converted_params[:total_amount].to_f * 100
+    @bill = Bill.new(converted_params)
     @bill.split = @split
 
     if @bill.save
+      @bill.update_total_bill if @bill.total_amount.nil?
+
       redirect_to split_bill_items_path(@split, @bill)
     else
       render :new, status: :unprocessable_entity
@@ -92,6 +102,12 @@ class BillsController < ApplicationController
   def items
     @split = Split.find(params[:split_id])
     @bill = Bill.find(params[:bill_id])
+    @items = Item.where(bill_id: @bill.id)
+
+    @items.update(item_params)
+    @bill.update_total_bill
+
+    redirect_to split_bill_items_path(@split)
   end
 
   # def items

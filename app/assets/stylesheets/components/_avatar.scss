@@ -18,3 +18,31 @@
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   border: white 1px solid;
 }
+
+.member-info {
+  position: relative;
+  display: inline-block;
+  color: #E96479;
+}
+
+.member-info i::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  font-size: 12px;
+}
+
+.member-info i:hover::after {
+  opacity: 1;
+  visibility: visible;
+}

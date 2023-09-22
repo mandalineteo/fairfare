@@ -11,14 +11,12 @@ class PayersController < ApplicationController
 
     @member = Member.find(params[:member_id])
     @bill = Bill.find(params[:bill_id])
-
     @payer = Payer.new
     @payer.member = @member
     @payer.bill = @bill
 
     respond_to do |format|
       if @payer.save
-        puts "HOORAY"
         format.html { redirect_to split_bill_items_path}
         format.json { render 'payer_partial' }
       else

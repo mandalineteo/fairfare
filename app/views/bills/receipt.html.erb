@@ -1,5 +1,5 @@
 <div class="m-5">
-    <%= link_to "Back", split_add_members_path(@split), class:"btn btn-primary" %>
+    <%= link_to "Back", split_add_members_path(@split), class:"btn back-button" %>
 
   <div class="row justify-content-center">
     <div class="col-sm-8 my-3">
@@ -7,7 +7,7 @@
       Upload Receipt
     </h1>
     <div data-controller="preview-image-uploaded">
-        <%= image_tag "upload-image-preview.jpeg", class:"img-fluid", style: "height: 300px;", data: { preview_image_uploaded_target: "previewImage" }%>
+        <%= image_tag "payment-receipt-with-coin.jpg", class:"img-fluid", style: "height: 300px;", data: { preview_image_uploaded_target: "previewImage" }%>
         <div class="my-5">
           <%= form_with url: upload_split_bills_path(@split), method: :post do  |form| %>
 
@@ -16,7 +16,7 @@
               <%= form.file_field :image, data: { action: "change->preview-image-uploaded#change" } %>
             </div>
             <div class="my-3 text-center">
-              <%= submit_tag "Submit", class:"btn btn-primary" %>
+              <%= submit_tag "Submit", class:"btn create-button" %>
             </div>
           <% end %>
         </div>

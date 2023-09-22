@@ -1,6 +1,6 @@
 <div class="item d-flex align-items-center justify-content-between border-bottom">
   <%= ff.input :name %>
-  <%= ff.input :price, input_html: { min: '0' } %>
+  <%= ff.input :price, as: :float, input_html: { min: '0' } %>
   <%= ff.input :quantity, input_html: { min: '0' } %>
 
   <div data-action="click->bills-manual-input#removeInput">del</div>

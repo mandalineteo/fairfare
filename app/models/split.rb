@@ -21,7 +21,7 @@ class Split < ApplicationRecord
         # check if SS has this member
         if member_settlement
           # add to the total
-          member_settlement[:total] += settlement[:total]
+          member_settlement[:amount] += settlement[:amount]
         else
           # create a new item
           split_settlements << settlement
@@ -33,32 +33,10 @@ class Split < ApplicationRecord
   end
 
   def sort_split_stats
-    # bills.map(&:settlement)
-    payer_negative = []
-    payee_positive = []
-      # bill.uniq.members.each do |member|
-      # bills.each do |bill|
-      split_stats.each do |settlement|
-
-        if settlement[:total].positive?
-          to_pay = {
-            member: settlement[:member],
-            amount: settlement[:total]
-          }
-          payee_positive << to_pay
-        else
-          payer = {
-            member: settlement[:member],
-            amount: settlement[:total]
-          }
-          payer_negative << payer
-        end
-      end
-      return {
-        payers: payer_negative.sort_by { |payer| payer[:amount] },
-        payees: payee_positive.sort_by { |payee| payee[:amount] }.reverse
-      }
-      # end
+    {
+      payers: split_stats.select { |stat| stat[:amount].negative? }.sort_by { |payer| payer[:amount] },
+      payees: split_stats.select { |stat| stat[:amount].positive? }.sort_by { |payee| payee[:amount] }.reverse
+    }
   end
 
   def settlements
@@ -95,5 +73,6 @@ class Split < ApplicationRecord
       end
     end
     settlements
+
   end
 end

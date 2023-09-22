@@ -34,28 +34,6 @@
       </button>
       <ul class="dropdown-menu">
         <% @split_members.each do |member| %>
-          <div data-controller="payer-dropdown" data-payer-dropdown-has-payer-value="<%= member.payer?(@bill) %>" data-payer-dropdown-split-id-value="<%= @split.id %>" data-payer-dropdown-bill-id-value="<%= @bill.id %>">
-
-            <%# <%= render "form", payer: @payer %>
-
-            <%= simple_form_for([@split, @bill, @payer], html: { data: {
-              payer_dropdown_target: "form",
-              action: "submit->payer-dropdown#check"} }) do |f|  %>
-              <%= hidden_field_tag "member_id", member.id %>
-              <%= hidden_field_tag "remove", false %>
-              <div class="d-flex person">
-                <div class="d-flex">
-                  <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-                  <p><%= member.given_nickname(current_user) %></p>
-                </div>
-                <%= button_tag "", type:  "submit", class:"add", style:"background:none; padding:0px; border:none;", data: { payer_dropdown_target:"checkbox" } do %>
-                  <i class="fa-solid fa-square-check" ></i>
-                <% end %>
-              </div>
-            <% end %>
-
-          </div>
-
           <%= render 'bills/payer', member: member, bill: @bill, split: @split, payer: @payer %>
         <% end %>
       </ul>
@@ -90,17 +68,17 @@
     <hr>
   </div>
 
-  <%# <% raise %>
-
 <%# ------------------------------------------------------------- %>
 
   <div class="bill-items">
-    <div class="bill-headers row fw-bold">
+    <div class="bill-headers row" style="margin-bottom: 0.8rem">
       <h3 class="col-7 item">Item</h3>
       <h3 class="col-1">Qty</h3>
       <h3 class="col-2">Unit price</h3>
       <h3 class="col-2">People</h3>
     </div>
+
+  <%# <hr style="margin-top: 0.5rem"> %>
 
     <div class="add-people-button">
       <div class="item-row">
@@ -114,32 +92,61 @@
           </div>
           <%# </form> %>
           <div data-controller="add-people-button">
-            <div class="bill-summary-item-card row">
-              <div class="col-7">
-                <p class="item"><%= "#{item.name}" %></p>
-                <ul>
-                </ul>
+            <div class="bill-summary-item-card row d-flex">
+
+              <div class="col-10">
+                <%= simple_form_for :item,  data: { edit_bill_target: "itemDescriptions", action: "focusout->edit-bill#updateItem" } do |f| %>
+
+                  <div class="row form-toggler" data-action="click->edit-bill#toggleForm">
+
+                    <div class="col-8 form-toggler item">
+                      <p class="item-value"><%= "#{item.name}" %></p>
+                    </div>
+                    <div class="col-2 form-toggler">
+                      <p class="item-value"><%= "#{item.quantity}" %></p>
+                    </div>
+                    <div class="col-2 form-toggler">
+                      <p class="item-value"><%= sprintf("%.2f", item.price / 100.00) %></p>
+                    </div>
+
+                    <div class="col-7" >
+                      <%= f.input :name, input_html: { class: "item-input",  value: item.name }, label_html: { class: "item-input"}  %>
+                    </div>
+
+                    <div class="col-3">
+                      <%= f.input :quantity, input_html: { class: "item-input",  value: item.quantity},  label_html: { class: "item-input"}  %>
+                    </div>
+
+                    <div class="col-2" >
+                      <%= f.input :price, input_html: { class: "item-input",  value: item.price},  label_html: { class: "item-input"}%>
+                    </div>
+
+                  </div>
+                <% end %>
               </div>
 
-              <p class="col-1"><%= "#{item.quantity}" %></p>
-              <p class="col-2"><%= "#{item.price}" %></p>
-              <p class="col-2 people" data-action="click->add-people-button#appear">Add people</p>
+              <%# <p class="col-2 people" data-action="click->add-people-button#appear">add people</p> %>
+              <button class="col-2 people btn btn-secondary " type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" style="margin-right:0">
+                <i class="fa-solid fa-user-plus"></i>
+              </button>
+              <div class="payer dropdown d-flex">
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <% @split_members.each do |member| %>
+                    <%= render 'items/item_member', member: member, bill: @bill, split: @split, item: item, item_member: @item_member %>
+                  <% end %>
+                </ul>
+              </div>
+              <%# <p class="col-1"><%= "#{item.quantity}"</p> %>
+              <%# <p class="col-2"><%= sprintf("%.2f", item.price / 100.00)</p> %>
             </div>
 
-            <div class="pop-up d-none" data-add-people-button-target="popup">
-              <% @split_members.each do |member| %>
+            <%# <div class="pop-up d-none" data-add-people-button-target="popup"> %>
 
-                <%= render 'items/item_member', member: member, bill: @bill, split: @split, item: item, item_member: @item_member %>
-
-              <% end %>
-            </div>
 
           </div>
         <% end %>
       </div>
     </div>
-
-    <hr>
 
   </div>
 
@@ -148,7 +155,7 @@
 
   <%# form for taxes & discount %>
   <div class="bill-footer row" data-action="click->edit-bill#closeTaxForm">
-    <%= simple_form_for :bill,
+    <%= simple_form_for @bill,
       html: {
         data: {
           edit_bill_target: "taxDescriptions",
@@ -186,14 +193,21 @@
           <%= f.hidden_field :authenticity_token, value: form_authenticity_token %>
         </div>
       </div>
+
+      <%# <p>Discount: SGD $<%= sprintf("%.2f", @bill.discount / 100.00)</p> %>
+      <%# <p>Tax: SGD $<%= sprintf("%.2f", @bill.taxes / 100.00)</p>  %>
+      <%# <p>Service Charge: SGD $<%= sprintf("%.2f", @bill.service_charge / 100.00) </p> %>
+      <%# <p>Total Amount: SGD $<%= sprintf("%.2f", @bill.total_amount / 100.00)</p> %>
     </div>
 
     <% end %>
 
     <div class="add-receipt col-6 justify-content-center">
-      <p>Add another receipt?</p>
-      <%= link_to "<button>Yes</button>".html_safe, select_split_bills_path %>
-      <%= link_to "<button>No</button>".html_safe, split_path(@split) %>
+      <p style="margin-bottom: 20px">Add another receipt?</p>
+      <div class="d-flex">
+        <%= link_to "<button>Yes</button>".html_safe, select_split_bills_path, class:"add-another-receipt" %>
+        <%= link_to "<button>No</button>".html_safe, split_path(@split), class:"continue-to-bill-summary" %>
+      </div>
     </div>
   </div>
 </div>
