@@ -28,6 +28,12 @@
         <%= "#{settlement[:payee].given_nickname(@split.user)} (#{settlement[:payee].phone_number}) owes #{settlement[:payer].given_nickname(@split.user)} (#{settlement[:payer].phone_number})" %>
         <%= "SGD#{format('%.2f', settlement[:amount]/100.00)}" %>
       </p>
+        <div class="d-flex justify-content-end mt-1 mb-0 me-4">
+          <% url_encoded_msg = CGI.escape("Hello #{settlement[:payee].given_nickname(@split.user)}. Please pay #{settlement[:payer].given_nickname(@split.user)} SGD#{format('%.2f', settlement[:amount]/100.00)}. O$P$ Paynow at #{settlement[:payer].phone_number}. ") %>
+          <a href="https://wa.me/<%= settlement[:payee].phone_number %>?text=<%= url_encoded_msg %>" class="whatsapp-button">
+            <i class="fa-brands fa-whatsapp"></i>Whatsapp
+          </a>
+        </div>
     </div>
   <% end %>
   <%# @split.get_split_stats.each do |stat| %>

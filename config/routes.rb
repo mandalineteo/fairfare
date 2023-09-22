@@ -23,7 +23,6 @@ Rails.application.routes.draw do
 
     resources :bills do
       resources :items, only: %i[update index]
-
       collection do
         get :receipt
         post :upload
@@ -40,9 +39,7 @@ Rails.application.routes.draw do
       resources :payers, only: %i[new create destroy]
     end
 
-
     resources :items, only: %i[destroy]
-
   end
 
   # resources :payers, only: %i[destroy]

@@ -7,11 +7,11 @@
       </a>
 
       <%= link_to destroy_user_session_path, data: {turbo_method: :delete} do %>
-        <i class="fa-solid fa-power-off"></i>
+        <i class="fa-solid fa-power-off" style="color:#E96479"></i>
       <% end %>
 
       <%= link_to new_split_path do %>
-        <i class="fa-solid fa-rotate-right"></i>
+        <i class="fa-solid fa-rotate-right" style="color:#E96479"></i>
       <% end %>
     </div>
   </nav>
@@ -32,58 +32,100 @@
         <div class="card-body">
           <h5 class="card-title">Owed: </h5>
 
-          <p class="card-text">SGD $ <%= format('%.2f',current_user.owed_summary(current_user)/100.00) %></p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+
+
+
+
+<div class="welcome-message" style="text-align: center";>
+  <h1>Hello <%= current_user.username %></h1>
+</div>
+
+<div class="container mt-5" style="text-align: center";>
+  <div class="row">
+  <div class="col-sm-6 mb-3 mb-sm-0">
+    <div class="card splits-summary-card">
+      <div class="card-body">
+        <h5 class="card-title">Owed: </h5>
+
+        <p class="card-text">SGD $ <%= format('%.2f',current_user.owed_summary(current_user)/100.00) %></p>
+        <%= link_to "View Splits", splits_path, class:"create-button" %>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card splits-summary-card">
+      <div class="card-body">
+        <h5 class="card-title">Owe: </h5>
+      <p class="card-text">SGD $<%= format('%.2f',current_user.owe_summary(current_user)/100.00) %></p>
+        <%= link_to "View Splits", splits_path, class:"create-button" %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container mt-5">
+  <h4>Transactions</h4>
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+
+            <%= (Split.all.select { |split| split.bills.count.positive?}).last.name %>
+
+        </button>
+      </h2>
+      <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <% (Split.all.select { |split| split.bills.count.positive?}).last.bills.each do |bill| %>
+            <div>
+              <i class="fa-solid fa-receipt"></i>
+              <%= bill.merchant %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Owe: </h5>
-        <p class="card-text">SGD $<%= format('%.2f',current_user.owe_summary(current_user)/100.00) %></p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+          <%= (Split.all.select { |split| split.bills.count.positive?})[-2].name %>
+        </button>
+      </h2>
+      <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <% (Split.all.select { |split| split.bills.count.positive?})[-2].bills.each do |bill| %>
+            <div>
+              <i class="fa-solid fa-receipt"></i>
+              <%= bill.merchant %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+
+          <%= (Split.all.select { |split| split.bills.count.positive?})[-3].name %>
+        </button>
+      </h2>
+      <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <% (Split.all.select { |split| split.bills.count.positive?})[-3].bills.each do |bill| %>
+            <div>
+              <i class="fa-solid fa-receipt"></i>
+              <%= bill.merchant %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
+  <div class="my-3 mx-4 text-end">
+    <%= link_to "See More", splits_path, class:"text-decoration-none pink-color-text" %>
   </div>
-
-  <div class="container mt-5">
-    <h4>Transactions</h4>
-    <div class="accordion accordion-flush" id="accordionFlushExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-            Accordion Item #1
-          </button>
-        </h2>
-        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-            Accordion Item #2
-          </button>
-        </h2>
-        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-            Accordion Item #3
-          </button>
-        </h2>
-        <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-        </div>
-      </div>
-    </div>
-
-    <a class="btn d-flex align-items-end flex-column" href="#" role="button">See More</a>
+  <div class="my-5">
   </div>
 </div>
