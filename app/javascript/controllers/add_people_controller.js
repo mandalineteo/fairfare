@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="add-people"
 export default class extends Controller {
-  static targets = ["checkbox", "form"]
+  static targets = ["checkbox", "form", "everyone"]
   static values = {
     splitId: String,
     billId: String,
@@ -55,5 +55,11 @@ export default class extends Controller {
       .then(data => {
         this.element.outerHTML = data.item_member_html
       })
+  }
+
+  everyone(event) {
+    event.preventDefault()
+
+    this.everyoneTarget
   }
 }
