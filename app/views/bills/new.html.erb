@@ -8,6 +8,7 @@
   <div class="container text-left manual-inputs-header" >
     <%= simple_form_for [@split, @bill] do |f| %>
       <%= f.input :merchant %>
+      <%= f.input :date %>
 
       <div class="items" data-controller="bills-manual-input">
         <%= f.simple_fields_for(:items) do |ff| %>
@@ -26,9 +27,10 @@
 
       <div class="all-taxes" data-bills-manual-input-target="taxInputElement">
 
-          <%= f.input :taxes, input_html: { min: '0' } %>
-          <%= f.input :service_charge, input_html: { min: '0' } %>
-          <%= f.input :discount, input_html: { min: '0' } %>
+          <%= f.input :taxes, as: :float, input_html: { min: '0.00' } %>
+          <%= f.input :service_charge, as: :float, input_html: { min: '0.00' } %>
+          <%= f.input :discount, as: :float, input_html: { min: '0.00' } %>
+          <%= f.input :total_amount, as: :float, input_html: { min: '0.00' } %>
 
           <%= f.submit  %>
 

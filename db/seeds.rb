@@ -26,8 +26,9 @@ Item.destroy_all
 Bill.destroy_all
 SplitMember.destroy_all
 Split.destroy_all
-Member.destroy_all
 User.destroy_all
+Member.destroy_all
+
 
 
 if seed_members
