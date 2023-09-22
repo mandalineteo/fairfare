@@ -80,21 +80,11 @@ class BillsController < ApplicationController
 
   def update
     @bill = Bill.find(params[:id])
-
-    # @items = Item.where(bill: @bill)
-
-    # @items.each do |item|
-    #   item.attributes = bill_params
-    #   item.save
-    # end
-
     @bill.update(bill_params)
-    # temp comment out line 79 on 21-09 @8.58pm
-    # redirect_to split_bill_items_path(@split)
 
     respond_to do |format|
       format.html { redirect_to split_bill_items_path(@split) }
-      format.text { render plain: 'testtt' }
+      format.text { render(partial: 'bills/breakdown', formats: :html, locals: { bill: @bill }) }
     end
   end
 
@@ -109,20 +99,6 @@ class BillsController < ApplicationController
 
     redirect_to split_bill_items_path(@split)
   end
-
-  # def items
-  #   @split = Split.find(params[:split_id])
-  #   @bill = Bill.find(params[:bill_id])
-  #   item.bill = @bill
-  # end
-
-
-  # def destroy
-  #   @item = Item.find(params[:id])
-  #   @bill = @item.bill
-  #   @item.destroy
-  #   # redirect_to edit_bill_path(@bill)
-  # end
 
   private
 
