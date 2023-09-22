@@ -40,7 +40,7 @@
 
 
           <div data-controller="add-people-button">
-            <div class="bill-summary-item-card row">
+            <div class="bill-summary-item-card row d-flex">
 
               <div class="col-10">
                 <%= simple_form_for :item,  data: { edit_bill_target: "itemDescriptions", action: "focusout->edit-bill#updateItem" } do |f| %>
@@ -73,16 +73,21 @@
                 <% end %>
               </div>
 
-              <p class="col-2 people" data-action="click->add-people-button#appear">add people</p>
+              <%# <p class="col-2 people" data-action="click->add-people-button#appear">add people</p> %>
+              <button class="col-2 people btn btn-secondary " type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" style="margin-right:0">
+                <i class="fa-solid fa-user-plus"></i>
+              </button>
+              <div class="payer dropdown d-flex">
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <% @split_members.each do |member| %>
+                    <%= render 'items/item_member', member: member, bill: @bill, split: @split, item: item, item_member: @item_member %>
+                  <% end %>
+                </ul>
+              </div>
             </div>
 
-            <div class="pop-up d-none" data-add-people-button-target="popup">
-              <% @split_members.each do |member| %>
+            <%# <div class="pop-up d-none" data-add-people-button-target="popup"> %>
 
-                <%= render 'items/item_member', member: member, bill: @bill, split: @split, item: item, item_member: @item_member %>
-
-              <% end %>
-            </div>
 
           </div>
         <% end %>
