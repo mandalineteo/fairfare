@@ -31,9 +31,15 @@ class User < ApplicationRecord
     "#{first_name.capitalize} #{last_name.capitalize}"
   end
 
-  def owed_summary
-    splits.each do |split|
-      split.settlements
+  def owed_summary(current_user)
+    amount = 0
+    current_user.member.splits.each do |split|
+      split.settlements.each do |settlement|
+        if settlement[:payer] == current_user.member
+          amount += settlement[:amount]
+        end
+      end
     end
+    amount
   end
 end
