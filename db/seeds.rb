@@ -29,8 +29,6 @@ Split.destroy_all
 User.destroy_all
 Member.destroy_all
 
-
-
 if seed_members
   puts "\n\n===== Creating members =====\n"
 
