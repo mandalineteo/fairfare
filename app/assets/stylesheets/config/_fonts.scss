@@ -1,9 +1,22 @@
 // Import Google fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&family=Cormorant:wght@300&family=Handjet&family=Inclusive+Sans&family=Monofett&family=Nunito:wght@200&family=Plus+Jakarta+Sans:wght@300;500;600;700&family=Press+Start+2P&display=swap');
 
 // Define fonts for body and headers
-$body-font: "Work Sans", "Helvetica", "sans-serif";
-$headers-font: "Nunito", "Helvetica", "sans-serif";
+$body-font: "Plus Jakarta Sans", "Helvetica", "sans-serif";
+// $body-font-weight: 300;
+// $body-font-size: 1.5rem;
+$headers-font: "Plus Jakarta Sans", "Helvetica", "sans-serif";
+
+// font-family: 'Inclusive Sans', sans-serif;
+// font-family: 'Monofett', monospace;
+// font-family: 'Nunito', sans-serif;
+// font-family: 'Plus Jakarta Sans', sans-serif;
+// font-family: 'Press Start 2P', cursive;
+
+
+// $body-font: "Work Sans", "Helvetica", "sans-serif";
+// $headers-font: "Nunito", "Helvetica", "sans-serif";
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {
@@ -13,4 +26,8 @@ $headers-font: "Nunito", "Helvetica", "sans-serif";
 //        font-url('FontFile.woff') format('woff'),
 //        font-url('FontFile.ttf') format('truetype')
 // }
-// $my-font: "Font Name";
+// // $my-font: "Font Name";
+
+.ff-bold {
+  font-weight: 800;
+}
