@@ -64,6 +64,8 @@ class BillsController < ApplicationController
     @bill.split = @split
 
     if @bill.save
+      @bill.update_total_bill if @bill.total_amount.nil?
+
       redirect_to split_bill_items_path(@split, @bill)
     else
       render :new, status: :unprocessable_entity
@@ -82,6 +84,7 @@ class BillsController < ApplicationController
     @items = Item.all.where(bill_id: @bill.id)
 
     @items.update(item_params)
+    @bill.update_total_bill
 
     redirect_to split_bill_items_path(@split)
   end
