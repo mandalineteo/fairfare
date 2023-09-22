@@ -8,17 +8,12 @@ export default class extends Controller {
     "splitText",
     "merchantAndDate",
     "taxDescriptions",
-    "splitHeader"
+    "splitHeader",
+    "breakdown"
   ]
 
-  // static values = {
-  //   billId: String,
-  //   splitId: String
-  // data-edit-bill-split-id-value="<%=@split.id%>" data-edit-bill-bill-id-value="<%=@bill.id%>"
-  // }
-
   connect() {
-
+    // console.log(this.itemDescriptionsTarget);
   }
 
   // ====== item ======
@@ -42,21 +37,20 @@ export default class extends Controller {
   }
 
   updateItem(event) {
-    event.preventDefault()
-    const url = this.itemDescriptionsTargets.action
-    fetch(url, {
+    // console.log(event.target.closest('form'));
+    const form = event.target.closest('form')
+
+    fetch(form.action, {
       method: "PATCH",
       headers: { "Accept": "text/plain"},
-      body: new FormData(this.itemDescriptionsTargets)
+      body: new FormData(form)
       })
 
       .then(response => response.text())
       .then((data) => {
-        // console.log(data);
-        this.itemDescriptionsTargets.innerHTML = data
+        console.log(data);
+        // this.itemDescriptionsTargets.innerHTML = data
       })
-    // console.log("fire ajax for ")
-    // console.log(e.target.form)
   }
 
   // ======== split name ============
@@ -89,29 +83,9 @@ export default class extends Controller {
         this.closeSplitForm()
 
       })
-    // console.log("fire ajax for split name ")
-    // console.log(event.target.form)
   }
 
   // ============ merchant's name & date =============
-
-  toggleMerchantForm(event) {
-
-    this.merchantAndDateTargets.forEach((target)=>{
-      target.classList.remove("merchant-and-date");
-    })
-    // this.merchantAndDateTargets.classList.remove("merchant-and-date")
-
-    const merchantForm = event.currentTarget.parentElement;
-    merchantForm.classList.add("merchant-and-date");
-  }
-
-  closeMerchantForm(event) {
-    if (event.target.classList.contains("merchant-date-value") ||event.target.classList.contains("merchant-toggler") || event.target.tagName.toLowerCase() === "input") {
-      return;
-    }
-    this.merchantAndDateTarget.classList.remove("merchant-and-date");
-  }
 
   updateMerchantValue(event) {
     event.preventDefault()
@@ -125,49 +99,30 @@ export default class extends Controller {
       .then(response => response.text())
       .then((data) => {
         console.log(data);
-        // this.splitTextTarget.outerHTML = data
       })
-    console.log("fire ajax for merchant's name ")
-    console.log(e.target.form)
   }
 
 
   // ======== taxes ==========
 
-  toggleTaxesForm(event) {
-    this.taxDescriptionsTarget.classList.remove("merchant-and-date")
+  updateTax(event) {
+    const form = event.target.closest('form')
+    const targetInput = event.target.dataset.billTarget
 
-    const merchantForm = event.currentTarget.parentElement;
-    merchantForm.classList.add("tax-and-discount");
-    // console.log("taxes form");
-  }
+    const centValue = parseFloat(event.target.value) * 100
+    const input = document.querySelector(`input[name="bill[${targetInput}]"]`)
+    input.value = centValue
 
-  closeTaxForm(event) {
-    // console.log("close split form")
-
-    if (event.target.classList.contains("tax-value") ||event.target.classList.contains("split-toggler") || event.target.tagName.toLowerCase() === "input") {
-      return;
-    }
-    this.splitTextTarget.classList.remove("split-input-header");
-  }
-
-  updateTaxAndDiscount(event) {
-    event.preventDefault()
-    const url = this.taxDescriptionsTarget.action
-    // console.log(this.taxDescriptionsTarget.action)
-    fetch(url, {
+    fetch(form.action, {
       method: "PATCH",
       headers: { "Accept": "text/plain"},
-      body: new FormData(this.taxDescriptionsTarget)
+      body: new FormData(form)
       })
 
       .then(response => response.text())
       .then((data) => {
-        console.log(data);
-        // this.taxDescriptionsTarget.outerHTML = data
+        this.breakdownTarget.outerHTML = data
       })
-    // console.log("fire ajax for tax name ")
-    // console.log(e.target.form)
   }
 
 }
