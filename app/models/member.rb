@@ -51,21 +51,21 @@ class Member < ApplicationRecord
   # need to separate out a method that returns payer id. same for item_member.
   # change data value for respective ids in index erb
 
-  # def item_member?(item)
-  #   item_member = ItemMember.find_by(
-  #     member: self,
-  #     item:,
-  #   )
-  #   return item_member ? true : false
-  # end
+  def item_member?(item)
+    item_member = ItemMember.find_by(
+      member: self,
+      item:,
+    )
+    return item_member ? true : false
+  end
 
-  # def item_member_id(item)
-  #   item_member = ItemMember.find_by(
-  #     member: self,
-  #     item:,
-  #   )
-  #   return item_member.id
-  # end
+  def item_member_id(item)
+    item_member = ItemMember.find_by(
+      member: self,
+      item:,
+    )
+    return item_member.id
+  end
 
   # def consumed_items_amount
   #   total_amount = 0
