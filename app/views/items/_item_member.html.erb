@@ -29,7 +29,7 @@
 
   <% else %>
 
-    <%= simple_form_for([@split, @bill, item, @item_member], html: { data: {
+    <%= simple_form_for([split, bill, item, item_member], html: { data: {
       add_people_target: "form",
       action: "submit->add-people#toggle"} }) do |f| %>
 

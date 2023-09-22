@@ -45,10 +45,6 @@ export default class extends Controller {
         Accept: 'application/json'
       }
     })
-      .then(response => response.json())
-      .then(data => {
-        this.element.outerHTML = data.item_member_html
-      })
   }
 
   everyone(event) {
