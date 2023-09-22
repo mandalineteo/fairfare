@@ -1,58 +1,64 @@
-<div class="container-fluid bill-index" data-controller="edit-bill" data-action="click->edit-bill#closeForm"  >
-  <div class="bill-description">
-    <%# <%= link_to collaborate_path %>
-    <%# <%= link_to edit_bill_path %>
+<div class="page-setup">
 
-    <h1
-      data-action="click->edit-bill#toggleSplitForm"
-      data-edit-bill-target="splitHeader"
-      class="fw-bold split-name-value">
-      <%= "#{@split.name}" %>
-    </h1>
+  <div class="container-fluid bill-index" data-billroom-subscription-bill-id-value=<%= @bill.id %> data-controller="edit-bill billroom-subscription" data-action="click->edit-bill#closeForm">
+    <div class="bill-description">
+      <%
+      host_name = Rails.env == "development" ? "localhost:3000" : request.host
+      encoded_url = host_name + "/splits/#{@split.id}"
+      encoded_message = "#{current_user.full_name} is inviting you to join their split at #{encoded_url} "
+      %>
+      <a class="collaborate standard-button yellow-pink-button" href="https://wa.me/?text=<%= encoded_message %>">collaborate</a>
 
-    <%= simple_form_for @split,
-      html: {
-        data: {
-          edit_bill_target: "splitText",
-          action: "focusout->edit-bill#updateSplitValue"
-        },
-        class: 'd-none'
-      } do |f| %>
-        <%= f.input :name, label: false %>
-    <% end %>
+      <h1
+        data-action="click->edit-bill#toggleSplitForm"
+        data-edit-bill-target="splitHeader"
+        class="fw-bold split-name-value">
+        <%= "#{@split.name}" %>
+      </h1>
 
-    <div class="payer dropdown d-flex">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-        Select Person(s)
-      </button>
-      <ul class="dropdown-menu">
-        <% @split_members.each do |member| %>
-          <%= render 'bills/payer', member: member, bill: @bill, split: @split, payer: @payer %>
-        <% end %>
-      </ul>
-      <h2>paid this bill</h2>
-    </div>
+      <%= simple_form_for @split,
+        html: {
+          data: {
+            edit_bill_target: "splitText",
+            action: "focusout->edit-bill#updateSplitValue"
+          },
+          class: 'd-none'
+        } do |f| %>
+          <%= f.input :name, label: false %>
+      <% end %>
 
-    <%= simple_form_for @bill,
-      html: { data: { edit_bill_target: "merchantAndDate" } } do |f| %>
+      <div class="payer dropdown d-flex">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+          Select Person(s)
+        </button>
+        <ul class="dropdown-menu">
+          <% @split_members.each do |member| %>
+            <%= render 'bills/payer', member: member, bill: @bill, split: @split, payer: @payer %>
+          <% end %>
+        </ul>
+        <h2>paid this bill</h2>
+      </div>
 
-      <%= f.input :merchant,
+      <%= simple_form_for @bill,
+        html: { data: { edit_bill_target: "merchantAndDate" } } do |f| %>
+
+        <%= f.input :merchant,
+              label: false,
+              input_html: {
+                placeholder: 'Merchant Name',
+                data: { action: 'blur->edit-bill#updateMerchantValue' }
+              }
+              %>
+
+        <%= f.input :date,
             label: false,
             input_html: {
-              placeholder: 'Merchant Name',
-              data: { action: 'blur->edit-bill#updateMerchantValue' }
-            }
-            %>
+              data: {
+                action: 'blur->edit-bill#updateMerchantValue'
+              }
+            } %>
 
-      <%= f.input :date,
-          label: false,
-          input_html: {
-            data: {
-              action: 'blur->edit-bill#updateMerchantValue'
-            }
-          } %>
-
-    <% end %>
+      <% end %>
   </div>
 
   <hr>
