@@ -12,16 +12,25 @@ class ItemMembersController < ApplicationController
     @item_member.member_id = params[:member_id]
     @item_member.item_id = params[:item_id]
 
-    respond_to do |format|
-      if @item_member.save
-        format.html { redirect to split_bill_items_path }
-        format.json { render 'item_member_partial' }
-      else
-        format.html { render "items/index", status: :unprocessible_entity }
-        format.json { render json: { status: 402 } }
-      end
-
+    if @item_member.save
+      BillRoomChannel.broadcast_to(
+        @item_member.item.bill,
+        "HELLO"
+      )
     end
+
+    head :ok
+
+    # respond_to do |format|
+    #   if @item_member.save
+    #     format.html { redirect to split_bill_items_path }
+    #     format.json { render 'item_member_partial' }
+    #   else
+    #     format.html { render "items/index", status: :unprocessible_entity }
+    #     format.json { render json: { status: 402 } }
+    #   end
+
+    # end
   end
 
   def destroy

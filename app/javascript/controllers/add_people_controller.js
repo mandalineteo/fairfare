@@ -23,7 +23,7 @@ export default class extends Controller {
 
   toggle(event) {
     event.preventDefault()
-    // console.log("AJAX")
+    console.log("AJAX")
 
     if (!this.hasItemMemberValue) {
 
