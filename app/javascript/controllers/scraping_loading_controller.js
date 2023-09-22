@@ -17,7 +17,7 @@ export default class extends Controller {
     ];
     this.speed = 100;
 
-    setInterval(this.typeWriter.bind(this), this.speed);
+    this.interval = setInterval(this.typeWriter.bind(this), this.speed);
   }
 
   typeWriter() {
@@ -31,7 +31,8 @@ export default class extends Controller {
             this.j = 0;
         }
     } else {
-        location.reload();
+        clearInterval(this.interval);
+        location.reload()
     }
   }
 }
