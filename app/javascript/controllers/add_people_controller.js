@@ -32,12 +32,6 @@ export default class extends Controller {
         headers: { "Accept": "application/json" },
         body: new FormData(this.formTarget)
       })
-        .then(response => {
-          return response.json()
-        })
-        .then((data) => {
-          console.log("data", data)
-        })
     }
   }
 
