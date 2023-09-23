@@ -10,7 +10,6 @@ require 'faker'
 require 'open-uri'
 require 'date'
 require 'securerandom'
-require 'pry-byebug'
 
 seed_members = true
 seed_users = true
