@@ -11,9 +11,9 @@ export default class extends Controller {
         "Footing the bill...",
         "Scanning the receipt...",
         "Checking item by item...",
-        "Whoa that was expensive...",
-        "Inflation is painful isn't it...",
-        "Time to eat grass for the rest of the month..."
+        "Loading...",
+        "Still Loading...",
+        "Almost done..."
     ];
     this.speed = 100;
 
