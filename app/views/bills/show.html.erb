@@ -1,33 +1,37 @@
+<div class="page-setup">
 
-<div class="mt-5">
-  <%= link_to "Split", split_path(@bill.split), class: "back-button m-3 text-decoration-none" %>
-  <%= link_to "Edit", split_bill_items_path(@bill.split, @bill), class:"back-button text-decoration-none" %>
-</div>
-<div class="container">
-  <h1 class="mt-5"><%= @bill.merchant %></h1>
-  <h2><%= "SGD #{format('%.2f', @bill.total_amount/100.00)}" %></h2>
-  <% @bill.payers.each do |payer| %>
-    <div>
-      <h3>Payer: <%= payer.member.given_nickname(@bill.split.user) %></h3>
-    </div>
-  <% end %>
-  <div>
-    <% @bill.items.each do |item| %>
-      <div class="splits-summary-card my-3">
-        <%= item.name %>
-        <%= "X #{item.quantity}" %>
-        <%= "SGD #{item.price/100.00}" %>
-        <% item.members.each do |member| %>
-          <div class="d-flex mt-3">
-            <i class="fa-solid fa-user fs-5"></i>
-            <p class="mx-2 mt-0"><%= member.given_nickname(@bill.split.user) %></p>
-            <p><%= "SGD #{format('%.2f', (item.price/100.00)/item.members.count)}" %></p>
-
-          </div>
-        <% end %>
+  <div class="mt-5">
+    <%= link_to "Back", split_path(@bill.split), class: "back-button m-3" %>
+    <%= link_to "Edit", split_bill_items_path(@bill.split, @bill), class:"back-button" %>
+  </div>
+  <div class="container">
+    <h1 class="mt-5"><%= @bill.merchant %></h1>
+    <h2><%= "SGD #{format('%.2f', @bill.total_amount/100.00)}" %></h2>
+    <% @bill.payers.each do |payer| %>
+      <div>
+        <h3>Payer: <%= payer.member.given_nickname(@bill.split.user) %></h3>
       </div>
-
     <% end %>
+    <div>
+      <% @bill.items.each do |item| %>
+        <div class="splits-summary-card my-3">
+          <%= item.name %>
+          <%= "X #{item.quantity}" %>
+          <%= "SGD #{item.price/100.00}" %>
+          <% item.members.each do |member| %>
+            <div class="d-flex mt-3">
+              <i class="fa-solid fa-user fs-5"></i>
+              <p class="mx-2 mt-0"><%= member.given_nickname(@bill.split.user) %></p>
+              <p><%= "SGD #{format('%.2f', (item.price/100.00)/item.members.count)}" %></p>
+
+            </div>
+          <% end %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+  <div class="my-5">
   </div>
   <div class="splits-summary-card my-3">
     <%= "Taxes: SGD #{format('%.2f', @bill.taxes/100.00)}" %>
