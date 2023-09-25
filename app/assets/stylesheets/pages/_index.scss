@@ -1,7 +1,15 @@
 // Import page-specific CSS files here.
 @import "home";
-@import "items/index";
 @import "dashboard";
+
+@import "items/index";
+
 @import "splits/show";
+@import "splits/new";
+
 @import "bills/show";
+@import "bills/new";
+@import "bills/select_upload";
+
+
 @import "contacts/index";
