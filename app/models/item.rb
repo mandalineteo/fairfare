@@ -1,4 +1,6 @@
 class Item < ApplicationRecord
+  include CurrencyConversion
+
   belongs_to :bill
 
   has_many :item_members, dependent: :destroy
@@ -8,4 +10,6 @@ class Item < ApplicationRecord
   validates :quantity, presence: true
   validates :price, presence: true
   has_many :members, through: :item_members
+
+  currency_attr :price
 end

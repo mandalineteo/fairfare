@@ -1,0 +1,41 @@
+<%
+  split = Split.find(115)
+  bill = Bill.find(212)
+%>
+
+Total Amount: <%= bill.total_amount %> <br>
+Payer: <%= bill.payers.first.member.given_nickname(split.user) %>
+
+<% bill.all_split_members.each do |member| %>
+  <div>
+    <%= member.given_nickname(split.user) + "(#{member.id})" %>: <br>
+    Total Consumed (for bill) <%= member.total_consumed(bill) %><br>
+  </div>
+<% end %>
+
+<hr>
+
+<%
+    items = Item.where(bill:).joins(:item_members).where(item_members: { member: Member.find(1121) })
+    items_without_members = Item.where(bill:).left_outer_joins(:item_members).where(item_members: { id: nil })
+%>
+
+<%=
+  items.to_json
+%>
+
+<hr>
+
+<% items_without_members.each do |item| %>
+    <%= item.id %> <br>
+      Price <%= item.price.to_f %> <br>
+      Qty <%= item.quantity %> <br>
+      Count <%= item.bill.members.uniq.count %> <br>
+
+      <%# share = (price * quantity) / (item.members.count.positive? ? item.members.count : item.bill.members.uniq.count) %>
+
+      <%# total += share %>
+ <% end %>
+
+<div style="height: 20vh">
+</div>

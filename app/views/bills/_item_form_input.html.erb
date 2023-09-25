@@ -1,9 +1,10 @@
 <div class="item d-flex align-items-center justify-content-between border-bottom">
+  <%= ff.input :id, as: :hidden %>
   <%= ff.input :name %>
-  <%= ff.input :price, as: :float, input_html: { min: '0' } %>
+  <%= ff.input :price_in_dollars, as: :float, input_html: { min: '0' } %>
   <%= ff.input :quantity, input_html: { min: '0' } %>
 
-  <div data-action="click->bills-manual-input#removeInput">del</div>
+  <div data-action="click->bills-manual-input#removeInput"><i class="fa fa-times-circle"></i></div>
 <%# this link doesn't show on the browswer %>
   <%# <% if ff.object.id %>
     <%#= link_to "Remove Item", new_split_bill_item_path(ff.object), data: { "turbo-method": :delete } %>
