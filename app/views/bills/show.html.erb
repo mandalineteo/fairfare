@@ -39,6 +39,9 @@
   <div class="row justify-content-center">
     <div class="splits-summary-card my-3 col-11">
       <%= "Taxes: SGD #{cents_to_dollars(@bill.taxes)}" %>
+      <br>
+      <br>
+      <%= "Service Charge: SGD #{cents_to_dollars(@bill.service_charge)}" %>
     </div>
   </div>
 

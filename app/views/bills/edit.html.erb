@@ -27,10 +27,10 @@
 
         <div class="all-taxes" data-bills-manual-input-target="taxInputElement">
 
-            <%= f.input :taxes, as: :float, input_html: { min: '0.00' } %>
-            <%= f.input :service_charge, as: :float, input_html: { min: '0.00' } %>
-            <%= f.input :discount, as: :float, input_html: { min: '0.00' } %>
-            <%= f.input :total_amount, as: :float, input_html: { min: '0.00' } %>
+            <%= f.input :taxes_in_dollars, as: :float, input_html: { min: '0.00' } %>
+            <%= f.input :service_charge_in_dollars, as: :float, input_html: { min: '0.00' } %>
+            <%= f.input :discount_in_dollars, as: :float, input_html: { min: '0.00' } %>
+            <%= f.input :total_amount_in_dollars, as: :float, input_html: { min: '0.00' } %>
 
             <%= f.submit  %>
 
