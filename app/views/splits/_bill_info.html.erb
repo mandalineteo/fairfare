@@ -10,7 +10,7 @@
       <div class="my-4 splits-summary-card">
         <h4><%= "#{bill.merchant}" %></h4>
         <h5><%= "Date: #{bill.date}" %></h5>
-        <h5><%= "Total amount: SGD#{format('%.2f', bill.total_amount/100.00)}" %></h5>
+        <h5><%= "Total amount: SGD#{cents_to_dollars(bill.total_amount)}" %></h5>
         <% bill.split.members.each do |member| %>
           <div class="member-info">
             <i class="fa-solid fa-circle-user fs-2" title="<%= member.given_nickname(@split.user) %>" ></i>

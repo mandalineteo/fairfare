@@ -1,6 +1,9 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home]
 
+  def test
+  end
+
   def index
     @splits = Split.all
   end

@@ -117,13 +117,14 @@ class Member < ApplicationRecord
     total = 0
     # get all the items i am a part of
     # items = bill.items
-    items = Item.where(bill: bill).joins(:item_members).where(item_members: { member: self })
+    items = Item.where(bill:).joins(:item_members).where(item_members: { member: self })
+    items_without_members = Item.where(bill:).left_outer_joins(:item_members).where(item_members: { id: nil })
 
-    items.each do |item|
+    (items + items_without_members).each do |item|
       price = item.price.to_f
       quantity = item.quantity
       # total_price = price * quantity
-      share = (price * quantity) / (item.members.count.positive? ? item.members.count : item.bill.members.uniq.count)
+      share = (price * quantity) / (item.members.count.positive? ? item.members.count : item.bill.all_split_members.uniq.count)
 
       total += share
     end
