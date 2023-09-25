@@ -1,0 +1,28 @@
+.contacts-index {
+
+  .form-summary-card-less-padding {
+    background: $ff-yellow-light!important;
+    border:none!important;
+    padding: 16px;
+  }
+  .contact {
+    margin: 8px 0;
+    align-items: center;
+  }
+
+  .green-button {
+    margin: 4px;
+  }
+
+  h1 {
+    color: $ff-red;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  .fa-circle-user {
+    color: $ff-red;
+  }
+}

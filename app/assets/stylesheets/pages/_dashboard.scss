@@ -11,25 +11,33 @@
     }
   }
 
-  .log-out {
+  h3, .log-out {
     text-decoration: none;
+    // color: $ff-red!important;
     color: $ff-purple;
     text-align: right;
-    margin: 8px 8px 0 0;
+    font-size: 1rem!important;
     // position:relative;
   }
 
   .fa-bell {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: $ff-purple;
+    // color: $ff-red!important;
+
   }
 
   h1 {
     margin: 1.5rem auto;
+    color: $ff-purple!important;
+    // color: $ff-red!important;
   }
 
+
   h5 {
-    color: $ff-yellow;
+    // color: $ff-yellow-light;
+    // color: $ff-red-light;
+    color: $ff-purple;
     font-size: 0.9rem;
   }
 
@@ -37,15 +45,16 @@
     color: $ff-purple;
   }
 
-  h1, h4 {
+  h4 {
     color: $ff-purple;
   }
 
 
 .view-splits {
   text-decoration: none;
-  // color: $ff-purple;
-  color: $ff-yellow;
+  color: $ff-purple;
+  // color: $ff-yellow-light;
+  // color: $ff-red;
   font-size: 0.8rem;
 
   &:hover {
@@ -69,13 +78,26 @@
 
 .outstanding-card {
   // background-color: $ff-yellow-light!important;
-  background-color: $ff-purple!important;
+  // background-color: $ff-purple!important;
+  // background-color: $ff-red-light!important;
+  background-color: white!important;
+
   width: 100%;
   height: 100%;
   border: 2px solid ff-yellow-light;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
   border-radius: 10px;
   padding: 10px;
+  // border: 1px solid!important;
+  // border-color: $ff-red!important;
+}
+
+.outstanding-card.green {
+  border-color: $ff-green!important;
+}
+
+.outstanding-card.red {
+  border-color: $ff-red!important;
 }
 
 .accordion-button {
