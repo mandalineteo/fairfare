@@ -3,7 +3,7 @@
 <div class="page-setup">
 
   <div class="m-5">
-      <%= link_to "Back", split_add_members_path(@split), class:"btn back-button" %>
+      <%= link_to "Back", select_split_bills_path(@split), class:"btn back-button" %>
 
     <div class="row justify-content-center">
       <div class="col-sm-8 my-3">
@@ -13,16 +13,22 @@
       <div data-controller="preview-image-uploaded">
           <%= image_tag "payment-receipt-with-coin.jpg", class:"img-fluid", style: "height: 300px;", data: { preview_image_uploaded_target: "previewImage" }%>
           <div class="my-5">
-            <%= form_with url: upload_split_bills_path(@split), method: :post do  |form| %>
+          <div class="row">
+            <div class="col-md-4">
+              <%= form_with url: upload_split_bills_path(@split), method: :post do  |form| %>
 
-              <div class="d-flex">
-                <%= form.label :image, 'Upload Photo', class:"pe-3" %>
-                <%= form.file_field :image, data: { action: "change->preview-image-uploaded#change" } %>
-              </div>
-              <div class="my-3 text-center">
-                <%= submit_tag "Submit", class:"btn create-button" %>
-              </div>
-            <% end %>
+                <div class="">
+                  <%= form.label :image, class:"w-100" do %>
+                    <a class="btn py-3 teal-button w-100">Upload Photo</a>
+                  <% end %>
+                  <%= form.file_field :image, class: 'd-none', data: { action: "change->preview-image-uploaded#change" }%>
+                </div>
+                <div class="my-3 text-center">
+                  <%= submit_tag "Submit", class:"btn create-button w-100" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
           </div>
         </div>
       </div>

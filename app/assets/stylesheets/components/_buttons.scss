@@ -4,9 +4,9 @@
   padding: 8px;
   border-radius: 15px;
   border: none;
-  font-weight: 600!important;
+  font-weight: 600 !important;
   margin-bottom: 0.5rem;
-  font-size: 0.8rem!important;
+  font-size: 0.8rem !important;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   text-decoration: none;
 }
@@ -50,7 +50,8 @@
 .whatsapp-button {
   display: inline-block;
   padding: 5px 10px;
-  background-color: #25d366; /* WhatsApp green */
+  background-color: #25d366;
+  /* WhatsApp green */
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
@@ -65,9 +66,9 @@
 .teal-button {
   display: inline-block;
   background-color: #7DB9B6;
+  color: rgb(255, 255, 255);
   display: inline-block;
   padding: 5px 12px;
-  color: black;
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
@@ -97,7 +98,6 @@
 }
 
 .create-button {
-  display: inline-block;
   border: 10px solid #E96479;
   border-radius: 5px;
   padding: 5px;
@@ -105,6 +105,7 @@
   color: white;
   width: 70%;
   text-decoration: none;
+  display: inline;
 }
 
 .split-button {
@@ -126,4 +127,11 @@
   background-color: #E96479;
   color: white;
   text-decoration: none;
+}
+
+.add-a-bill-button {
+  margin: 10px;
+  margin-top: 40px;
+  padding-left: 20px;
+  display: inline;
 }

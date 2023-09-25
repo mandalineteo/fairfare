@@ -27,8 +27,9 @@ export default class extends Controller {
   }
 
   closeForm(event){
-    // console.log('close form')
+    console.log('close form')
     if (event.target.classList.contains("item-value") || event.target.classList.contains("form-toggler") || event.target.tagName.toLowerCase() === "input") {
+      console.log("don't close")
       return;
     }
     this.itemDescriptionsTargets.forEach((target)=>{
@@ -69,6 +70,8 @@ export default class extends Controller {
     this.splitTextTarget.classList.remove("d-none")
     this.splitHeaderTarget.classList.add("d-none")
     this.splitTextTarget.focus()
+
+    this.splitTextTarget.querySelector("#split_name").focus()
   }
 
   closeSplitForm() {
@@ -116,6 +119,7 @@ export default class extends Controller {
   // ======== taxes ==========
 
   updateTax(event) {
+    console.log("test")
     const form = event.target.closest('form')
     const targetInput = event.target.dataset.billTarget
 
@@ -138,6 +142,7 @@ export default class extends Controller {
   }
 
   calculateTotal() {
+    console.log("trigger")
     let total = 0
     // run the calculations
     this.itemDescriptionsTargets.forEach((form) => {
