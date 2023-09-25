@@ -1,5 +1,5 @@
 .splits-summary-card {
-  border: 2px solid ff-yellow-light; ;
+  border: 2px solid ff-yellow-light;
   background-color: $ff-yellow-light;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
   border-radius: 10px;
@@ -17,7 +17,6 @@
   background-color: #F4F4F4;
   border-radius: 10px;
   padding: 0 24px;
-  margin-top: 12px;
 }
 
 .form-summary-card-padding {
@@ -56,4 +55,10 @@
 
 .card-title {
   color: #E96479;
+}
+
+.add-a-bill-button {
+  margin: 10px;
+  margin-top: 40px;
+  padding-left: 20px;
 }
