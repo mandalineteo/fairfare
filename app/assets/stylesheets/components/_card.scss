@@ -23,3 +23,21 @@
   padding-bottom: 32px;
   margin-top: 12px;
 }
+
+.contact-card {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  background-color: #fff;
+  padding: 15px;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-title {
+  color: #E96479;
+}

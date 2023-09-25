@@ -18,4 +18,8 @@ class ContactsController < ApplicationController
       end
     end
   end
+
+  def index
+    @contacts = Contact.where(user: current_user)
+  end
 end
