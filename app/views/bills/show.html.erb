@@ -1,4 +1,5 @@
-<div class="page-setup">
+<body class="container-color">
+<div>
 
   <div class="mt-5">
     <%= link_to "Back", split_path(@bill.split), class: "back-button m-3" %>
@@ -33,9 +34,15 @@
   </div>
   <div class="my-5">
   </div>
-  <div class="splits-summary-card my-3">
-    <%= "Taxes: SGD #{format('%.2f', @bill.taxes/100.00)}" %>
+  <div>
   </div>
+  <div class="row justify-content-center">
+    <div class="splits-summary-card my-3 col-11">
+      <%= "Taxes: SGD #{format('%.2f', @bill.taxes/100.00)}" %>
+    </div>
+  </div>
+
   <div class="my-5">
   </div>
 </div>
+</body>

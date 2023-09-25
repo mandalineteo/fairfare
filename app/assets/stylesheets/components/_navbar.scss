@@ -33,3 +33,84 @@
   height: 100%;
   // padding: 20px;
 }
+
+
+// css for forgot password page
+.sign-up-page {
+  background-color:#f5e9cf;
+}
+
+.forgot-password-container {
+  padding-top: 30px;
+  text-align: center;
+  color: #141E46;
+
+  .forgot-password-wrapper {
+    // border: 1px solid red;
+    border-radius: 8px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    box-shadow: 5px 5px 20px #848282;
+  }
+
+  .forgot-password-header {
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-shadow: 1px 1px 8px rgb(220, 194, 107);
+  }
+
+  .forgot-password-input {
+    padding-bottom: 10px;
+    font-size: 22px;
+
+    form {
+      .form-label {
+        font-size: 18px;
+        margin-bottom: 0;
+        margin-top: 18px;
+        // position: absolute;
+        // top: 120px;
+        // left: 40px;
+      }
+
+      .form-control {
+        width: 30%;
+        margin: 0 auto;
+        margin-top: 5px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+      }
+    }
+
+  }
+
+  #log-in-back-btn {
+    padding: 10px;
+    margin: 8px 5px;
+    background-color: #EB9599;
+    transition: 300ms all ease-in-out;
+    border-radius: 8px;
+    box-shadow: 5px 5px 20px #bfbdbd;
+
+    &:hover {
+      background-color: #f5e9cf;
+      border: 1px solid #EB9599;
+    }
+
+
+    a {
+      color: #f5e9cf;
+      text-decoration: none;
+      transition: 300ms all ease-in-out;
+      padding: 0;
+
+      &:hover {
+        color: #EB9599;
+      }
+    }
+  }
+}

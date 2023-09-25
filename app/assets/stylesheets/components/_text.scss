@@ -4,6 +4,14 @@
   border-radius: 10px;
 }
 
+.split-highlight-title {
+  color:white;
+  background-color: #7DB9B6;
+  border-radius: 10px;
+  padding: 10px;
+  display: inline-block;
+}
+
 .pink-color-text {
   color: #E96479;
 }
@@ -18,4 +26,13 @@
 
 .teal-color-text {
   color: #7DB9B6
+}
+
+.black-text-no-decoration {
+  color: black;
+  text-decoration: none;
+}
+
+.no-bottom-padding {
+  padding-bottom: 0;
 }

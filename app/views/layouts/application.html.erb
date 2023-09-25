@@ -7,8 +7,10 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Bree+Serif&family=Lora&family=Montserrat:wght@200;300&family=Noto+Serif&family=Satisfy&family=Tilt+Prism&display=swap" rel="stylesheet">
     <%= javascript_importmap_tags %>
-
 
   </head>
 
@@ -16,7 +18,7 @@
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
 
-    <div class="page-content">
+    <div class="page-content sign-up-page">
       <%= yield %>
     </div>
   </body>
