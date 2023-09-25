@@ -37,17 +37,40 @@ $signincolor: #DBDBDB;
     margin: 16px auto;
     padding: 8px 16px;
     font-size: 1rem!important;
+    transition: 300ms all ease-in-out;
+
+    a {
+      text-decoration: none;
+      color: $ff-purple;
+      font-size: 0.9rem!important;
+    }
   }
 
-  a {
-    text-decoration: none;
-    color: $ff-purple;
-    font-size: 0.9rem!important;
+  .sign-up {
+    background-color: #eb7f8a;
+    border: 1px solid #eb7f8a;
+    border-radius: 5px;
+    margin: 16px auto;
+    padding: 8px 16px;
+    font-size: 1rem!important;
+    transition: 300ms all ease-in-out;
+
+    &:hover {
+        color: #eb7f8a;
+        background-color: #f5e9cf;
+        border: 1px solid #eb7f8a;
+
+        a {
+          color: #eb7f8a;
+        }
+      }
+
+      a {
+        color: #f5e9cf;
+        text-decoration: none;
+    }
   }
 }
-
-
-
 // ---------------------------------------
 
 
