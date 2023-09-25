@@ -137,10 +137,21 @@ ul.dropdown-menu {
   font-weight: 600!important;
   margin-bottom: 0.5rem;
   font-size: 0.8rem!important;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
   i {
     color: $ff-red;
+  }
+
+  &:hover {
+    background: none !important;
+  }
+
+  &:active {
+    background: none !important;
+  }
+
+  &:focus {
+    background: none !important;
   }
 }
 
@@ -167,7 +178,6 @@ ul.dropdown-menu {
 
   button.person {
     width: calc(100% - 8px);
-
   }
 }
 
@@ -260,12 +270,33 @@ ul.dropdown-menu {
       color: $ff-purple;
       font-weight: 500;
     }
+
+
+    .justify-content-center {
+      button {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+      }
+    }
 }
 
 a.collaborate {
+  background-color: #e8c986;
   text-decoration: none;
   padding: 10px;
   position: fixed;
   top: 30px;
   right: 30px;
+  color: #020839;
+  z-index: 1000000;
+}
+
+// collaborate button
+#item-collaborate {
+  box-shadow: 5px 5px 15px #b9b6b6;
+  transition: 300ms all ease-in-out;
+
+  &:hover {
+    background-color: #e2d8c0;
+  }
 }
