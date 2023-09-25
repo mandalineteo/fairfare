@@ -17,10 +17,10 @@
 
           <%= f.association :split, as: :hidden %>
 
-          <%= f.submit 'Create', disabled: 'disabled', data: { filter_contacts_target: 'submit' }, class:"split-button" %>
-          <p class="split-button" data-action="click->filter-contacts#back">Back</p>
+          <%= f.submit 'Create', disabled: 'disabled', data: { filter_contacts_target: 'submit' }, class:"btn login-btn standard-button red-button" %>
+          <p class="btn login-btn standard-button red-button" data-action="click->filter-contacts#back">Back</p>
         </div>
-        <p class="split-button" data-filter-contacts-target="toggle" data-action="click->filter-contacts#toggle">Create</p>
+        <p class="btn login-btn standard-button red-button" data-filter-contacts-target="toggle" data-action="click->filter-contacts#toggle">Create</p>
       <% end %>
     </div>
     <br>
@@ -36,8 +36,8 @@
     </div>
 
     <div class="add-a-bill-button">
-      <%= link_to "Add a bill", select_split_bills_path, class: "split-button my-5" %>
-      <%= link_to "Back", new_split_path, class: "split-1-button" %>
+      <%= link_to "Add a bill", select_split_bills_path, class: "btn login-btn standard-button red-button" %>
+      <%= link_to "Back", new_split_path, class: "btn login-btn standard-button red-button" %>
     </div>
   </div>
 </div>

@@ -3,9 +3,9 @@
   padding: 8px;
   border-radius: 15px;
   border: none;
-  font-weight: 600!important;
+  font-weight: 600 !important;
   margin-bottom: 0.5rem;
-  font-size: 0.8rem!important;
+  font-size: 0.8rem !important;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   text-decoration: none;
 }
@@ -16,17 +16,17 @@
 }
 
 .red-button {
-  color:white;
+  color: white;
   background-color: $ff-red;
 }
 
 .green-button {
-  color:white;
+  color: white;
   background-color: $ff-green;
 }
 
 .white-purple-button {
-  color:$ff-purple;
+  color: $ff-purple;
   background-color: white;
 }
 
@@ -44,7 +44,8 @@
 .whatsapp-button {
   display: inline-block;
   padding: 5px 10px;
-  background-color: #25d366; /* WhatsApp green */
+  background-color: #25d366;
+  /* WhatsApp green */
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
@@ -52,7 +53,8 @@
 }
 
 .whatsapp-button:hover {
-  background-color: #128C7E; /* Darker shade on hover */
+  background-color: #128C7E;
+  /* Darker shade on hover */
 }
 
 .teal-button {
@@ -83,4 +85,20 @@
 .pink-button:hover {
   background-color: #c35162;
   color: white;
+}
+
+.create-button {
+  border: 10px solid #E96479;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #E96479;
+  color: white;
+  width: 70%;
+  text-decoration: none;
+}
+
+.add-a-bill-button {
+  margin: 10px;
+  margin-top: 40px;
+  padding-left: 20px;
 }
