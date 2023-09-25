@@ -9,10 +9,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  resources :users, only: %i[show edit update] do
+    resources :contacts, only: %i[index edit update]
+  end
   resources :splits, except: %i[edit] do
     resources :split_members, only: %i[create destroy]
     resources :members, only: %i[create index]
-    resources :contacts, only: %i[create index] do
+    resources :contacts, only: %i[create] do
       collection do
         get :filter
       end

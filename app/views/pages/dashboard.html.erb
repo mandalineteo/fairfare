@@ -1,4 +1,5 @@
 x<div class="page-setup">
+<div style="background-color: #F5E9CF">
 
   <nav class="navbar pt-5 ">
     <div class="container d-flex align-items-end flex-column">
@@ -15,7 +16,6 @@ x<div class="page-setup">
       <% end %>
     </div>
   </nav>
-
 
 <div class="welcome-message" style="text-align: center";>
   <h1>Hello <%= current_user.username %></h1>
@@ -52,38 +52,83 @@ x<div class="page-setup">
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+
+            <p><%= Split.accordion_split(-1) %></p>
+
         </button>
       </h2>
       <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
+          <% if Split.accordion_bills(-1).nil? %>
+              <div>
+                <i class="fa-solid fa-receipt"></i>
+                <%= "No Bills Found" %>
+              </div>
+              <% else %>
+              <% Split.accordion_bills(-1).each do |bill| %>
+              <div>
+                <i class="fa-solid fa-receipt purple-color-text"></i>
+                <%= link_to "#{bill.merchant}", split_bill_path(Split.split_sort[-1], bill), class:"text-decoration-none purple-color-text" %>
+              </div>
+            <% end %>
+            <% end %>
         </div>
       </div>
     </div>
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+          <%= Split.accordion_split(-2) %>
         </button>
       </h2>
       <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
+            <% if Split.accordion_bills(-2).nil? %>
+              <div>
+                <i class="fa-solid fa-receipt purple-color-text"></i>
+                <%= "No Bills Found" %>
+              </div>
+              <% else %>
+              <% Split.accordion_bills(-2).each do |bill| %>
+              <div>
+                <i class="fa-solid fa-receipt"></i>
+                <%= link_to "#{bill.merchant}", split_bill_path(Split.split_sort[-2], bill), class:"text-decoration-none purple-color-text" %>
+              </div>
+            <% end %>
+            <% end %>
         </div>
       </div>
     </div>
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+
+          <%= Split.accordion_split(-3) %>
         </button>
       </h2>
       <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
-
+            <% if Split.accordion_bills(-3).nil? %>
+              <div>
+                <i class="fa-solid fa-receipt purple-color-text"></i>
+                <%= "No Bills Found" %>
+              </div>
+              <% else %>
+              <% Split.accordion_bills(-3).each do |bill| %>
+              <div>
+                <i class="fa-solid fa-receipt"></i>
+                <%= link_to "#{bill.merchant}", split_bill_path(Split.split_sort[-3], bill), class:"text-decoration-none purple-color-text" %>
+              </div>
+            <% end %>
+            <% end %>
         </div>
       </div>
     </div>
   </div>
   <div class="my-3 mx-4 text-end">
-    <%= link_to "See More", splits_path, class:"text-decoration-none pink-color-text" %>
+    <%= link_to "See More", splits_path, class:"text-decoration-none btn create-button my-5" %>
   </div>
-  <div class="my-5">
-  </div>
+  <%# <div class="my-5" style="background-color: #F5E9CF">
+  </div> %>
+</div>
 </div>

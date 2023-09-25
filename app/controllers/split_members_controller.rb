@@ -28,10 +28,10 @@ class SplitMembersController < ApplicationController
   end
 
   def destroy
-    @split = Split.find(params[:id])
+    @split = Split.find(params[:split_id])
     @split_member = SplitMember.find(params[:id])
     @split_member.destroy
-    redirect_to split_add_members_path(@split), status: :see_other
+    head :ok
   end
 
   private

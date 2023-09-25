@@ -53,27 +53,27 @@ export default class extends Controller {
     this.submitTarget.disabled = !this.inputTargets.every(input => input.value !== '')
   }
 
-  // delete(event) {
-  //   event.preventDefault();
-  //   const splitId = this.splitIdValue;
-  //   const memberId = event.currentTarget.dataset.filterContactsMemberIdValue
+  delete(event) {
+    event.preventDefault();
+    const splitId = this.splitIdValue;
+    const splitMemberId = event.currentTarget.dataset.filterContactsSplitMemberIdValue
 
-  //   fetch(`/splits/${splitId}/split_members/${memberId}`), {
-  //     method: "DELETE",
-  //     headers: {
-  //       "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
-  //       Accept: 'application/json'
-  //     }
-  //       .then((response) => {
-  //         if (response.ok) {
-  //           this.element.remove();
-  //         } else {
-  //           console.error("Unable to delete contact from split.");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error("An error occurred:", error);
-  //       })
-  //   }
-  // }
+    fetch(`/splits/${splitId}/split_members/${splitMemberId}`, {
+      method: "DELETE",
+      headers: {
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+        Accept: 'application/json'
+      }
+    })
+      .then((response) => {
+        if (response.ok) {
+          event.target.remove();
+        } else {
+          console.error("Unable to delete contact from split.");
+        }
+      })
+      .catch((error) => {
+        console.error("An error occurred:", error);
+      })
+  }
 }

@@ -1,11 +1,12 @@
-<div class="page-setup">
+<body class="container-color">
+  <div class="page-setup">
 
-  <div class="container">
+  <div class="container mt-5">
     <h1>Create a new Split!</h1>
     <%= simple_form_for(@split) do |f| %>
       <%= f.input :name %>
       <%= f.input :date %>
-      <%= f.submit "Add members", class: "split-button-large" %>
+      <%= f.button :submit, "Add members", class:"teal-button my-3" %>
     <% end %>
 
     <br>
@@ -13,3 +14,4 @@
     <%= link_to "Back", root_path, class: "split-button" %>
   </div>
 </div>
+</body>

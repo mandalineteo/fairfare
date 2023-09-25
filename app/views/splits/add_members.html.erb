@@ -27,7 +27,7 @@
     <div class="split-members form-summary-card-less-padding" data-controller="filter-contacts" data-filter-contacts-split-id-value="<%= @split.id %>">
       <h2 class="pt-3">Contacts included in split</h2>
         <% @split.members.each do |member| %>
-          <span data-filter-contacts-member-id-value="<%= member.id %>" class="badge rounded-pill text-bg-secondary" data-action="click->filter-contacts#delete"><%= member.given_nickname(current_user) %> (<%= member.phone_number %>)</span>
+          <span data-filter-contacts-split-member-id-value="<%= SplitMember.find_by(member_id: member.id, split_id: @split.id).id %>" class="badge rounded-pill text-bg-secondary" data-action="click->filter-contacts#delete"><%= member.given_nickname(current_user) %> (<%= member.phone_number %>)</span>
         <% end %>
     </div>
     <br>
@@ -36,7 +36,7 @@
     </div>
 
     <%= link_to "Add a bill", select_split_bills_path, class: "split-button my-5" %>
-    <%= link_to "Back", new_split_path, class: "split-button" %>
+    <%= link_to "Back", new_split_path, class: "split-1-button" %>
     <div class="mb-5">
     </div>
   </div>
