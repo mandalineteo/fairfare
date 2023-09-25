@@ -36,8 +36,13 @@
     </div>
 
     <div class="splits-summary-card mt-3 mb-5">
-      <%= "Taxes: SGD #{format('%.2f', @bill.taxes/100.00)}" %>
+      <%= "GST: SGD #{format('%.2f', @bill.taxes/100.00)}" %>
+      <br>
+      <%= "Service Charge: SGD #{format('%.2f', @bill.service_charge/100.00)}" %>
+      <br>
+      <%= "Discount: SGD #{format('%.2f', @bill.discount/100.00)}" %>
     </div>
+
   </div>
 </div>
 </body>
