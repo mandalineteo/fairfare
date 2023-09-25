@@ -1,7 +1,7 @@
 <div class="page-setup">
   <div class="container" data-controller="filter-contacts" data-filter-contacts-split-id-value="<%= @split.id %>">
 
-    <div class="form form-summary-card-less-padding">
+    <div class="form form-summary-card-less-padding add-members">
       <h1 class="mt-3">Add members</h1>
       <%= simple_form_for([@split, @split_member], html: { data: { "filter-contacts-target" => "form" } }) do |f| %>
         <div class="mb-3 tel required contact_nickname">

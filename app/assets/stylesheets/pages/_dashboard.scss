@@ -41,12 +41,13 @@
     font-size: 0.9rem;
   }
 
-  h2, p {
+  h2 {
     color: $ff-purple;
   }
 
   h4 {
     color: $ff-purple;
+    margin-left: 12px;
   }
 
 
@@ -119,4 +120,12 @@
   }
 }
 
+p.split {
+  // color: $ff-red!important;
+  color: $ff-purple!important;
+}
+
+.accordion-flush .accordion-item .accordion-button, .accordion-flush .accordion-item .accordion-button.collapsed {
+  border-radius: 5px;
+}
 }
