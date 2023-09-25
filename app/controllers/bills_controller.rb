@@ -54,13 +54,19 @@ class BillsController < ApplicationController
 
     @split = Split.find(params[:split_id])
     converted_params = bill_params
+
+    # i suspect we wont be sending price at all via the create action. need to confirm.
     converted_params[:items_attributes].each do |item|
-      item[1][:price] = item[1][:price].to_f * 100
+      unless (item[1][:price_in_dollars])
+        item[1][:price] = item[1][:price].to_f * 100
+      end
     end
+
     converted_params[:taxes] = converted_params[:taxes].to_f * 100
     converted_params[:discount] = converted_params[:discount].to_f * 100
     converted_params[:service_charge] = converted_params[:service_charge].to_f * 100
     converted_params[:total_amount] = converted_params[:total_amount].to_f * 100
+
     @bill = Bill.new(converted_params)
     @bill.split = @split
 
