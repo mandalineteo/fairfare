@@ -4,16 +4,16 @@
     <h1 class="my-5">How would you like to upload your bill for <%= @split.name %>?</h1>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-6">
         <div class="text-center d-flex flex-column align-items-center">
-          <%= image_tag "manual-input.jpg", class:"img-fluid", style: "height: 300px;" %>
-          <%= link_to "Manual Input", new_split_bill_path(@split), class:"btn create-button mt-2 mb-5" %>
+          <%= image_tag "manual-input.png", class:"img-fluid", style: "height: 110px;" %>
+          <%= link_to "Manual Input", new_split_bill_path(@split), class:"btn red-button standard-button mt-2 mb-5" %>
         </div >
       </div>
-      <div class="col-md-6">
+      <div class="col-6">
         <div class="text-center d-flex flex-column align-items-center">
-        <%= image_tag "upload-option.jpg", class:"img-fluid", style: "height: 300px;" %>
-        <%= link_to "Upload Receipt Photo", receipt_split_bills_path(@split), class:"btn create-button mt-2 mb-5" %>
+        <%= image_tag "upload-option.png", class:"img-fluid", style: "height: 110px;" %>
+        <%= link_to "Upload Receipt Photo", receipt_split_bills_path(@split), class:"btn red-button standard-button mt-2 mb-5" %>
         </div>
       </div>
     </div>
