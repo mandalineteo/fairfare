@@ -42,9 +42,12 @@ class ItemsController < ApplicationController
   end
 
   def update
-
+    pp 'zonghan'
+    pp item_params
     @item = Item.find(params[:id])
     @item.update(item_params)
+
+    @item.bill.update_total_bill
 
     respond_to do |format|
       format.text { head :ok }
