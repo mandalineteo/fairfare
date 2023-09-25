@@ -8,7 +8,7 @@
         encoded_url = host_name + "/splits/#{@split.id}"
         encoded_message = "#{current_user&.full_name || @split.user.first_name} is inviting you to join their split at #{encoded_url} "
         %>
-        <a class="collaborate standard-button white-pink-button" href="https://wa.me/?text=<%= encoded_message %>">Collaborate</a>
+        <a id="item-collaborate" class="collaborate standard-button yellow-pink-button" href="https://wa.me/?text=<%= encoded_message %>">Collaborate</a>
       <% end %>
 
       <h1
@@ -26,7 +26,7 @@
           },
           class: 'd-none'
         } do |f| %>
-          <%= f.input :name, label: false %>
+          <%= f.input :name, label: false, input_html: { style: "max-width: 420px;" } %>
       <% end %>
 
       <div class="payer dropdown d-flex">
@@ -47,6 +47,7 @@
         <%= f.input :merchant,
               label: false,
               input_html: {
+                style: "max-width: 420px;",
                 placeholder: 'Merchant Name',
                 data: { action: 'blur->edit-bill#updateMerchantValue' }
               }

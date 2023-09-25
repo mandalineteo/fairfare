@@ -268,4 +268,15 @@ a.collaborate {
   position: fixed;
   top: 30px;
   right: 30px;
+  color: #020839;
+}
+
+// collaborate button
+#item-collaborate {
+  box-shadow: 5px 5px 15px #b9b6b6;
+  transition: 300ms all ease-in-out;
+
+  &:hover {
+    background-color: #dbceb1;
+  }
 }
