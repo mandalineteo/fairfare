@@ -1,0 +1,100 @@
+.dashboard {
+
+  .page-top {
+    align-items: center;
+    padding: 20px;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+
+    p {
+      margin: auto;
+    }
+  }
+
+  .log-out {
+    text-decoration: none;
+    color: $ff-purple;
+    text-align: right;
+    margin: 8px 8px 0 0;
+    // position:relative;
+  }
+
+  .fa-bell {
+    font-size: 2rem;
+    color: $ff-purple;
+  }
+
+  h1 {
+    margin: 1.5rem auto;
+  }
+
+  h5 {
+    color: $ff-yellow;
+    font-size: 0.9rem;
+  }
+
+  h2, p {
+    color: $ff-purple;
+  }
+
+  h1, h4 {
+    color: $ff-purple;
+  }
+
+
+.view-splits {
+  text-decoration: none;
+  // color: $ff-purple;
+  color: $ff-yellow;
+  font-size: 0.8rem;
+
+  &:hover {
+    color: $ff-yellow;
+  }
+}
+
+.outstanding-owed {
+  color: $ff-green;
+  margin-bottom: 8px;
+  font-weight: 800px!important;
+  font-size: 1.2rem;
+}
+
+.outstanding-owe {
+  color: $ff-red;
+  margin-bottom: 8px;
+  font-weight: 800px!important;
+  font-size: 1.2rem;
+}
+
+.outstanding-card {
+  // background-color: $ff-yellow-light!important;
+  background-color: $ff-purple!important;
+  width: 100%;
+  height: 100%;
+  border: 2px solid ff-yellow-light;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.accordion-button {
+  background-color: $ff-yellow-light!important;
+  border: none!important;
+  border-radius: 5px!important;
+
+  p {
+    color: $ff-purple!important;
+  }
+}
+
+.see-more {
+  margin-bottom: 50px;
+  color: $ff-purple!important;
+
+  &:hover {
+    color: $ff-yellow;
+  }
+}
+
+}

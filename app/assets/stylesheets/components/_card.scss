@@ -1,9 +1,14 @@
 .splits-summary-card {
-  border: 2px solid rgb(221, 221, 221);
-  background-color: #F4F4F4;
+  border: 2px solid ff-yellow-light; ;
+  background-color: $ff-yellow-light;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
   border-radius: 10px;
   padding: 24px;
+  width: 100%;
+
+  .date {
+    font-size: 0.9rem;
+  }
 }
 
 .form-summary-card-less-padding {

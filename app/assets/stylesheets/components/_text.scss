@@ -5,11 +5,12 @@
 }
 
 .split-highlight-title {
-  color:white;
-  background-color: #7DB9B6;
+  color:$ff-red;
+  // background-color: #7DB9B6;
   border-radius: 10px;
-  padding: 10px;
   display: inline-block;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
 }
 
 .pink-color-text {
