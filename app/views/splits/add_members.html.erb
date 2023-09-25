@@ -2,7 +2,7 @@
   <div class="container p-5" data-controller="filter-contacts" data-filter-contacts-split-id-value="<%= @split.id %>">
 
     <div class="form form-summary-card-less-padding add-members">
-      <h1 class="mt-3">Add members</h1>
+      <h1 class="mt-3 pink-color-text">Add members</h1>
       <%= simple_form_for([@split, @split_member], html: { data: { "filter-contacts-target" => "form" } }) do |f| %>
         <div class="mb-3 tel required contact_nickname">
           <label class="form-label tel required" for="contact_nickname">Nickname <abbr title="required">*</abbr></label>
@@ -17,15 +17,15 @@
 
           <%= f.association :split, as: :hidden %>
 
-          <%= f.submit 'Create', disabled: 'disabled', data: { filter_contacts_target: 'submit' }, class:"split-button" %>
-          <p class="split-button" data-action="click->filter-contacts#back">Back</p>
+          <%= f.submit 'Create', disabled: 'disabled', data: { filter_contacts_target: 'submit' }, class:"btn login-btn standard-button red-button" %>
+          <p class="btn login-btn standard-button red-button" data-action="click->filter-contacts#back">Back</p>
         </div>
-        <p class="split-button" data-filter-contacts-target="toggle" data-action="click->filter-contacts#toggle">Create</p>
+        <p class="btn login-btn standard-button red-button" data-filter-contacts-target="toggle" data-action="click->filter-contacts#toggle">Create</p>
       <% end %>
     </div>
     <br>
     <div class="split-members form-summary-card-less-padding pb-3" data-controller="filter-contacts" data-filter-contacts-split-id-value="<%= @split.id %>">
-      <h2 class="pt-3">Contacts included in split</h2>
+      <h2 class="pt-3 pink-color-text">Contacts included in split</h2>
         <% @split.members.each do |member| %>
           <span data-filter-contacts-split-member-id-value="<%= SplitMember.find_by(member_id: member.id, split_id: @split.id).id %>" class="p-3 badge rounded-pill text-bg-secondary" data-action="click->filter-contacts#delete"><%= member.given_nickname(@split.user) %> (<%= member.phone_number %>)</span>
         <% end %>
@@ -36,8 +36,8 @@
     </div>
 
     <div class="add-a-bill-button">
-      <%= link_to "Add a bill", select_split_bills_path, class: "split-button my-5" %>
-      <%= link_to "Back", new_split_path, class: "split-1-button" %>
+      <%= link_to "Add a bill", select_split_bills_path, class: "btn login-btn standard-button red-button" %>
+      <%= link_to "Back", new_split_path, class: "btn login-btn standard-button red-button" %>
     </div>
   </div>
 </div>
