@@ -19,6 +19,8 @@ class User < ApplicationRecord
   before_validation :assign_or_create_member
 
   def assign_or_create_member
+    return unless phone_number.present?
+
     member = Member.find_or_create_by(phone_number:)
     self.member_id = member.id
   end
