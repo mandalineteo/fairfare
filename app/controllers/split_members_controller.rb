@@ -27,6 +27,13 @@ class SplitMembersController < ApplicationController
     end
   end
 
+  def destroy
+    @split = Split.find(params[:split_id])
+    @split_member = SplitMember.find(params[:id])
+    @split_member.destroy
+    head :ok
+  end
+
   private
 
   def split_member_params
