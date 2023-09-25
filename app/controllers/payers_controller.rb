@@ -1,4 +1,6 @@
 class PayersController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def new
     @payer = Payer.new
   end

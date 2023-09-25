@@ -6,7 +6,7 @@
   <div class="d-flex person">
     <div class="d-flex">
       <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-      <p><%= member.given_nickname(current_user) %></p>
+      <p><%= member.given_nickname(@split.user) %></p>
     </div>
     <%= button_tag "", type:  "submit", class:"add green", style:"background:none; padding:0px; border:none;", data: { payers_target:"checkbox" } do %>
       <i class="fa-solid fa-square-check" ></i>

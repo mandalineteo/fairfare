@@ -22,7 +22,7 @@
 
           <div class="d-flex person-details">
             <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-            <p><%= member.given_nickname(current_user) %></p>
+            <p><%= member.given_nickname(split.user) %></p>
           </div>
 
           <% end %>
@@ -38,7 +38,7 @@
         <%= button_tag "", type:  "submit", class:"d-flex person", style:"padding:14px; border:none;", data: { add_people_target:"checkbox" } do %>
           <div class="d-flex person-details">
             <img class="avatar" alt="avatar" src="https://kitt.lewagon.com/placeholder/users/cveneziani" />
-            <p><%= member.given_nickname(current_user) %></p>
+            <p><%= member.given_nickname(split.user) %></p>
           </div>
         <% end %>
 
