@@ -33,7 +33,9 @@ class ContactsController < ApplicationController
 
   def update
     if @contact.update(contact_params)
-      # redirect_to split_contacts_path
+      redirect_to user_contacts_path(current_user)
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 

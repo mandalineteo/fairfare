@@ -1,0 +1,14 @@
+<body class="container-color">
+<%= link_to "Back", user_contacts_path(current_user), class:"pink-button mt-4 ms-2" %>
+  <div class="container">
+    <div>
+      <h1 class="pt-5">Edit <%= @contact.nickname %></h1>
+        <div class="my-4">
+          <%= simple_form_for([current_user, @contact]) do |f| %>
+          <%= f.input :nickname %>
+          <%= f.button :submit, class:"pink-button my-3" %>
+        <% end %>
+        </div>
+    </div>
+  </div>
+</body>
