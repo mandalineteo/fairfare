@@ -77,4 +77,25 @@ class Split < ApplicationRecord
     settlements
 
   end
+
+  def self.split_sort
+    Split.all.sort_by { |split| split.bills.count }
+  end
+
+  def self.accordion_split(number)
+    splits = split_sort
+    if splits[number].present?
+      splits[number].name || "No Splits Found"
+    else
+      # Handle the case when there are no splits
+      "No Splits Found"
+    end
+  end
+
+  def self.accordion_bills(number)
+    splits = split_sort
+    if splits[number].present?
+      splits[number].bills
+    end
+  end
 end
