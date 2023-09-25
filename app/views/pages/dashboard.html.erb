@@ -4,13 +4,12 @@
     <div class="d-flex page-top">
 
       <a class="navbar-brand" href="#">
-        <i class="fa-regular fa-bell"></i>
-      </a>
+        <i class="fa-solid fa-bell"></i></a>
       <%= link_to destroy_user_session_path,
       data: {turbo_method: :delete},
       class: "log-out" do %>
         <%# <i class="fa-solid fa-power-off" style="color:#E96479"></i> %>
-        <p>Log Out</p>
+        <h3>Log Out</h3>
       <% end %>
 
       <%# <%= link_to new_split_path do %>
@@ -26,9 +25,9 @@
 <div class="container mt-5" style="text-align: center";>
   <div class="row">
     <div class="col-6" style="padding:8px 4px 8px 16px;">
-      <div class="card outstanding-card" style="background-color:#4D455D; border:none; padding: 16px">
+      <div class="card outstanding-card green" style="background-color:#4D455D; border:1px solid; padding: 16px">
         <div class="card-body" style="padding:0">
-          <h5 class="card-title">Owed: </h5>
+          <%# <h5 class="card-title">Owed: </h5> %>
 
           <p class="card-text outstanding-owed ff-bold">SGD $ <%= format('%.2f',current_user.owed_summary(current_user)/100.00) %></p>
           <%= link_to "View Splits", splits_path,
@@ -39,9 +38,9 @@
       </div>
     </div>
     <div class="col-6" style="padding:8px 16px 8px 4px;">
-      <div class="card outstanding-card"  style="background-color:#4D455D; border:none; padding: 16px">
+      <div class="card outstanding-card red"  style="background-color:#4D455D; border:1px solid; padding: 16px">
         <div class="card-body" style="padding:0">
-          <h5 class="card-title">Owe: </h5>
+          <%# <h5 class="card-title">Owe: </h5> %>
         <p class="card-text outstanding-owe ff-bold">SGD $<%= format('%.2f',current_user.owe_summary(current_user)/100.00) %></p>
           <%= link_to "View Splits", splits_path,
           class: "view-splits"
@@ -53,7 +52,7 @@
   </div>
 </div>
 
-<div class="container mt-5">
+<div class="container mt-5 px-7">
   <h4>Transactions</h4>
   <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">

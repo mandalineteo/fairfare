@@ -1,14 +1,14 @@
-<body class="container-color">
+<body class="container-color contacts-index">
   <div class="container">
-    <h1 class="mt-5 mb-3">My Contacts</h1>
+    <h1 class="mt-5 mb-4 ms-3">My Contacts</h1>
     <div class="form-summary-card-less-padding">
       <% current_user.contacts.sort_by(&:nickname).each do |contact| %>
-          <div class="d-flex my-4 p-1 justify-content-between">
+          <div class="d-flex contact p-1 justify-content-between">
             <div class="d-flex">
               <i class="fa-solid fa-circle-user fs-1 purple-color-text"></i>
               <h5 class="my-0 ms-3"><%= contact.nickname %></h5>
             </div>
-            <%= link_to "edit", edit_user_contact_path(current_user, contact), class:"teal-button me-3" %>
+            <%= link_to "edit", edit_user_contact_path(current_user, contact), class:"standard-button green-button" %>
           </div>
       <% end %>
     </div>
