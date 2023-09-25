@@ -1,4 +1,6 @@
 class BillsController < ApplicationController
+  skip_before_action :authenticate_user!
+
   # def show
   #   @bill = Bill.find(params[:id])
   #   data = @bill.receipt_data
