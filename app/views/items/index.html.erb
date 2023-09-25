@@ -8,7 +8,7 @@
         encoded_url = host_name + "/splits/#{@split.id}"
         encoded_message = "#{current_user&.full_name || @split.user.first_name} is inviting you to join their split at #{encoded_url} "
         %>
-        <a id="item-collaborate" class="collaborate standard-button yellow-pink-button" href="https://wa.me/?text=<%= encoded_message %>">Collaborate</a>
+        <a id="item-collaborate" class="collaborate standard-button yellow-pink-button" href="https://api.whatsapp.com/send?text=<%= encoded_message %>">Collaborate</a>
       <% end %>
 
       <h1
