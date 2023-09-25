@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def index
     @split = Split.find(params[:split_id])
     @bill = Bill.find(params[:bill_id])
