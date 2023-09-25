@@ -4,7 +4,8 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["form", "contacts", "create", "toggle", 'submit', 'input']
   static values = {
-    splitId: String
+    splitId: String,
+    memberId: String
   }
 
   connect() {
@@ -50,5 +51,29 @@ export default class extends Controller {
     //   this.submitTarget.disabled = true
     // }
     this.submitTarget.disabled = !this.inputTargets.every(input => input.value !== '')
+  }
+
+  delete(event) {
+    event.preventDefault();
+    const splitId = this.splitIdValue;
+    const splitMemberId = event.currentTarget.dataset.filterContactsSplitMemberIdValue
+
+    fetch(`/splits/${splitId}/split_members/${splitMemberId}`, {
+      method: "DELETE",
+      headers: {
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+        Accept: 'application/json'
+      }
+    })
+      .then((response) => {
+        if (response.ok) {
+          event.target.remove();
+        } else {
+          console.error("Unable to delete contact from split.");
+        }
+      })
+      .catch((error) => {
+        console.error("An error occurred:", error);
+      })
   }
 }

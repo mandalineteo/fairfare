@@ -38,35 +38,39 @@ $signincolor: #DBDBDB;
     padding: 8px 16px;
     font-size: 1rem!important;
     transition: 300ms all ease-in-out;
+    border: 1px solid #eb7f8a;
 
     a {
       text-decoration: none;
-      color: $ff-purple;
       font-size: 0.9rem!important;
+    }
+
+    &:hover {
+      color: $ff-red;
     }
   }
 
   .sign-up {
-    background-color: #eb7f8a;
-    border: 1px solid #eb7f8a;
+    background-color: $ff-green;
+    border: 1px solid $ff-green;
     border-radius: 5px;
     margin: 16px auto;
-    padding: 8px 16px;
+    padding: 8px 10px;
     font-size: 1rem!important;
     transition: 300ms all ease-in-out;
 
     &:hover {
-        color: #eb7f8a;
+        color: $ff-green;
         background-color: #f5e9cf;
-        border: 1px solid #eb7f8a;
+        border: 1px solid $ff-green;
 
         a {
-          color: #eb7f8a;
+          color: $ff-green;
         }
       }
 
       a {
-        color: #f5e9cf;
+        color: white;
         text-decoration: none;
     }
   }

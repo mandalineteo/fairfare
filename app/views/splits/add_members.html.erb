@@ -17,17 +17,17 @@
 
           <%= f.association :split, as: :hidden %>
 
-          <%= f.submit 'Create', disabled: 'disabled', data: { filter_contacts_target: 'submit' } %>
+          <%= f.submit 'Create', disabled: 'disabled', data: { filter_contacts_target: 'submit' }, class:"split-button" %>
           <p class="split-button" data-action="click->filter-contacts#back">Back</p>
         </div>
         <p class="split-button" data-filter-contacts-target="toggle" data-action="click->filter-contacts#toggle">Create</p>
       <% end %>
     </div>
     <br>
-    <div class="split-members form-summary-card-less-padding">
+    <div class="split-members form-summary-card-less-padding" data-controller="filter-contacts" data-filter-contacts-split-id-value="<%= @split.id %>">
       <h2 class="pt-3">Contacts included in split</h2>
         <% @split.members.each do |member| %>
-          <p><%= member.given_nickname(current_user) %> <%= member.phone_number %></p>
+          <span data-filter-contacts-split-member-id-value="<%= SplitMember.find_by(member_id: member.id, split_id: @split.id).id %>" class="badge rounded-pill text-bg-secondary" data-action="click->filter-contacts#delete"><%= member.given_nickname(@split.user) %> (<%= member.phone_number %>)</span>
         <% end %>
     </div>
     <br>

@@ -38,6 +38,10 @@ class Bill < ApplicationRecord
       total_sum += item.quantity * item.price
     end
 
+    pp "test"
+    puts total_sum - discount + taxes + service_charge
+
+
     update(total_amount: total_sum - discount + taxes + service_charge)
   end
 

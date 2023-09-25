@@ -9,11 +9,11 @@ export default class extends Controller {
     "merchantAndDate",
     "taxDescriptions",
     "splitHeader",
-    "breakdown"
+    "breakdown",
+    "total"
   ]
 
   connect() {
-    // console.log(this.itemDescriptionsTarget);
   }
 
   // ====== item ======
@@ -40,6 +40,14 @@ export default class extends Controller {
     // console.log(event.target.closest('form'));
     const form = event.target.closest('form')
 
+    const targetInput = event.target.dataset.itemTarget
+
+    if (targetInput === "price") {
+      const centValue = parseFloat(event.target.value) * 100
+      const input = event.target.parentElement.querySelector(`input[name="item[price]"]`)
+      input.value = centValue
+    }
+
     fetch(form.action, {
       method: "PATCH",
       headers: { "Accept": "text/plain"},
@@ -48,9 +56,11 @@ export default class extends Controller {
 
       .then(response => response.text())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         // this.itemDescriptionsTargets.innerHTML = data
       })
+
+      this.calculateTotal()
   }
 
   // ======== split name ============
@@ -98,7 +108,7 @@ export default class extends Controller {
 
       .then(response => response.text())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
       })
   }
 
@@ -123,6 +133,39 @@ export default class extends Controller {
       .then((data) => {
         this.breakdownTarget.outerHTML = data
       })
+
+      this.calculateTotal();
+  }
+
+  calculateTotal() {
+    let total = 0
+    // run the calculations
+    this.itemDescriptionsTargets.forEach((form) => {
+      const quantity = form.querySelector("input#item_quantity").value
+      const price = form.querySelector("input#item_price").value
+      // console.log(itemDescriptionsTargets)
+      // console.log(price, quantity)
+
+      total += (price * quantity)
+    })
+
+    // update the target
+
+    const tax = Number(this.taxDescriptionsTarget.querySelector("input#bill_taxes").value)
+    const svc = Number(this.taxDescriptionsTarget.querySelector("input#bill_service_charge").value)
+    const discount = Number(this.taxDescriptionsTarget.querySelector("input#bill_discount").value)
+    console.log('test')
+    console.log({
+     total, tax, svc, discount
+    })
+    total = total + tax + svc - discount
+
+    // const total_in_dollars = (total/100).toFixed(2)
+    // const total_after_taxes = total_in_dollars + tax + svc - discount
+    // this.totalTarget.innerHTML = total_after_taxes
+
+    console.log( this.totalTarget)
+    this.totalTarget.innerHTML = (total / 100).toFixed(2)
   }
 
 }
