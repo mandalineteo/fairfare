@@ -1,6 +1,7 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon d-flex">
   <div class="container-fluid">
 
+  <% if current_user %>
     <%= link_to root_path, class: "navbar-icon" do %>
         <i class="fa-solid fa-house"></i>
     <% end %>
@@ -20,7 +21,7 @@
     <%= link_to user_path(current_user), class: "navbar-icon" do %>
         <i class="fa-solid fa-user"></i>
     <% end %>
-
+  <% end %>
 
   </div>
 </div>
