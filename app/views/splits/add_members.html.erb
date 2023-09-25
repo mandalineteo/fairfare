@@ -1,8 +1,7 @@
 <div class="page-setup">
-  <div class="container" data-controller="filter-contacts" data-filter-contacts-split-id-value="<%= @split.id %>">
-
-    <div class="form form-summary-card-less-padding">
-      <h1 class="mt-3">Add members</h1>
+  <div class="container py-3" data-controller="filter-contacts" data-filter-contacts-split-id-value="<%= @split.id %>">
+    <div class="form form-summary-card-padding">
+      <h1 class="pt-3">Add members</h1>
       <%= simple_form_for([@split, @split_member], html: { data: { "filter-contacts-target" => "form" } }) do |f| %>
         <div class="mb-3 tel required contact_nickname">
           <label class="form-label tel required" for="contact_nickname">Nickname <abbr title="required">*</abbr></label>
@@ -24,10 +23,10 @@
       <% end %>
     </div>
     <br>
-    <div class="split-members form-summary-card-less-padding" data-controller="filter-contacts" data-filter-contacts-split-id-value="<%= @split.id %>">
-      <h2 class="pt-3">Contacts included in split</h2>
+    <div class="split-members form-summary-card-less-padding py-4" data-controller="filter-contacts" data-filter-contacts-split-id-value="<%= @split.id %>">
+      <h2>Contacts included in split</h2>
         <% @split.members.each do |member| %>
-          <span data-filter-contacts-split-member-id-value="<%= SplitMember.find_by(member_id: member.id, split_id: @split.id).id %>" class="badge rounded-pill text-bg-secondary" data-action="click->filter-contacts#delete"><%= member.given_nickname(@split.user) %> (<%= member.phone_number %>)</span>
+          <span data-filter-contacts-split-member-id-value="<%= SplitMember.find_by(member_id: member.id, split_id: @split.id).id %>" class="badge rounded-pill text-bg-secondary py-2" data-action="click->filter-contacts#delete"><%= member.given_nickname(@split.user) %> (<%= member.phone_number %>)</span>
         <% end %>
     </div>
     <br>
@@ -35,9 +34,9 @@
       <%= render "splits/contact_list", available_contacts: @available_contacts, split: @split %>
     </div>
 
-    <%= link_to "Add a bill", select_split_bills_path, class: "split-button my-5" %>
-    <%= link_to "Back", new_split_path, class: "split-1-button" %>
-    <div class="mb-5">
+    <div class="mt-3 mb-5">
+      <%= link_to "Add a bill", select_split_bills_path, class: "split-button" %>
+      <%= link_to "Back", new_split_path, class: "split-1-button" %>
     </div>
   </div>
 </div>
