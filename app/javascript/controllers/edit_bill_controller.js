@@ -119,6 +119,7 @@ export default class extends Controller {
   // ======== taxes ==========
 
   updateTax(event) {
+    console.log("test")
     const form = event.target.closest('form')
     const targetInput = event.target.dataset.billTarget
 
@@ -141,6 +142,7 @@ export default class extends Controller {
   }
 
   calculateTotal() {
+    console.log("trigger")
     let total = 0
     // run the calculations
     this.itemDescriptionsTargets.forEach((form) => {

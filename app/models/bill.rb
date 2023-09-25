@@ -25,7 +25,11 @@ class Bill < ApplicationRecord
   has_one_attached :photo
 
   # added by cl (15-09)
-  accepts_nested_attributes_for :items, reject_if: proc { |attributes| attributes.values.any?(&:blank?) }, allow_destroy: true
+  accepts_nested_attributes_for :items, reject_if: proc { |attributes|
+    cloned_attributes = attributes.clone
+    cloned_attributes.delete(:id)
+    cloned_attributes.values.any?(&:blank?)
+    }, allow_destroy: true
 
   def all_split_members
     split.members

@@ -51,6 +51,7 @@ class BillsController < ApplicationController
   end
 
   def create
+
     @split = Split.find(params[:split_id])
     converted_params = bill_params
     converted_params[:items_attributes].each do |item|
