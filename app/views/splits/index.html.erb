@@ -1,14 +1,16 @@
-<div class="page-setup">
-  <div class="container">
-    <h1 class="my-5">Your Splits so far...</h1>
-    <div>
-      <% if @splits.any? %>
-        <%= render partial: 'splits' %>
-          <div>
-        <% else %>
-          <p><em>Sorry, no splits found!</em></p>
-        </div>
-      <% end %>
+<body class="container-color">
+  <div class="page-setup">
+    <div class="container">
+      <h1 class="my-5">My Splits</h1>
+      <div>
+        <% if @splits.any? %>
+          <%= render partial: 'splits' %>
+            <div>
+          <% else %>
+            <p><em>Sorry, no splits found!</em></p>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
+</body>
