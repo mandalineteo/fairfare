@@ -8,8 +8,8 @@ class RetrieveItemsFromReceipt < ApplicationService
     data = @json_data["document"]["inference"]["pages"][0]["prediction"]
 
     date = data.dig("date", "value")
-    taxes = data.dig("taxes", 0, "value")
-    total_amount = data.dig("total_amount", "value") * 100
+    taxes = data.dig("taxes", 0, "value") || 0
+    total_amount = (data.dig("total_amount", "value") || 0) * 100
 
     items = data["line_items"]
     merchant_name = data.dig("supplier_name", "value")

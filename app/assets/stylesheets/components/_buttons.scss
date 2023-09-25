@@ -1,4 +1,5 @@
 .standard-button {
+  display: inline-block;
   opacity: 0.8;
   padding: 8px;
   border-radius: 15px;
@@ -11,27 +12,32 @@
 }
 
 .white-pink-button {
+  display: inline-block;
   background-color: white;
   color: $ff-red;
 }
 
 .red-button {
-  color: white;
+  display: inline-block;
+  color:white;
   background-color: $ff-red;
 }
 
 .green-button {
-  color: white;
+  display: inline-block;
+  color:white;
   background-color: $ff-green;
 }
 
 .white-purple-button {
-  color: $ff-purple;
+  display: inline-block;
+  color:$ff-purple;
   background-color: white;
 }
 
 
 .contacts-selection-button {
+  display: inline-block;
   border: 10px solid #F5E9CF;
   border-radius: 8px;
   padding: 5px;
@@ -53,11 +59,12 @@
 }
 
 .whatsapp-button:hover {
-  background-color: #128C7E;
-  /* Darker shade on hover */
+  display: inline-block;
+  background-color: #128C7E; /* Darker shade on hover */
 }
 
 .teal-button {
+  display: inline-block;
   background-color: #7DB9B6;
   color: rgb(255, 255, 255);
   display: inline-block;
@@ -68,11 +75,13 @@
 }
 
 .teal-button:hover {
+  display: inline-block;
   background-color: #547f7c;
   color: white;
 }
 
 .pink-button {
+  display: inline-block;
   background-color: #E96479;
   display: inline-block;
   padding: 5px 12px;
@@ -83,6 +92,7 @@
 }
 
 .pink-button:hover {
+  display: inline-block;
   background-color: #c35162;
   color: white;
 }
@@ -94,6 +104,28 @@
   background-color: #E96479;
   color: white;
   width: 70%;
+  text-decoration: none;
+  display: inline;
+}
+
+.split-button {
+  display: inline-block;
+  border: 10px solid #E96479;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #E96479;
+  color: white;
+  width: 100px;
+  text-decoration: none;
+}
+
+.split-1-button {
+  display: inline-block;
+  border: 10px solid #E96479;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #E96479;
+  color: white;
   text-decoration: none;
 }
 
