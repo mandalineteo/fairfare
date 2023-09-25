@@ -1,14 +1,14 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon d-flex">
-  <div class="container-fluid">
+<% if current_user %>
+  <div class="navbar navbar-expand-sm navbar-light navbar-lewagon d-flex">
+    <div class="container-fluid">
 
-  <% if current_user %>
     <%= link_to root_path, class: "navbar-icon" do %>
         <i class="fa-solid fa-house"></i>
     <% end %>
 
-    <%= link_to splits_path, class: "navbar-icon" do %>
-        <i class="fa-solid fa-file-lines"></i>
-    <% end %>
+      <%= link_to splits_path, class: "navbar-icon" do %>
+          <i class="fa-solid fa-file-lines"></i>
+      <% end %>
 
     <%= link_to new_split_path, class: "navbar-icon" do %>
         <i class="fa-solid fa-circle-plus"></i>
@@ -21,7 +21,6 @@
     <%= link_to user_path(current_user), class: "navbar-icon" do %>
         <i class="fa-solid fa-user"></i>
     <% end %>
-  <% end %>
-
+    </div>
   </div>
-</div>
+<% end %>

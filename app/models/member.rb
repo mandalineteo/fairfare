@@ -12,12 +12,12 @@ class Member < ApplicationRecord
     !user.nil?
   end
 
-  def given_nickname(current_user)
-    return current_user.username if current_user.member == self
+  def given_nickname(by_user)
+    return by_user.username if by_user.member == self
 
     contact = Contact.find_by(
       member: self,
-      user: current_user
+      user: by_user
     )
     contact&.nickname
   end

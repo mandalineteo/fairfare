@@ -1,4 +1,6 @@
 class ItemMembersController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def new
     @item_member = ItemMember.new
   end

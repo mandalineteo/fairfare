@@ -2,12 +2,14 @@
 
   <div class="container-fluid bill-index" data-billroom-subscription-bill-id-value=<%= @bill.id %> data-controller="edit-bill billroom-subscription" data-action="click->edit-bill#closeForm">
     <div class="bill-description">
-      <%
-      host_name = Rails.env == "development" ? "localhost:3000" : request.host
-      encoded_url = host_name + "/splits/#{@split.id}"
-      encoded_message = "#{current_user.full_name} is inviting you to join their split at #{encoded_url} "
-      %>
-      <a class="collaborate standard-button yellow-pink-button" href="https://wa.me/?text=<%= encoded_message %>">collaborate</a>
+      <% if user_signed_in? %>
+        <%
+        host_name = Rails.env == "development" ? "localhost:3000" : request.host
+        encoded_url = host_name + "/splits/#{@split.id}"
+        encoded_message = "#{current_user&.full_name || @split.user.first_name} is inviting you to join their split at #{encoded_url} "
+        %>
+        <a class="collaborate standard-button yellow-pink-button" href="https://wa.me/?text=<%= encoded_message %>">Collaborate</a>
+      <% end %>
 
       <h1
         data-action="click->edit-bill#toggleSplitForm"
@@ -167,13 +169,14 @@
     <%= render 'bills/breakdown', bill: @bill %>
 
 
-
-    <div class="add-receipt col-6 justify-content-center">
-      <p style="margin-bottom: 20px">Add another receipt?</p>
-      <div class="d-flex">
-        <%= link_to "<button>Yes</button>".html_safe, select_split_bills_path, class:"add-another-receipt" %>
-        <%= link_to "<button>No</button>".html_safe, split_path(@split), class:"continue-to-bill-summary" %>
+    <% if user_signed_in? %>
+      <div class="add-receipt col-6 justify-content-center">
+        <p style="margin-bottom: 20px">Add another receipt?</p>
+        <div class="d-flex">
+          <%= link_to "<button>Yes</button>".html_safe, select_split_bills_path, class:"add-another-receipt" %>
+          <%= link_to "<button>No</button>".html_safe, split_path(@split), class:"continue-to-bill-summary" %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
