@@ -7,7 +7,7 @@
   </div>
   <div class="container">
     <h1 class="mt-5"><%= @bill.merchant %></h1>
-    <h2><%= "SGD #{format('%.2f', @bill.total_amount/100.00)}" %></h2>
+    <h2><%= "SGD #{cents_to_dollars(@bill.total_amount)}" %></h2>
     <% @bill.payers.each do |payer| %>
       <div>
         <h3>Payer: <%= payer.member.given_nickname(@bill.split.user) %></h3>
@@ -23,7 +23,7 @@
             <div class="d-flex mt-3">
               <i class="fa-solid fa-user fs-5"></i>
               <p class="mx-2 mt-0"><%= member.given_nickname(@bill.split.user) %></p>
-              <p><%= "SGD #{format('%.2f', (item.price/100.00)/item.members.count)}" %></p>
+              <p><%= "SGD #{cents_to_dollars(item.price/item.members.count)}" %></p>
 
             </div>
           <% end %>
@@ -38,7 +38,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="splits-summary-card my-3 col-11">
-      <%= "Taxes: SGD #{format('%.2f', @bill.taxes/100.00)}" %>
+      <%= "Taxes: SGD #{cents_to_dollars(@bill.taxes)}" %>
     </div>
   </div>
 

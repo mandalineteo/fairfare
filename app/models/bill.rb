@@ -18,6 +18,10 @@ class Bill < ApplicationRecord
   # added by cl (15-09)
   accepts_nested_attributes_for :items
 
+  def all_split_members
+    split.members
+  end
+
   def update_total_bill
     total_sum = 0
 
@@ -33,12 +37,12 @@ class Bill < ApplicationRecord
   end
 
   def settlement
-    members.uniq.map { |member| member.total_consumed(self) }
+    all_split_members.uniq.map { |member| member.total_consumed(self) }
   end
 
   def even_split_tax
     return 0 if taxes.nil?
 
-    taxes / (members.uniq.count.positive? ? members.uniq.count : 1)
+    taxes / (all_split_members.uniq.count.positive? ? all_split_members.uniq.count : 1)
   end
 end

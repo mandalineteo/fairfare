@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[show edit update] do
     resources :contacts, only: %i[index edit update]
   end
+
   resources :splits, except: %i[edit] do
     resources :split_members, only: %i[create]
     resources :members, only: %i[create index]
@@ -46,11 +47,9 @@ Rails.application.routes.draw do
   end
 
   # resources :payers, only: %i[destroy]
-  resources :bills, only: :update
-  resources :items, only: :update
+  resources :bills, only: [:edit, :update]
+  resources :items, only: %i[destroy update]
 end
-
-
 # def tabulate
 #   @split = Split.find_by(invite_code: params[:id])
 # end

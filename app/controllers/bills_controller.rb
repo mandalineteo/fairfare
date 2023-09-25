@@ -73,9 +73,9 @@ class BillsController < ApplicationController
   end
 
   def edit
-    @bill = Bill.find(params[:bill_id])
-    @items = Item.all.where(bill_id: @bill.id)
-    # raise
+    @bill = Bill.find(params[:id])
+    @split = @bill.split
+    @bill.items.build
   end
 
   def update
@@ -83,7 +83,7 @@ class BillsController < ApplicationController
     @bill.update(bill_params)
 
     respond_to do |format|
-      format.html { redirect_to split_bill_items_path(@split) }
+      format.html { redirect_to split_bill_items_path(@bill.split, @bill) }
       format.text { render(partial: 'bills/breakdown', formats: :html, locals: { bill: @bill }) }
     end
   end
