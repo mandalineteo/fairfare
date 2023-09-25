@@ -37,8 +37,10 @@
   <div>
   </div>
   <div class="row justify-content-center">
-    <div class="splits-summary-card my-3 col-11">
-      <%= "Taxes: SGD #{format('%.2f', @bill.taxes/100.00)}" %>
+    <div class="col splits-summary-card my-3">
+      <%= "GST: SGD #{format('%.2f', @bill.taxes/100.00)}" %>
+      <%= "Discount: SGD #{format('%.2f', @bill.discount/100.00)}" %>
+      <%= "Service Charge: SGD #{format('%.2f', @bill.service_charge/100.00)}" %>
     </div>
   </div>
 
