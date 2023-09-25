@@ -1,15 +1,15 @@
-<div class="page-setup">
+<div class="page-setup" style="padding-top:120px">
 
   <div class="container-fluid page-padding d-flex">
 
     <div class="login-form">
 
-      <h2 >Sign up</h2>
+      <h2>Sign up</h2>
 
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= f.error_notification %>
 
-        <div class="form-inputs">
+        <div class="form-inputs input-background">
           <%= f.input :phone_number,
                       required: true,
                       autofocus: true,
