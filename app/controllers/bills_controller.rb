@@ -81,6 +81,7 @@ class BillsController < ApplicationController
   def update
     @bill = Bill.find(params[:id])
     @bill.update(bill_params)
+    @bill.update_total_bill
 
     respond_to do |format|
       format.html { redirect_to split_bill_items_path(@split) }

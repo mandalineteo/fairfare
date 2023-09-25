@@ -1,14 +1,14 @@
-<body class="container-color">
-<%= link_to "Back", user_contacts_path(current_user), class:"pink-button mt-4 ms-2" %>
-  <div class="container">
-    <div>
-      <h1 class="pt-5">Edit <%= @contact.nickname %></h1>
-        <div class="my-4">
-          <%= simple_form_for([current_user, @contact]) do |f| %>
-          <%= f.input :nickname %>
-          <%= f.button :submit, class:"pink-button my-3" %>
-        <% end %>
-        </div>
+<body class="container-color edit-contact page-setup" style="padding-top: 24px;">
+<%= link_to "Back", user_contacts_path(current_user), class:"back standard-button white-pink-button fs-3 ms-3" %>
+  <div class="container edit-friend" style="padding: 16px;">
+
+    <h1 class="pt-5" style="color:#E96479">Edit <%= @contact.nickname %></h1>
+    <div class="my-4">
+      <%= simple_form_for([current_user, @contact]) do |f| %>
+        <%= f.input :nickname %>
+        <%= f.button :submit, class:" standard-button red-button my-3" %>
+      <% end %>
     </div>
+
   </div>
 </body>

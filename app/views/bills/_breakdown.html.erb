@@ -2,5 +2,5 @@
   <p>Discount: SGD $<%= cents_to_dollars(@bill.discount) %></p>
   <p>Tax: SGD $<%= cents_to_dollars(@bill.taxes) %></p>
   <p>Service Charge: SGD $<%= cents_to_dollars(@bill.service_charge) %></p>
-  <p>Total Amount: SGD $<%= cents_to_dollars(@bill.total_amount) %></p>
+  <p>Total Amount: SGD $<span data-edit-bill-target="total"><%= cents_to_dollars(@bill.total_amount) %></span></p>
 </div>
