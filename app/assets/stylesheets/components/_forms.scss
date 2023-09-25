@@ -1,0 +1,13 @@
+.was-validated .form-control:valid,
+.form-control.is-valid {
+  border-color: transparent;
+  background-image: none;
+}
+
+.was-validated .form-select:valid:not([multiple]):not([size]),
+.was-validated .form-select[size="1"]:valid:not([multiple]),
+.form-select.is-valid:not([multiple]):not([size]),
+.form-select.is-valid[size="1"]:not([multiple]) {
+  border-color: transparent;
+  background-image: var(--bs-form-select-bg-img);
+}
