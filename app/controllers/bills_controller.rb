@@ -25,7 +25,7 @@ class BillsController < ApplicationController
       # schedule a background job
       ParseReceiptJob.perform_later(@bill)
 
-      redirect_to split_bill_items_path(@bill.split, @bill)
+      redirect_to edit_split_bill_path(@bill.split, @bill)
       # check sidekiq background jobs on what to do when the json is obtained from ocr
     else
       raise
@@ -73,18 +73,24 @@ class BillsController < ApplicationController
   end
 
   def edit
-    @bill = Bill.find(params[:bill_id])
-    @items = Item.all.where(bill_id: @bill.id)
-    # raise
+    @bill = Bill.find(params[:id])
+
+    if @bill.scraping_data
+      render :scraping
+    else
+      @split = @bill.split
+      @bill.items.build
+    end
   end
 
   def update
+    pp params
     @bill = Bill.find(params[:id])
     @bill.update(bill_params)
     @bill.update_total_bill
 
     respond_to do |format|
-      format.html { redirect_to split_bill_items_path(@split) }
+      format.html { redirect_to split_bill_items_path(@bill.split, @bill) }
       format.text { render(partial: 'bills/breakdown', formats: :html, locals: { bill: @bill }) }
     end
   end
@@ -105,6 +111,11 @@ class BillsController < ApplicationController
 
   def bill_params
     # params.require(:bill).permit(:merchant, items_attributes: %i[name price quantity])
-    params.require(:bill).permit(:merchant, :date, :discount, :service_charge, :taxes, items_attributes: %i[name price quantity])
+    params.require(:bill).permit(:total_amount,
+      :total_amount_in_dollars,
+      :taxes_in_dollars,
+      :discount_in_dollars,
+      :service_charge_in_dollars,
+      :merchant, :date, :discount, :service_charge, :taxes, items_attributes: %i[id name price price_in_dollars quantity])
   end
 end

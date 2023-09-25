@@ -10,11 +10,7 @@ class ItemsController < ApplicationController
     @item_member = ItemMember.new
     # @contacts = Contact.all.where(member_id: )
 
-    if @bill.scraping_data
-      render :scraping
-    else
-      render :index
-    end
+    render :index
   end
 
   def new
@@ -72,6 +68,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :quantity, :price)
+    params.require(:item).permit(:name, :quantity, :price, :price_in_dollars)
   end
 end
