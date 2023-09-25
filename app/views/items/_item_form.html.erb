@@ -6,7 +6,7 @@
       }}  %>
     </div>
 
-    <div class="col-3">
+    <div class="col-2">
       <%= f.input :quantity, label: false, input_html: { data: {
         action: 'blur->edit-bill#updateItem'
       }}  %>
@@ -19,14 +19,15 @@
     <%# </div> %>
 
 
-    <div class="col-2">
-      <%= f.input :price, label: false, input_html: {
+    <div class="col-3">
+      <%= f.input :price, label: false, wrapper_html: { style: "height: 0px; margin-bottom: 0px !important;" }, input_html: {
         class: 'd-none',
         data: {
-
         }
       } %>
-      <input value="<%= cents_to_dollars(item.price) %>" class="w-100" type="number" data-item-target="price" data-action="blur->edit-bill#updateItem">
+      <input value="<%= cents_to_dollars(item.price) %>"
+      min="0"
+      class="w-100 form-control" type="number" data-item-target="price" data-action="blur->edit-bill#updateItem">
     </div>
 
 
