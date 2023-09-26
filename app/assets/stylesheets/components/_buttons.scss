@@ -1,7 +1,7 @@
 .standard-button {
   display: inline-block;
   opacity: 0.8;
-  padding: 8px;
+  padding: 10px;
   border-radius: 15px;
   border: none;
   font-weight: 600 !important;
@@ -27,6 +27,13 @@
   display: inline-block;
   color:white;
   background-color: $ff-green;
+  transition: 300ms all ease-in-out;
+
+  &:hover {
+    color: $ff-green;
+    border: 1px solid $ff-green;
+    background-color: white;
+  }
 }
 
 .white-purple-button {
@@ -134,4 +141,28 @@
   margin-top: 40px;
   padding-left: 20px;
   display: inline;
+}
+
+
+.log-out-btn {
+  background-color: #F7F1E4;
+  box-shadow: 5px 5px 10px #93a6d3;
+  border: 1px solid #F7F1E4;
+  border-radius: 8px;
+  float: right;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-right: 35px;
+  padding: 10px;
+  transition: 300ms all ease;
+
+  &:hover {
+    background-color: #d6d3cb;
+    border: 1px solid #d6d3cb;
+  }
+
+  a {
+    color: #2E4374;
+    text-decoration: none;
+  }
 }
