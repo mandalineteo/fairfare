@@ -1,7 +1,7 @@
 <div class="container-color contacts-index">
   <div class="container">
     <h1 class="pt-5 pb-4 ms-3">My Contacts</h1>
-    <div class="form-summary-card-less-padding">
+    <div class="form-summary-card-less-padding mb-5">
       <% current_user.contacts.sort_by(&:nickname).each do |contact| %>
           <div class="d-flex contact p-1 justify-content-between">
             <div class="d-flex">
