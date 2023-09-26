@@ -34,7 +34,7 @@
       <% end %>
 
       <div class="payer dropdown d-flex">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-select-person-target="dropdown" data-bs-auto-close="outside" aria-expanded="false">
           Select Person(s)
         </button>
         <ul class="dropdown-menu">
@@ -107,7 +107,7 @@
                       <i class="fa-solid fa-user-plus"></i>
                     </button>
                     <div class="payer dropdown d-flex ">
-                      <ul class="dropdown-menu dropdown-menu-end">
+                      <ul id="item-member-dropdown" class="dropdown-menu dropdown-menu-end">
                         <% @split_members.each do |member| %>
                           <%= render 'items/item_member', member: member, bill: @bill, split: @split, item: item, item_member: @item_member %>
                         <% end %>

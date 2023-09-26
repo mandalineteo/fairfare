@@ -1,9 +1,10 @@
 <%= simple_form_for item, data: { edit_bill_target: "itemDescriptions" } do |f| %>
   <div class="row g-0">
     <div class="col-7">
-      <%= f.input :name, label: false, input_html: { data: {
+      <%= f.input :name, label: false,
+      input_html: { data: {
         action: 'blur->edit-bill#updateItem',
-        class: 'w-100'
+        class: 'w-100',
       }}  %>
     </div>
 

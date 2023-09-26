@@ -15,6 +15,10 @@
     font-size: 1rem;
     // font-weight: 500;
   }
+
+  h2 {
+    margin-bottom: 0;
+  }
 }
 
 .bill-description p, .tax-discounts p {
@@ -224,7 +228,8 @@ ul.dropdown-menu {
 }
 
 .added-green {
-  background-color: $ff-green!important;
+  // background-color: $ff-green!important;
+  background-color: $ff-red!important;
   color: white!important;
   // font-weight :500!important;
   opacity: 0.8;
@@ -285,14 +290,23 @@ ul.dropdown-menu {
     }
 }
 
+#item-member-dropdown {
+  width: 100vw;
+  // position: absolute !important;
+  // bottom: 0 !important;
+}
+
+
 a.collaborate {
-  background-color: #e8c986;
+  // background-color: #e8c986;
+  background-color: white;
+
   text-decoration: none;
   padding: 10px;
   position: absolute;
-  top: 30px;
-  right: 30px;
-  color: #020839;
+  top: 20px;
+  right: 20px;
+  color: $ff-red;
   // z-index: 1000000;
 }
 
@@ -305,6 +319,22 @@ a.collaborate {
     background-color: #e2d8c0;
   }
 }
+
+.item-member-badge {
+  // background-color: $ff-yellow-light!important;
+  background-color: rgb(255, 247, 231)!important;
+  color: $orange!important;
+  border: 1px solid $orange!important;
+  font-weight: 300!important;
+}
+
+.payer-pill {
+  background-color: rgb(255, 247, 231)!important;
+  color: $orange!important;
+  border: 1px solid $orange!important;
+  font-weight: 300!important;
+}
+
 
 
 // ===== item input field =======

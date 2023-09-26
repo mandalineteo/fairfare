@@ -2,7 +2,7 @@
   data-billroom-subscription-target="itemMemberList"
   data-id="item-<%=item.id%>">
   <% item.members.each do |member| %>
-    <span class="mb-2 badge rounded-pill bg-secondary text-light">
+    <span class="item-member-badge mb-2 badge rounded-pill bg-secondary text-light">
       <%= member.given_nickname(item.bill.split.user) %>
     </span>
   <% end %>
