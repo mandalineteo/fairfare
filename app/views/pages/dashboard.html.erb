@@ -27,7 +27,7 @@
     <div class="col-6" style="padding:8px 4px 8px 16px;">
       <div class="card outstanding-card green" style="background-color:#4D455D; border:1px solid; padding: 16px">
         <div class="card-body" style="padding:0">
-          <%# <h5 class="card-title">Owed: </h5> %>
+          <h5 class="card-title">Owed: </h5>
 
           <p class="card-text outstanding-owed ff-bold">SGD $ <%= format('%.2f',current_user.owed_summary(current_user)/100.00) %></p>
           <%= link_to "View Splits", splits_path,
@@ -40,7 +40,7 @@
     <div class="col-6" style="padding:8px 16px 8px 4px;">
       <div class="card outstanding-card red"  style="background-color:#4D455D; border:1px solid; padding: 16px">
         <div class="card-body" style="padding:0">
-          <%# <h5 class="card-title">Owe: </h5> %>
+          <h5 class="card-title">Owe: </h5>
         <p class="card-text outstanding-owe ff-bold">SGD $<%= format('%.2f',current_user.owe_summary(current_user)/100.00) %></p>
           <%= link_to "View Splits", splits_path,
           class: "view-splits"
