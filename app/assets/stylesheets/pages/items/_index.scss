@@ -285,11 +285,11 @@ a.collaborate {
   background-color: #e8c986;
   text-decoration: none;
   padding: 10px;
-  position: fixed;
+  position: absolute;
   top: 30px;
   right: 30px;
   color: #020839;
-  z-index: 1000000;
+  // z-index: 1000000;
 }
 
 // collaborate button
