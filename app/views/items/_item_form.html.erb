@@ -1,23 +1,18 @@
 <%= simple_form_for item, data: { edit_bill_target: "itemDescriptions" } do |f| %>
-  <div class="row">
-    <div class="col-7" >
+  <div class="row g-0">
+    <div class="col-7">
       <%= f.input :name, label: false, input_html: { data: {
-        action: 'blur->edit-bill#updateItem'
+        action: 'blur->edit-bill#updateItem',
+        class: 'w-100'
       }}  %>
     </div>
 
     <div class="col-2">
       <%= f.input :quantity, label: false, input_html: { data: {
-        action: 'blur->edit-bill#updateItem'
+        action: 'blur->edit-bill#updateItem',
+        # style: 'width: 100px;'
       }}  %>
     </div>
-
-    <%# <div class="col-2" >
-      <%= f.input :price, label: false, input_html: { data: {
-        action: 'blur->edit-bill#updateItem'
-      }} %>
-    <%# </div> %>
-
 
     <div class="col-3">
       <%= f.input :price, label: false, wrapper_html: { style: "height: 0px; margin-bottom: 0px !important;" }, input_html: {
@@ -29,7 +24,5 @@
       min="0"
       class="w-100 form-control" type="number" data-item-target="price" data-action="blur->edit-bill#updateItem">
     </div>
-
-
   </div>
 <% end %>

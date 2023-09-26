@@ -71,32 +71,36 @@
   <div id="bill">
     <div class="bill-items">
       <div class="bill-headers row" style="margin-bottom: 0.8rem">
-        <h3 class="col-7 item">Item</h3>
-        <h3 class="col-1">Qty</h3>
-        <h3 class="col-2">Unit price</h3>
-        <h3 class="col-2">People</h3>
+        <div class="col-11">
+          <div class="container">
+            <div class="row">
+              <h3 class="fw-bold col-7 text-start p-0 item">Item</h3>
+              <h3 class="fw-bold col-2 text-start p-0">Qty</h3>
+              <h3 class="fw-bold col-3 text-start p-0">Price</h3>
+            </div>
+          </div>
+        </div>
+        <h3 class="col-1"></h3>
       </div>
 
-      <div class="add-people-button">
+      <div class="add-people-button row px-0">
         <div class="item-row">
           <% @bill.items.each do |item| %>
+            <div class="bill-summary-item-card row g-0">
 
-            <div class="bill-summary-item-card row">
-
-              <div class="col-10">
+              <div class="col-11">
                 <%= render 'item_form', item: item %>
               </div>
 
-              <div class="col-2">
-                <div data-controller="add-people-button" class="">
-                  <div class="bill-summary-item-card d-flex justify-content-center align-items-center">
+              <div class="col-1">
+                <div data-controller="add-people-button" >
+                  <div class="bill-summary-item-card d-flex justify-content-center align-items-center mt-2">
                     <%# <p class="col-2 people" data-action="click->add-people-button#appear">add people</p> %>
                     <button class="col-2 people btn btn-secondary " type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" style="margin-right:0">
                       <i class="fa-solid fa-user-plus"></i>
                     </button>
-                    <div class="payer dropdown d-flex">
+                    <div class="payer dropdown d-flex ">
                       <ul class="dropdown-menu dropdown-menu-end">
-
                         <% @split_members.each do |member| %>
                           <%= render 'items/item_member', member: member, bill: @bill, split: @split, item: item, item_member: @item_member %>
                         <% end %>

@@ -17,3 +17,33 @@
   border-radius: 5px;
   // background-color: #F5E9CF;
 }
+
+.form-select.is-valid:not([multiple]):not([size]) {
+  padding: 0.2rem;
+  background-image: none;
+}
+
+.form-control {
+  padding: 0.2rem !important;
+  border: 2px solid transparent;
+  border:0;
+  outline: none;
+  background-color: transparent;
+  text-align: left;
+  font-size: .8rem;
+  border-radius: 0;
+  background-size: 50% 1px !important;
+  background-repeat: no-repeat;
+  background-position: bottom left !important;
+  background-image: linear-gradient(rgba($orange, 0.5), rgba($orange, 0.5)) !important;
+  transition: 300ms;
+
+  &:focus {
+    background-size: 95% 1px !important;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+    box-shadow: none !important;
+    background-image: linear-gradient(rgba($orange, 1), rgba($orange, 0.5)) !important;
+  }
+}

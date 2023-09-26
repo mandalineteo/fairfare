@@ -19,9 +19,9 @@
     <div class="items">
       <% @bill.items.each do |item| %>
         <div class="splits-summary-card my-3">
-          <p class="item"><%= item.name %>
-            <%= "X #{item.quantity}" %>
-            <%= "SGD #{item.price/100.00}" %>
+          <p class="item"><%= item.name %> &nbsp;
+            <%= "X #{item.quantity}" %> &nbsp;
+            <%= "SGD #{cents_to_dollars(item.price)}" %>
           </p>
 
           <% item.members.each do |member| %>
