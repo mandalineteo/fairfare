@@ -64,7 +64,6 @@
       <% end %>
   </div>
 
-  <hr>
 
 
 <%# ------------------------------------------------------------- %>
@@ -72,21 +71,28 @@
   <div id="bill">
     <div class="bill-items">
       <div class="bill-headers row" style="margin-bottom: 0.8rem">
-        <h3 class="col-3 item">Item</h3>
-        <h3 class="col-3">Qty</h3>
-        <h3 class="col-3">Unit price</h3>
-        <h3 class="col-3 ">People</h3>
+        <div class="col-11">
+          <div class="container">
+            <div class="row">
+              <h3 class="fw-bold col-7 text-start p-0 item">Item</h3>
+              <h3 class="fw-bold col-2 text-start p-0">Qty</h3>
+              <h3 class="fw-bold col-3 text-start p-0">Price</h3>
+            </div>
+          </div>
+        </div>
+        <h3 class="col-1"></h3>
       </div>
 
       <div class="add-people-button row px-0">
         <div class="item-row">
           <% @bill.items.each do |item| %>
             <div class="bill-summary-item-card row g-0">
-              <div class="col-9">
+
+              <div class="col-11">
                 <%= render 'item_form', item: item %>
               </div>
 
-              <div class="col-3">
+              <div class="col-1">
                 <div data-controller="add-people-button" >
                   <div class="bill-summary-item-card d-flex justify-content-center align-items-center mt-2">
                     <%# <p class="col-2 people" data-action="click->add-people-button#appear">add people</p> %>
@@ -171,7 +177,7 @@
 
     <% if user_signed_in? %>
       <div class="add-receipt justify-content-center">
-        <p style="margin-bottom: 20px">Add another receipt?</p>
+        <p style="margin-bottom: 25x; margin-top: 30px">Add another receipt?</p>
         <div class="d-flex justify-content-center">
           <%= link_to "<button>Yes</button>".html_safe, select_split_bills_path, class:"add-another-receipt" %>
           <%= link_to "<button>No</button>".html_safe, split_path(@split), class:"continue-to-bill-summary" %>
