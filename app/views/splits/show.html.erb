@@ -3,7 +3,7 @@
 
   <div class="container">
     <div class="pt-5">
-      <h1>Split Name: <%= @split.name %></h1>
+      <h1 class="purple-text">Split Name: <%= @split.name %></h1>
     </div>
     <% if @split.bills.empty? %>
       <%= render partial: 'nothing_new' %>
