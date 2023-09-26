@@ -1,12 +1,12 @@
 <div data-filter-contacts-target="contacts">
   <% if available_contacts.empty? %>
     <div class="form-summary-card-less-padding">
-      <h2 class="mt-4">No Contacts to show</h2>
+      <h2 class="mt-4 purple-text">No Contacts to show</h2>
       <p>Enter a new nickname and phone number to add member to split.</p>
     </div>
   <% else %>
     <div class="existing-contacts-form-card card">
-      <h2 class="my-3 pink-color-text">Click to add existing contacts to split</h2>
+      <h2 class="my-3 purple-text">Click to add existing contacts to split</h2>
       <div class="list-group border-0" >
         <% available_contacts.each do |contact| %>
           <div class="list-group-item border-0">
