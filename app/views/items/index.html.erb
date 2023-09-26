@@ -64,7 +64,6 @@
       <% end %>
   </div>
 
-  <hr>
 
 
 <%# ------------------------------------------------------------- %>
@@ -174,7 +173,7 @@
 
     <% if user_signed_in? %>
       <div class="add-receipt justify-content-center">
-        <p style="margin-bottom: 20px">Add another receipt?</p>
+        <p style="margin-bottom: 25x; margin-top: 30px">Add another receipt?</p>
         <div class="d-flex justify-content-center">
           <%= link_to "<button>Yes</button>".html_safe, select_split_bills_path, class:"add-another-receipt" %>
           <%= link_to "<button>No</button>".html_safe, split_path(@split), class:"continue-to-bill-summary" %>
