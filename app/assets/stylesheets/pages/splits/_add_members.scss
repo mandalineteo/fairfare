@@ -1,0 +1,39 @@
+.add-members {
+  .form-summary-card-less-padding, .existing-contacts-form-card {
+    border-radius: 25px;
+    background-color: $ff-yellow-light;
+    border: none;
+  }
+
+  .list-group-item {
+    background-color: transparent;
+  }
+
+  h1, h2 {
+    font-size: 1rem;
+  }
+}
+
+.contacts-in-split {
+  background-color: rgb(255, 247, 231)!important;
+  color: $orange!important;
+  border: 1px solid $orange!important;
+  font-weight: 300!important;
+  padding: 8px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  margin-bottom: 6px;
+  margin-right: 6px;
+  // flex-wrap: wrap!important;
+  // align-self: start;
+}
+
+.contacts-selection-button {
+  border-radius: 30px;
+  background-color: white;
+  border: none;
+  padding: 0.8rem;
+  color: $ff-red;
+  font-weight: 300;
+}
