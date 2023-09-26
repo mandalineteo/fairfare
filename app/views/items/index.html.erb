@@ -1,6 +1,10 @@
 <div class="page-setup">
 
-  <div class="container-fluid bill-index" data-billroom-subscription-bill-id-value=<%= @bill.id %> data-controller="edit-bill billroom-subscription" data-action="click->edit-bill#closeForm">
+  <div class="container-fluid bill-index"
+  data-billroom-subscription-bill-id-value=<%= @bill.id %>
+  data-edit-bill-bill-id-value=<%= @bill.id %>
+  data-controller="edit-bill billroom-subscription payer-pills"
+  data-action="click->edit-bill#closeForm">
     <div class="bill-description">
       <% if user_signed_in? %>
         <%
@@ -38,7 +42,10 @@
             <%= render 'bills/payer', member: member, bill: @bill, split: @split, payer: @payer %>
           <% end %>
         </ul>
-        <h2>paid this bill</h2>
+      </div>
+      <div class="d-flex">
+        <h2 class="mx-2">Payers for this bill: </h2>
+        <%= render "bills/payer_pills", bill: @bill %>
       </div>
 
       <%= simple_form_for @bill,
