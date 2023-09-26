@@ -290,6 +290,13 @@ ul.dropdown-menu {
     }
 }
 
+#item-member-dropdown {
+  width: 100vw;
+  // position: absolute !important;
+  // bottom: 0 !important;
+}
+
+
 a.collaborate {
   // background-color: #e8c986;
   background-color: white;
@@ -297,8 +304,8 @@ a.collaborate {
   text-decoration: none;
   padding: 10px;
   position: absolute;
-  top: 30px;
-  right: 30px;
+  top: 20px;
+  right: 20px;
   color: $ff-red;
   // z-index: 1000000;
 }
@@ -315,12 +322,18 @@ a.collaborate {
 
 .item-member-badge {
   // background-color: $ff-yellow-light!important;
-  background-color: white!important;
-  color: $ff-green!important;
-  border: 1px solid $ff-green!important;
+  background-color: rgb(255, 247, 231)!important;
+  color: $orange!important;
+  border: 1px solid $orange!important;
   font-weight: 300!important;
 }
 
+.payer-pill {
+  background-color: rgb(255, 247, 231)!important;
+  color: $orange!important;
+  border: 1px solid $orange!important;
+  font-weight: 300!important;
+}
 
 
 
