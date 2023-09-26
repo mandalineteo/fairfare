@@ -10,7 +10,9 @@ export default class extends Controller {
     "taxDescriptions",
     "splitHeader",
     "breakdown",
-    "total"
+    "total",
+    "payer",
+    "payerPillsList"
   ]
 
   connect() {
@@ -18,7 +20,7 @@ export default class extends Controller {
 
   // ====== item ======
   toggleForm(event) {
-    this.itemDescriptionsTargets.forEach((target)=>{
+    this.itemDescriptionsTargets.forEach((target) => {
       target.classList.remove("show-form");
     })
     // console.log('show form')
@@ -26,13 +28,13 @@ export default class extends Controller {
     form.classList.add("show-form");
   }
 
-  closeForm(event){
+  closeForm(event) {
     console.log('close form')
     if (event.target.classList.contains("item-value") || event.target.classList.contains("form-toggler") || event.target.tagName.toLowerCase() === "input") {
       console.log("don't close")
       return;
     }
-    this.itemDescriptionsTargets.forEach((target)=>{
+    this.itemDescriptionsTargets.forEach((target) => {
       target.classList.remove("show-form");
     })
   }
@@ -51,9 +53,9 @@ export default class extends Controller {
 
     fetch(form.action, {
       method: "PATCH",
-      headers: { "Accept": "text/plain"},
+      headers: { "Accept": "text/plain" },
       body: new FormData(form)
-      })
+    })
 
       .then(response => response.text())
       .then((data) => {
@@ -61,7 +63,7 @@ export default class extends Controller {
         // this.itemDescriptionsTargets.innerHTML = data
       })
 
-      this.calculateTotal()
+    this.calculateTotal()
   }
 
   // ======== split name ============
@@ -85,9 +87,9 @@ export default class extends Controller {
     const url = this.splitTextTarget.action
     fetch(url, {
       method: "PATCH",
-      headers: { "Accept": "text/plain"},
+      headers: { "Accept": "text/plain" },
       body: new FormData(this.splitTextTarget)
-      })
+    })
 
       .then(response => response.text())
       .then((data) => {
@@ -105,9 +107,9 @@ export default class extends Controller {
     const url = this.merchantAndDateTarget.action
     fetch(url, {
       method: "PATCH",
-      headers: { "Accept": "text/plain"},
+      headers: { "Accept": "text/plain" },
       body: new FormData(this.merchantAndDateTarget)
-      })
+    })
 
       .then(response => response.text())
       .then((data) => {
@@ -129,16 +131,16 @@ export default class extends Controller {
 
     fetch(form.action, {
       method: "PATCH",
-      headers: { "Accept": "text/plain"},
+      headers: { "Accept": "text/plain" },
       body: new FormData(form)
-      })
+    })
 
       .then(response => response.text())
       .then((data) => {
         this.breakdownTarget.outerHTML = data
       })
 
-      this.calculateTotal();
+    this.calculateTotal();
   }
 
   calculateTotal() {
@@ -161,7 +163,7 @@ export default class extends Controller {
     const discount = Number(this.taxDescriptionsTarget.querySelector("input#bill_discount").value)
     console.log('test')
     console.log({
-     total, tax, svc, discount
+      total, tax, svc, discount
     })
     total = total + tax + svc - discount
 
@@ -169,7 +171,7 @@ export default class extends Controller {
     // const total_after_taxes = total_in_dollars + tax + svc - discount
     // this.totalTarget.innerHTML = total_after_taxes
 
-    console.log( this.totalTarget)
+    console.log(this.totalTarget)
     this.totalTarget.innerHTML = (total / 100).toFixed(2)
   }
 

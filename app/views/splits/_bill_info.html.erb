@@ -4,7 +4,7 @@
   <%# @split.members.each do |member| %>
     <%# <%= #member.given_nickname(@split.user) %>
   <%# <% #end %>
-  <h3>Bills:</h3>
+  <h3 class="purple-text">Bills:</h3>
   <% @split.bills.each do |bill| %>
     <%= link_to split_bill_path(@split, bill), class:"text-decoration-none text-dark" do %>
       <div class="my-4 splits-summary-card">
@@ -21,7 +21,7 @@
     <% end %>
   <% end %>
 
-  <h3 class="pt-5">Settlements:</h3>
+  <h3 class="pt-5 purple-text">Settlements:</h3>
   <% @split.settlements.each do |settlement| %>
     <div class="my-4 splits-summary-card">
       <p class="my-0">
