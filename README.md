@@ -1,3 +1,3 @@
 # Fake Airbnb
 
-Project Link: https://fairfare-mt-b53c4810ffe8.herokuapp.com/
+Project Link: https://fairfare-mt-f95380cdb393.herokuapp.com/
