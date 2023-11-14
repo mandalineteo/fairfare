@@ -11,12 +11,13 @@
     }
   }
 
-  h3, .log-out {
+  h3,
+  .log-out {
     text-decoration: none;
     // color: $ff-red!important;
     color: $ff-purple;
     text-align: right;
-    font-size: 1rem!important;
+    font-size: 1rem !important;
     // position:relative;
   }
 
@@ -24,12 +25,15 @@
     font-size: 1.5rem;
     color: $ff-purple;
     // color: $ff-red!important;
+  }
 
+  .fa-bell:hover {
+    color: $ff-red;
   }
 
   h1 {
     margin: 1.5rem auto;
-    color: $ff-purple!important;
+    color: $ff-purple !important;
     // color: $ff-red!important;
   }
 
@@ -51,81 +55,82 @@
   }
 
 
-.view-splits {
-  text-decoration: none;
-  color: $ff-purple;
-  // color: $ff-yellow-light;
-  // color: $ff-red;
-  font-size: 0.8rem;
+  .view-splits {
+    text-decoration: none;
+    color: $ff-purple;
+    // color: $ff-yellow-light;
+    // color: $ff-red;
+    font-size: 0.8rem;
 
-  &:hover {
-    color: $ff-yellow;
+    &:hover {
+      color: $ff-yellow;
+    }
   }
-}
 
-.outstanding-owed {
-  color: $ff-green;
-  margin-bottom: 8px;
-  font-weight: 800px!important;
-  font-size: 1.2rem;
-}
-
-.outstanding-owe {
-  color: $ff-red;
-  margin-bottom: 8px;
-  font-weight: 800px!important;
-  font-size: 1.2rem;
-}
-
-.outstanding-card {
-  // background-color: $ff-yellow-light!important;
-  // background-color: $ff-purple!important;
-  // background-color: $ff-red-light!important;
-  background-color: white!important;
-
-  width: 100%;
-  height: 100%;
-  border: 2px solid ff-yellow-light;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-  border-radius: 10px;
-  padding: 10px;
-  // border: 1px solid!important;
-  // border-color: $ff-red!important;
-}
-
-.outstanding-card.green {
-  border-color: $ff-green!important;
-}
-
-.outstanding-card.red {
-  border-color: $ff-red!important;
-}
-
-.accordion-button {
-  background-color: $ff-yellow-light!important;
-  border: none!important;
-  border-radius: 5px!important;
-
-  p {
-    color: $ff-purple!important;
+  .outstanding-owed {
+    color: $ff-green;
+    margin-bottom: 8px;
+    font-weight: 800px !important;
+    font-size: 1.2rem;
   }
-}
 
-.see-more {
-  margin-bottom: 50px;
-  color: $ff-purple!important;
-
-  &:hover {
-    color: $ff-yellow;
+  .outstanding-owe {
+    color: $ff-red;
+    margin-bottom: 8px;
+    font-weight: 800px !important;
+    font-size: 1.2rem;
   }
-}
 
-p.split {
-  // color: $ff-red!important;
-  color: $ff-purple!important;
-}
+  .outstanding-card {
+    // background-color: $ff-yellow-light!important;
+    // background-color: $ff-purple!important;
+    // background-color: $ff-red-light!important;
+    background-color: white !important;
 
-.accordion-flush .accordion-item .accordion-button, .accordion-flush .accordion-item .accordion-button.collapsed {
-  border-radius: 5px;
-}
+    width: 100%;
+    height: 100%;
+    border: 2px solid ff-yellow-light;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+    border-radius: 10px;
+    padding: 10px;
+    // border: 1px solid!important;
+    // border-color: $ff-red!important;
+  }
+
+  .outstanding-card.green {
+    border-color: $ff-green !important;
+  }
+
+  .outstanding-card.red {
+    border-color: $ff-red !important;
+  }
+
+  .accordion-button {
+    background-color: $ff-yellow-light !important;
+    border: none !important;
+    border-radius: 5px !important;
+
+    p {
+      color: $ff-purple !important;
+    }
+  }
+
+  .see-more {
+    margin-bottom: 50px;
+    color: $ff-purple !important;
+
+    &:hover {
+      color: $ff-yellow;
+    }
+  }
+
+  p.split {
+    // color: $ff-red!important;
+    color: $ff-purple !important;
+  }
+
+  .accordion-flush .accordion-item .accordion-button,
+  .accordion-flush .accordion-item .accordion-button.collapsed {
+    border-radius: 5px;
+  }
 }

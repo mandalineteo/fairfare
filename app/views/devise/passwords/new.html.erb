@@ -12,7 +12,7 @@
         <%= f.error_notification %>
 
         <div>
-          <h4>Please enter your email address so that we can send you an email to reset your password</h4>
+          <p>Please enter your email address so that we can send you an email to reset your password</p>
         </div>
         <div class="form-inputs">
           <%= f.input :email,
@@ -20,7 +20,7 @@
                       autofocus: true,
                       input_html: { autocomplete: "email" } %>
         </div>
-        <p>We will send you the instructions to reset your password."</p>
+        <p>We will send you the instructions to reset your password.</p>
         <div class="form-actions">
           <%= f.button :submit, "Next", class: 'red-button' %>
         </div>

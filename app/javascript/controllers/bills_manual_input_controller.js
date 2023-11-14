@@ -40,14 +40,14 @@ export default class extends Controller {
     }
 
     // 1. choice is true && id is not nil
-    if(id && confirmDelete) {
+    if (id && confirmDelete) {
       fetch(`/items/${id}`, {
         method: 'DELETE'
       })
     }
 
-    if(id === '' || confirmDelete)
-        input.parentElement.removeChild(input)
+    if (id === '' || confirmDelete)
+      input.parentElement.removeChild(input)
 
   }
 }

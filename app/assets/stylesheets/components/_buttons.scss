@@ -147,24 +147,30 @@
 
 
 .log-out-btn {
-  background-color: #F7F1E4;
-  box-shadow: 5px 5px 10px #93a6d3;
-  border: 1px solid #F7F1E4;
+  // background-color: #F7F1E4;
+  // box-shadow: 5px 5px 10px #93a6d3;
+  border: 1px solid $ff-red;
   border-radius: 8px;
   float: right;
   margin-top: 20px;
   margin-bottom: 10px;
-  margin-right: 35px;
+  margin-right: 30px;
   padding: 10px;
-  transition: 300ms all ease;
+  // transition: 300ms all ease;
+  color: white;
+  background-color: $ff-red;
 
   &:hover {
-    background-color: #d6d3cb;
-    border: 1px solid #d6d3cb;
+    background-color: #FFFFFF;
+    border: 1px solid $ff-red;
+
+    a {
+      color: $ff-red;
+    }
   }
 
   a {
-    color: #2E4374;
+    color: #FFFFFF;
     text-decoration: none;
   }
 }

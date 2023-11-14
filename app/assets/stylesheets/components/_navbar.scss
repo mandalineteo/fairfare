@@ -43,7 +43,7 @@
 .forgot-password-container {
   padding-top: 30px;
   text-align: center;
-  color: $ff-purple;
+  // color: $ff-purple;
 
   .forgot-password-wrapper {
     // border: 1px solid red;
@@ -53,23 +53,23 @@
     padding-left: 10px;
     margin-top: 50px;
     margin-bottom: 50px;
-    box-shadow: 5px 5px 20px #848282;
+    // box-shadow: 5px 5px 20px #848282;
   }
 
   .forgot-password-header {
     margin-bottom: 20px;
-    font-size: 30px;
+    // font-size: 30px;
     // font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     // text-shadow: 1px 1px 8px rgb(220, 194, 107);
   }
 
   .forgot-password-input {
     padding-bottom: 10px;
-    font-size: 22px;
+    // font-size: 22px;
 
     form {
       .form-label {
-        font-size: 18px;
+        // font-size: 18px;
         margin-bottom: 0;
         margin-top: 18px;
         // position: absolute;
