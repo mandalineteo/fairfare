@@ -1,8 +1,10 @@
-<div class="container forgot-password-container" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">
+<div class="container forgot-password-container"
+<%# style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;"> %>
+%>
   <div class="forgot-password-wrapper">
 
     <div class="forgot-password-header " >
-      <h2 class="forgot-password-header " >Forgot Password?</h2>
+      <h2 class="forgot-password-header " >Forgot your password?</h2>
     </div>
 
     <div class="forgot-password-input">
@@ -10,7 +12,7 @@
         <%= f.error_notification %>
 
         <div>
-          <h4>Please enter the email that you want to reset the password</h4>
+          <h4>Please enter your email address so that we can send you an email to reset your password</h4>
         </div>
         <div class="form-inputs">
           <%= f.input :email,
@@ -18,15 +20,15 @@
                       autofocus: true,
                       input_html: { autocomplete: "email" } %>
         </div>
-
+        <p>We will send you the instructions to reset your password."</p>
         <div class="form-actions">
-          <%= f.button :submit, "Send me reset password instructions" %>
+          <%= f.button :submit, "Next", class: 'red-button' %>
         </div>
       <% end %>
     </div>
 
-    <div class="btn" id="log-in-back-btn">
-      <%= link_to "Go back", new_user_session_path %>
+    <div>
+      <%= link_to "Go back", new_user_session_path, class: 'login-link' %>
     </div>
   </div>
 

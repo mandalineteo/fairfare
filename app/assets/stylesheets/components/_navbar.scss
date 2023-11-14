@@ -37,13 +37,13 @@
 
 // css for forgot password page
 .sign-up-page {
-  background-color:#f5e9cf;
+  background-color: #f5e9cf;
 }
 
 .forgot-password-container {
   padding-top: 30px;
   text-align: center;
-  color: #141E46;
+  color: $ff-purple;
 
   .forgot-password-wrapper {
     // border: 1px solid red;
@@ -59,8 +59,8 @@
   .forgot-password-header {
     margin-bottom: 20px;
     font-size: 30px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    text-shadow: 1px 1px 8px rgb(220, 194, 107);
+    // font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    // text-shadow: 1px 1px 8px rgb(220, 194, 107);
   }
 
   .forgot-password-input {
@@ -92,12 +92,12 @@
     padding: 10px;
     margin: 8px 5px;
     background-color: #EB9599;
-    transition: 300ms all ease-in-out;
+    // transition: 300ms all ease-in-out;
     border-radius: 8px;
     box-shadow: 5px 5px 20px #bfbdbd;
 
     &:hover {
-      background-color: #f5e9cf;
+      // background-color: #f5e9cf;
       border: 1px solid #EB9599;
     }
 
@@ -105,7 +105,7 @@
     a {
       color: #f5e9cf;
       text-decoration: none;
-      transition: 300ms all ease-in-out;
+      // transition: 300ms all ease-in-out;
       padding: 0;
 
       &:hover {
