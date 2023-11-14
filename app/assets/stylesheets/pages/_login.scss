@@ -31,3 +31,12 @@
     color: $ff-purple;
   }
 }
+
+.login-link {
+  text-decoration: none;
+}
+
+.login-link:hover {
+  color: $ff-red;
+  text-decoration: underline;
+}
