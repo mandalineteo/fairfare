@@ -29,7 +29,7 @@
         <%= "SGD#{format('%.2f', settlement[:amount]/100.00)}" %>
       </p>
         <div class="d-flex justify-content-end mt-1 mb-0">
-          <% url_encoded_msg = CGI.escape("Hello #{settlement[:payee].given_nickname(@split.user)}. Please pay #{settlement[:payer].given_nickname(@split.user)} SGD#{format('%.2f', settlement[:amount]/100.00)}. O$P$ Paynow at #{settlement[:payer].phone_number}. ") %>
+          <% url_encoded_msg = CGI.escape("Hello #{settlement[:payee].given_nickname(@split.user)}! Kindly pay #{settlement[:payer].given_nickname(@split.user)} SGD#{format('%.2f', settlement[:amount]/100.00)}. You may PayNow/PayLah! #{settlement[:payer].given_nickname(@split.user)} at #{settlement[:payer].phone_number}.") %>
           <a href="https://wa.me/<%= settlement[:payee].phone_number %>?text=<%= url_encoded_msg %>" class="whatsapp-button">
             <i class="fa-brands fa-whatsapp"></i>
           </a>
