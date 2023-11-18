@@ -35,7 +35,7 @@
 
       <div class="payer dropdown d-flex">
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-select-person-target="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-          Select Person(s)
+          Select Payer(s)
         </button>
         <ul class="dropdown-menu">
           <% @split_members.each do |member| %>
@@ -43,32 +43,33 @@
           <% end %>
         </ul>
       </div>
-      <div class="d-flex">
+      <br>
+      <%# <div class="d-flex">
         <h2 class="mx-2">Payers: </h2>
         <%= render "bills/payer_pills", bill: @bill %>
-      </div>
+      <%# </div> %>
 
-      <%= simple_form_for @bill,
-        html: { data: { edit_bill_target: "merchantAndDate" } } do |f| %>
-
-        <%= f.input :merchant,
-              label: false,
+      <div>
+        <%= simple_form_for @bill, html: { data: { edit_bill_target: "merchantAndDate" } } do |f| %>
+          <div class="form-group">
+            <%= f.input :merchant,
               input_html: {
                 style: "max-width: 420px;",
                 placeholder: 'Merchant Name',
                 data: { action: 'blur->edit-bill#updateMerchantValue' }
               }
-              %>
+            %>
+          </div>
 
-        <%= f.input :date,
-            label: false,
-            input_html: {
-              data: {
-                action: 'blur->edit-bill#updateMerchantValue'
+          <div class="form-group">
+            <%= f.input :date,
+              input_html: {
+                data: { action: 'blur->edit-bill#updateMerchantValue' }
               }
-            } %>
-
-      <% end %>
+            %>
+          </div>
+        <% end %>
+      </div>
   </div>
 
 
